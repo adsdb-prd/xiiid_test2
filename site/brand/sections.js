@@ -182,7 +182,7 @@
       eyebrow: '02', title: 'AI Studio', orb: '/brand/modal/orb-studio.gif',
       hero: '/brand/modal/ai-studio.jpg',
       lead: 'XIIID AI Studio is an all-in-one powerhouse, integrating modular systems and deep-learning AI for seamless development.',
-
+      tail: { src: '/brand/modal/ai-studio-dash.jpg', caption: 'Model training and performance dashboard' },
       footnote: 'XIIID AI STUDIO is a groundbreaking AIaaS solution, empowering anyone to create AI Tutors easily and efficiently — unlocking the future of AI-driven education.',
       cta: { text: 'Try it now', href: STUDIO_URL }
     },
@@ -502,6 +502,7 @@
     if (d.cta) {
       body.appendChild(el('div', { class: 'x-modal-cta-row' }, [extLink(d.cta.href, 'x-modal-cta', d.cta.text)]));
     }
+    if (d.tail) body.appendChild(figure(d.tail.src, d.tail.caption, 'x-figure-wide x-figure-tail'));
     body.appendChild(el('p', { class: 'x-modal-foot', text: d.footnote }));
     return body;
   }

@@ -809,3 +809,85 @@
 .x-reveal { opacity: 0; translate: 0 28px; transition: opacity .7s ease, translate .7s cubic-bezier(.2, .7, .2, 1); }
 .x-reveal.x-revealed { opacity: 1; translate: 0 0; }
 @media (prefers-reduced-motion: reduce) { .x-reveal { opacity: 1; translate: none; transition: none; } }
+
+/* ------------------------------------------------------------------ *
+ * Follow-up fixes
+ * ------------------------------------------------------------------ */
+
+/* The bundled stylesheet never shipped rules for these four classes, so the
+   story headings and their lead paragraphs fell back to the browser default
+   16px. Match the scale the sibling story text already uses:
+   --size-large resolves to clamp(3.2rem, 4.4vw, 5.6rem) and
+   --size-small to clamp(1.7rem, 1.7vw, 2.2rem). */
+.section-text-card-heading,
+.section-logoCards-heading {
+  font-size: var(--size-large, clamp(3.2rem, 4.4vw, 5.6rem));
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  max-width: 20em;
+  text-wrap: balance;
+}
+.section-text-card-text,
+.section-logoCards-text {
+  font-family: var(--font-secondary, "ABC Repro Mono", "Courier New", monospace);
+  font-size: var(--size-small, clamp(1.7rem, 1.7vw, 2.2rem));
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 42em;
+  margin-inline: auto;
+}
+
+/* Partner row: the three marks have very different proportions, so cap each
+   one where they carry the same optical weight instead of the same height. */
+.x-partner-logo { min-height: 8rem; }
+.x-partner-logo img { max-width: 100%; max-height: 4.4rem; width: auto; height: auto; object-fit: contain; }
+.x-partner-logo img[alt="XIDSOFT"] { max-height: 3.3rem; }
+.x-partner-logo img[alt="Fog Hashing"] { max-height: 3.6rem; }
+.x-partner-logo img[alt="Beosin"] { max-height: 6.6rem; }
+@media (max-width: 767px) {
+  .x-partner-logo { min-height: 0; }
+  .x-partner-logo img { max-height: 3.2rem; }
+  .x-partner-logo img[alt="XIDSOFT"] { max-height: 2.9rem; }
+  .x-partner-logo img[alt="Fog Hashing"] { max-height: 2.4rem; }
+  .x-partner-logo img[alt="Beosin"] { max-height: 4.4rem; }
+}
+
+/* The footer no longer paints a block over the 3D mark. Instead the last
+   section lets go of its panel before the join, and the footer video rises
+   over the mark and fades in, so the mark is covered by the clip rather than
+   chopped off by a background. */
+.x-community {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 26rem), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 26rem), transparent 100%);
+}
+.footer-main.x-footer {
+  background-color: transparent;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(4, 3, 12, 0) 0%,
+    rgba(4, 3, 12, .16) 10%,
+    rgba(4, 3, 12, .52) 22%,
+    rgba(4, 3, 12, .86) 33%,
+    #04030c 45%
+  );
+}
+/* the clip itself carries the transition: invisible where the mark still
+   shows, fully opaque by the time the footer content starts */
+.x-footer-video {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .14) 9%, rgba(0, 0, 0, .52) 22%, #000 40%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .14) 9%, rgba(0, 0, 0, .52) 22%, #000 40%);
+}
+.x-footer-scrim {
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 3, 12, 0) 0%,
+    rgba(4, 3, 12, .22) 14%,
+    rgba(4, 3, 12, .58) 28%,
+    rgba(4, 3, 12, .76) 55%,
+    rgba(4, 3, 12, .82) 100%
+  );
+}
+
+/* The dashboard sits at the foot of the AI Studio modal. */
+.x-figure-tail { margin-top: 3.2rem; }
