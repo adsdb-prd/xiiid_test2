@@ -745,3 +745,15 @@
   .x-modal-dialog { width: 94vw; max-height: 94vh; }
   .x-modal-top { grid-template-columns: 1fr; gap: 2.4rem; }
 }
+
+/* Requested mobile layout, logo spacing, footer and scroll motion. */
+@media(max-width:767px) {
+ .section-logoCards .section-logoCards-cards { display:flex!important; flex-direction:column!important; width:100%!important; gap:2.4rem!important; overflow:visible!important; transform:none!important; }
+ .section-logoCards .section-logoCards-cards .section-logoCards-card { flex:0 0 auto!important; width:100%!important; min-width:0!important; max-width:none!important; height:auto!important; aspect-ratio:auto!important; padding:2.8rem!important; }
+}
+.x-marquee-item { box-sizing:border-box; height:9rem; padding:1.6rem 2rem; align-items:center; }
+.x-marquee-item img { display:block; width:100%; height:100%; object-fit:contain; }
+.footer-main.x-footer { padding-top:clamp(24rem,28vw,38rem)!important; padding-bottom:8rem!important; }
+.x-reveal { opacity:0; translate:0 28px; transition:opacity .7s ease, translate .7s cubic-bezier(.2,.7,.2,1); }
+.x-reveal.x-revealed { opacity:1; translate:0 0; }
+@media(prefers-reduced-motion:reduce) { .x-reveal {opacity:1;translate:none;transition:none;} }

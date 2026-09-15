@@ -175,7 +175,7 @@
         { src: '/brand/modal/test-toefl.png', alt: 'TOEFL' },
         { src: '/brand/modal/test-sat.png', alt: 'SAT' }
       ],
-      gallery: [{ src: '/brand/modal/paraguay.jpg', caption: 'National AI transformation programme, Paraguay' }],
+
       footnote: "XIIID's AI Tutor is poised to disrupt the $300B global test-prep market, seamlessly integrating across TOEIC, TOEFL, SAT, national college entrance exams, and any standardized test worldwide."
     },
     'project-ai-studio': {
@@ -183,20 +183,7 @@
       hero: '/brand/modal/ai-studio.jpg',
       lead: 'XIIID AI Studio is an all-in-one powerhouse, integrating modular systems and deep-learning AI for seamless development.',
       wide: { src: '/brand/modal/ai-studio-dash.jpg', caption: 'Model training and performance dashboard' },
-      metrics: [
-        { k: 'Dataset', v: 'Saber-Interaction 20240701' },
-        { k: 'Publish Date', v: '2024 / 9 / 13' },
-        { k: 'Training Date', v: '2024 / 9 / 13' },
-        { k: 'Base Model', v: 'X-DKT+' },
-        { k: 'Optimizer', v: 'ADAM' },
-        { k: 'Epoch', v: '10' },
-        { k: 'Dataset Count', v: '1,000' },
-        { k: 'Interaction Count', v: '80,020' }
-      ],
-      index: [
-        { k: 'Accuracy', v: '0.71' }, { k: 'AUC', v: '0.60' },
-        { k: 'Epoch Count', v: '10' }, { k: 'Data Count', v: '80,020' }
-      ],
+
       footnote: 'XIIID AI STUDIO is a groundbreaking AIaaS solution, empowering anyone to create AI Tutors easily and efficiently — unlocking the future of AI-driven education.',
       cta: { text: 'Try it now', href: STUDIO_URL }
     },
@@ -206,7 +193,7 @@
       kicker: 'Powering a Smarter AI Ecosystem',
       lead: 'XIIID is building a decentralized AI network where creators, educators, and innovators shape the future of AI tutors — together.',
       wide: { src: '/brand/modal/tokenomics.jpg', caption: 'Tokenomics: how value moves through the network' },
-      gallery: [{ src: '/brand/modal/ecosystem-map.png', caption: 'XIIID Foundation ecosystem', plate: true }],
+
       footnote: 'XIIID builds a decentralized tokenomics system where AI Tutors generate revenue issued as NFT-backed smart contracts — seamlessly distributing value to contributors and investors.'
     }
   };
@@ -669,6 +656,7 @@
     }
     var footer = document.querySelector('.footer-main');
     if (footer && !footer.querySelector('.x-footer-grid')) { buildFooter(footer); built = true; }
+    enhanceRequestedElements();
     return built;
   }
 
@@ -691,6 +679,41 @@
 
   // The app re-renders #__nuxt after it mounts, throwing away whatever was in
   // the server markup, so keep watching and re-attach whenever it is missing.
+
+  var revealObserver;
+  function enhanceRequestedElements() {
+    if (window.IntersectionObserver && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (!revealObserver) revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) { if(entry.isIntersecting) { entry.target.classList.add('x-revealed'); revealObserver.unobserve(entry.target); } });
+      }, {threshold: 0.08});
+      document.querySelectorAll('.section-logoCards-card, .x-head, .x-eco-card, .x-partner-role, .x-partner-note, .x-marquee-wrap, .x-team-card, .x-news-card, .x-app-card, .x-community-links, .x-footer-grid, .x-footer-bar, main h1, main h2, main p').forEach(function(node) {
+        if(node.classList.contains('x-reveal') || node.closest('.x-reveal')) return;
+        node.classList.add('x-reveal'); revealObserver.observe(node);
+      });
+    }
+    document.querySelectorAll('.x-marquee-item img:not([data-cleaned])').forEach(function(img) {
+      img.dataset.cleaned='true';
+      function clean() {
+        if(!img.naturalWidth) return;
+        var canvas=document.createElement('canvas'); canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+        var ctx=canvas.getContext('2d',{willReadFrequently:true}); ctx.drawImage(img,0,0);
+        var frame=ctx.getImageData(0,0,canvas.width,canvas.height), d=frame.data;
+        var white=0, opaque=0, count=0;
+        for(var y=0;y<canvas.height;y++) for(var x=0;x<canvas.width;x++) if(x===0||y===0||x===canvas.width-1||y===canvas.height-1) {
+          var k=(y*canvas.width+x)*4; count++; if(d[k+3]>240) {opaque++; if(Math.min(d[k],d[k+1],d[k+2])>225) white++;}
+        }
+        var matte=white/count>0.45;
+        for(var i=0;i<d.length;i+=4) {
+          var min=Math.min(d[i],d[i+1],d[i+2]), max=Math.max(d[i],d[i+1],d[i+2]);
+          if(matte) d[i+3]=Math.round(d[i+3]*(1-min/255));
+          if((d[i]*.2126+d[i+1]*.7152+d[i+2]*.0722)<145 || matte && max-min<45) { d[i]=d[i+1]=d[i+2]=245; }
+        }
+        ctx.putImageData(frame,0,0); img.src=canvas.toDataURL('image/png');
+      }
+      if(img.complete) clean(); else img.addEventListener('load',clean,{once:true});
+    });
+  }
+
   var pending = 0;
   function ensure() {
     if (pending) return;
