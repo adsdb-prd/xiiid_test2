@@ -1,0 +1,1 @@
+import{a6 as e}from"./CfIAjGaV.js";const s=e("navigation",{state:()=>({header:{links:[]},footer:{ctaGroups:[],copyrightText:"",bottomMessage:""}}),actions:{setNavigationSettings(t){this.header=t?.header||{links:[]},this.footer=t?.footer||{ctaGroups:[],copyrightText:"",bottomMessage:""}}}});export{s as u};
