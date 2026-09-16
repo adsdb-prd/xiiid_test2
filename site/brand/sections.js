@@ -166,7 +166,7 @@
     { label: 'Medium', href: 'https://medium.com/@xiiid', icon: '/brand/sns/medium.png' },
     { label: 'Token', href: '#token' },
     { label: 'KYC', href: 'https://xiiidlabs.imweb.me/kyc' },
-    { label: 'White Paper', href: PAPER_URL }
+    { label: 'Whitepaper', href: PAPER_URL }
   ];
 
   var FOOTER_COLUMNS = [
@@ -409,7 +409,7 @@
     }));
 
     var clsCol = el('div', { class: 'x-map-col x-map-class' }, trackHead(TRACKS.cls).concat([
-      el('h5', { class: 'x-map-sub', text: 'Blockchain System' }),
+      el('h5', { class: 'x-map-sub', text: 'Blockchain System.' }),
       steps,
       el('p', { class: 'x-eco-caption', text: 'Ownership is a reason to come back.' }),
       el('div', { class: 'x-map-cta-row' }, [extLink(XCLASS_URL, 'x-studio-cta', 'Open XClass')])
@@ -601,10 +601,10 @@
         return figure(g.src, g.caption, g.plate ? 'x-figure-plate' : '');
       })));
     }
+    if (d.tail) body.appendChild(figure(d.tail.src, d.tail.caption, 'x-figure-wide x-figure-tail'));
     if (d.cta) {
       body.appendChild(el('div', { class: 'x-modal-cta-row' }, [extLink(d.cta.href, 'x-modal-cta', d.cta.text)]));
     }
-    if (d.tail) body.appendChild(figure(d.tail.src, d.tail.caption, 'x-figure-wide x-figure-tail'));
     if (d.table) {
       body.appendChild(el('dl', { class: 'x-spec' }, d.table.reduce(function (rows, r) {
         return rows.concat([

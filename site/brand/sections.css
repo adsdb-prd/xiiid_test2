@@ -1161,3 +1161,34 @@
 /* The loop cards get a little more room inside, to match the section. */
 .x-map-class .x-eco-card { padding: 3.2rem 2.8rem; gap: 1.6rem; }
 @media (max-width: 767px) { .x-map-class .x-eco-card { padding: 2.6rem 2.2rem; } }
+
+/* ------------------------------------------------------------------ *
+ * Modals on phones
+ * ------------------------------------------------------------------ */
+
+@media (max-width: 767px) {
+  /* The close button is floated, which shrinks the following block-formatting
+     context — that left the hero image narrower than the figures below it.
+     A stated width keeps every image in the sheet the same width; the head
+     content sits well clear of the button. */
+  .x-modal-top { width: 100%; }
+
+  /* exam and test tiles run two across instead of one */
+  .x-modal-exams, .x-modal-tests { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .x-modal-exams .x-tile, .x-modal-tests .x-tile { padding: 1.6rem; }
+  .x-tile-flag { width: 4.8rem; }
+  .x-tile-name { font-size: 1.4rem; }
+  .x-tile-test { min-height: 7.2rem; padding: 1.6rem; }
+}
+
+/* On phones the status badge takes its own line, left aligned, instead of
+   being pushed to the far right by itself. */
+@media (max-width: 767px) {
+  .x-field-top {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: .8rem 1rem;
+  }
+  .x-field-state { grid-column: 1 / -1; justify-self: start; margin-left: 0; }
+}
