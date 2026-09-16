@@ -421,8 +421,7 @@
         el('div', { class: 'x-head x-head-eco' }, [
           el('h2', { class: 'x-title' }, [
             el('span', { class: 'x-underline', text: 'Ecosystem.' })
-          ]),
-          el('p', { class: 'x-lead', text: 'Do the work. Own the result.' })
+          ])
         ]),
         el('div', { class: 'x-map' }, [
           el('h3', { class: 'x-map-title', text: 'Two types of AI Tutor' }),
@@ -458,7 +457,6 @@
         el('p', { class: 'x-partner-note', text: PARTNER_NOTE })
       ]),
       el('div', { class: 'x-marquee-wrap' }, [
-        el('p', { class: 'x-partner-wall-label', text: 'Technology delivered to' }),
         marqueeRow(WALL_A, 'left'),
         marqueeRow(WALL_B, 'right')
       ])

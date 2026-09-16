@@ -945,11 +945,11 @@
   background: rgba(255, 255, 255, .03);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  padding: clamp(2.8rem, 3.4vw, 4.4rem);
+  padding: clamp(3.6rem, 4vw, 6rem);
   box-shadow: 0 2rem 6rem rgba(0, 0, 0, .45);
 }
 .x-map-title {
-  margin: 0 0 clamp(2.8rem, 3vw, 4rem);
+  margin: 0 0 clamp(4.4rem, 4.6vw, 6.4rem);
   font-size: clamp(2.6rem, 3vw, 3.6rem);
   font-weight: 700;
   letter-spacing: -.025em;
@@ -958,7 +958,7 @@
 .x-map-cols {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(3rem, 4vw, 5.6rem);
+  gap: clamp(4rem, 5vw, 7.2rem);
 }
 .x-map-col { display: flex; flex-direction: column; min-width: 0; }
 /* the divider the sketch draws between the two halves */
@@ -968,7 +968,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(clamp(3rem, 4vw, 5.6rem) / -2);
+  left: calc(clamp(4rem, 5vw, 7.2rem) / -2);
   width: 1px;
   background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .18) 12%, rgba(255, 255, 255, .18) 88%, transparent);
 }
@@ -983,32 +983,32 @@
   color: var(--brand-cyan, #29ccff);
 }
 .x-map-pro .x-track-kicker { color: #a58cff; }
-.x-track-text { margin: 1.6rem 0 0; font-size: 1.55rem; line-height: 1.7; color: var(--x-text); }
+.x-track-text { margin: 2.6rem 0 0; font-size: 1.55rem; line-height: 1.75; color: var(--x-text); }
 
 /* the two section headings carry the same weight as the frame title */
 .x-map-sub {
-  margin: clamp(3.2rem, 3.4vw, 4.4rem) 0 2.4rem;
+  margin: clamp(5.6rem, 5.4vw, 8rem) 0 3.2rem;
   font-size: clamp(2.6rem, 3vw, 3.6rem);
   font-weight: 700;
   letter-spacing: -.025em;
 }
-.x-map-text { margin: 0; font-size: 1.5rem; line-height: 1.7; color: var(--x-text); }
-.x-map-cta-row { margin-top: 2.4rem; }
+.x-map-text { margin: 0; font-size: 1.5rem; line-height: 1.75; color: var(--x-text); }
+.x-map-cta-row { margin-top: 3.6rem; }
 /* the shared brand pill treatment picks this up via [class$="-cta"]; only the
    size and the trailing affordance are set here */
 .x-studio-cta { font-size: 1.4rem; font-weight: 600; text-decoration: none; }
 .x-studio-cta::after { content: " \2197"; }
 
 /* Where AI Pro already runs */
-.x-field { margin: 4.4rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.x-field { margin: 5.6rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
 .x-field-row {
   display: flex;
-  gap: 1.6rem;
-  padding: 2rem 0;
+  gap: 2rem;
+  padding: 2.8rem 0;
   border-top: 1px solid var(--x-line);
 }
 .x-field-row:first-child { border-top: none; padding-top: 0; }
-@media (max-width: 767px) { .x-field { margin-top: 3.2rem; } }
+@media (max-width: 767px) { .x-field { margin-top: 4rem; } }
 .x-field-mark {
   flex: 0 0 auto;
   width: 6.8rem;
@@ -1047,9 +1047,9 @@
 .x-map-class .x-eco-card:nth-child(3) { border-top: 1px solid var(--x-line); }
 .x-map-class .x-eco-card:nth-child(4) { border-top: 1px solid var(--x-line); }
 .x-map-class .x-eco-card:nth-child(odd) { border-left: none; }
-.x-map-class .x-eco-caption { margin-top: 1.6rem; }
+.x-map-class .x-eco-caption { margin-top: 2.8rem; }
 /* both columns close on a button, aligned to the bottom of the frame */
-.x-map-col .x-map-cta-row { margin-top: auto; padding-top: 2.4rem; }
+.x-map-col .x-map-cta-row { margin-top: auto; padding-top: 3.6rem; }
 
 /* ------------------------------------------------------------------ *
  * Apps: three across, the third one opens on the web
@@ -1117,12 +1117,12 @@
   /* no drift-in on scroll: the page is simply there */
   .x-reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
 
-  .x-map { padding: 2.4rem 2rem; border-radius: 1.2rem; }
-  .x-map-title { margin-bottom: 2.4rem; }
-  .x-map-cols { grid-template-columns: 1fr; gap: 4rem; }
-  .x-map-class::before { left: 0; right: 0; top: -2rem; bottom: auto; width: auto; height: 1px;
+  .x-map { padding: 3.2rem 2.2rem; border-radius: 1.2rem; }
+  .x-map-title { margin-bottom: 3.6rem; }
+  .x-map-cols { grid-template-columns: 1fr; gap: 5.6rem; }
+  .x-map-class::before { left: 0; right: 0; top: -2.8rem; bottom: auto; width: auto; height: 1px;
     background: linear-gradient(to right, transparent, rgba(255, 255, 255, .18) 12%, rgba(255, 255, 255, .18) 88%, transparent); }
-  .x-map-sub { margin-top: 3.2rem; }
+  .x-map-sub { margin-top: 5rem; }
   .x-studio-cta { width: 100%; text-align: center; }
   .x-map-class .x-eco-steps { grid-template-columns: 1fr; }
   .x-map-class .x-eco-card { border-left: none; border-top: 1px solid var(--x-line); }
@@ -1154,3 +1154,10 @@
   /* widen the hamburger's hit area without moving its bars */
   .x-nav-toggle::after { content: ""; position: absolute; inset: -.7rem; }
 }
+
+/* Copy the section no longer needs. */
+.section-logoCards-text { display: none !important; }
+
+/* The loop cards get a little more room inside, to match the section. */
+.x-map-class .x-eco-card { padding: 3.2rem 2.8rem; gap: 1.6rem; }
+@media (max-width: 767px) { .x-map-class .x-eco-card { padding: 2.6rem 2.2rem; } }
