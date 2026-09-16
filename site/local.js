@@ -3,7 +3,7 @@
   const localUrl = input => {
     const url = new URL(String(input), location.href);
     if (url.pathname.includes('154adc4df997f6b1fe8680543e03d926ec51543b-1200x630')) return new URL('/brand/news/news-1.jpg', location.origin).href;
-    if (url.hostname.endsWith('.api.sanity.io')) return new URL('/content/home-response.json', location.origin).href;
+    if (url.hostname.endsWith('.api.sanity.io')) return new URL('/content/home-response.json?v=11', location.origin).href;
     if (url.hostname === 'cdn.sanity.io') return new URL('/sanity' + url.pathname, location.origin).href;
     return String(input);
   };
