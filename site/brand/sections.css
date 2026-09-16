@@ -936,93 +936,124 @@
 .x-figure-tail { margin-top: 3.2rem; }
 
 /* ------------------------------------------------------------------ *
- * Ecosystem map
+ * Ecosystem map — one AI Tutor frame, two columns inside
  * ------------------------------------------------------------------ */
 
-.x-block + .x-block { margin-top: clamp(6rem, 7vw, 10rem); }
-.x-block-head { margin: 0 0 3.2rem; }
-.x-block-eyebrow {
-  margin: 0 0 1rem;
-  font-size: 1.25rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(210, 208, 235, .48);
-}
-.x-block-title {
-  margin: 0;
-  font-size: clamp(2.4rem, 2.6vw, 3.4rem);
-  font-weight: 700;
-  letter-spacing: -.02em;
-  line-height: 1.15;
-}
-
-/* AI Pro / AI Class */
-.x-tracks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem; }
-.x-track {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 3.2rem;
-  border-radius: 1.4rem;
-  border: 1px solid var(--x-line);
-  background: rgba(255, 255, 255, .035);
+.x-map {
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 1.6rem;
+  background: rgba(255, 255, 255, .03);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
+  padding: clamp(2.8rem, 3.4vw, 4.4rem);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, .45);
 }
-.x-track-kicker { margin: 0; font-size: 1.25rem; letter-spacing: .08em; text-transform: uppercase; color: var(--brand-cyan, #29ccff); }
-.x-track-name { margin: 0; font-size: clamp(2.6rem, 3vw, 3.6rem); font-weight: 700; letter-spacing: -.025em; }
-.x-track-text { margin: 0; font-size: 1.55rem; line-height: 1.65; color: var(--x-text); flex: 1 1 auto; }
-.x-track-note { margin: 0; font-size: 1.3rem; color: rgba(210, 208, 235, .5); }
-.x-track:first-child .x-track-kicker { color: #a58cff; }
-
-/* AI Studio band */
-.x-studio {
+.x-map-title {
+  margin: 0 0 clamp(2.8rem, 3vw, 4rem);
+  font-size: clamp(2.6rem, 3vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  text-align: center;
+}
+.x-map-cols {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: clamp(2.4rem, 4vw, 6rem);
-  align-items: end;
-  padding: clamp(3rem, 4vw, 4.4rem);
-  border-radius: 1.4rem;
-  border: 1px solid rgba(255, 255, 255, .16);
-  background:
-    linear-gradient(135deg, rgba(109, 79, 255, .22), rgba(41, 204, 255, .10) 60%, rgba(255, 255, 255, .03));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(3rem, 4vw, 5.6rem);
 }
-.x-studio-title { margin: 0 0 1.6rem; font-size: clamp(2.4rem, 2.8vw, 3.4rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.2; }
-.x-studio-text { margin: 0; font-size: 1.55rem; line-height: 1.7; color: rgba(228, 226, 245, .8); }
-.x-studio-side { display: flex; flex-direction: column; align-items: flex-start; gap: 1.6rem; }
-.x-studio-note { margin: 0; font-size: 1.3rem; color: rgba(210, 208, 235, .6); }
+.x-map-col { display: flex; flex-direction: column; min-width: 0; }
+/* the divider the sketch draws between the two halves */
+.x-map-class { position: relative; }
+.x-map-class::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(clamp(3rem, 4vw, 5.6rem) / -2);
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .18) 12%, rgba(255, 255, 255, .18) 88%, transparent);
+}
+
+.x-track-name { margin: 0; font-size: clamp(2.6rem, 3vw, 3.6rem); font-weight: 700; letter-spacing: -.025em; }
+.x-track-kicker {
+  margin: .8rem 0 0;
+  font-size: 1.3rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--brand-cyan, #29ccff);
+}
+.x-map-pro .x-track-kicker { color: #a58cff; }
+.x-track-text { margin: 1.8rem 0 0; font-size: 1.55rem; line-height: 1.7; color: var(--x-text); }
+
+.x-map-sub {
+  margin: clamp(3.2rem, 3.4vw, 4.4rem) 0 2rem;
+  font-size: clamp(1.9rem, 2vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+.x-map-text { margin: 0; font-size: 1.5rem; line-height: 1.7; color: var(--x-text); }
+.x-map-cta-row { margin-top: 2.4rem; }
 /* the shared brand pill treatment picks this up via [class$="-cta"]; only the
    size and the trailing affordance are set here */
 .x-studio-cta { font-size: 1.4rem; font-weight: 600; text-decoration: none; }
 .x-studio-cta::after { content: " \2197"; }
 
 /* Where AI Pro already runs */
-.x-deploys { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem; }
-.x-deploy {
+.x-field { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.x-field-row {
   display: flex;
-  flex-direction: column;
-  gap: .8rem;
-  padding: 2.8rem;
-  border-radius: 1.2rem;
-  border: 1px solid var(--x-line);
-  background: rgba(255, 255, 255, .035);
+  gap: 1.6rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--x-line);
 }
-.x-deploy-top { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; }
-.x-deploy-place { margin: 0; font-size: 2rem; font-weight: 700; letter-spacing: -.02em; }
-.x-deploy-state {
+.x-field-row:first-child { border-top: none; padding-top: 0; }
+.x-field-mark {
   flex: 0 0 auto;
-  padding: .35em .9em;
+  width: 6.8rem;
+  height: 4.2rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.x-field-mark img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+.x-field-mark-flag {
+  border-radius: .4rem;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .06);
+}
+.x-field-mark-flag img { width: 100%; height: 100%; object-fit: cover; }
+.x-field-body { min-width: 0; }
+.x-field-top { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem 1rem; }
+.x-field-place { margin: 0; font-size: 1.8rem; font-weight: 700; letter-spacing: -.02em; }
+.x-field-product { font-size: 1.4rem; font-weight: 500; color: rgba(228, 226, 245, .78); }
+.x-field-state {
+  margin-left: auto;
+  flex: 0 0 auto;
+  padding: .3em .8em;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, .22);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: rgba(228, 226, 245, .6);
 }
-.x-deploy-state.is-live { border-color: rgba(41, 204, 255, .55); color: var(--brand-cyan, #29ccff); }
-.x-deploy-product { margin: 0; font-size: 1.45rem; font-weight: 600; color: rgba(228, 226, 245, .92); }
-.x-deploy-text { margin: 0; font-size: 1.4rem; line-height: 1.6; color: var(--x-text); flex: 1 1 auto; }
-.x-deploy-kind { margin: 0; font-size: 1.2rem; letter-spacing: .06em; text-transform: uppercase; color: rgba(210, 208, 235, .42); }
+.x-field-state.is-live { border-color: rgba(41, 204, 255, .55); color: var(--brand-cyan, #29ccff); }
+.x-field-text { margin: .8rem 0 0; font-size: 1.4rem; line-height: 1.6; color: var(--x-text); }
+.x-field-kind { margin: .8rem 0 0; font-size: 1.15rem; letter-spacing: .06em; text-transform: uppercase; color: rgba(210, 208, 235, .42); }
+
+/* The XClass loop sits inside its column, so it runs two across. */
+.x-map-class .x-eco-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.x-map-class .x-eco-card:nth-child(3) { border-top: 1px solid var(--x-line); }
+.x-map-class .x-eco-card:nth-child(4) { border-top: 1px solid var(--x-line); }
+.x-map-class .x-eco-card:nth-child(odd) { border-left: none; }
+.x-eco-chain {
+  margin: 1.6rem 0 0;
+  font-size: 1.15rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(210, 208, 235, .42);
+  text-align: center;
+}
+.x-map-class .x-eco-caption { margin-top: 1.2rem; }
 
 /* ------------------------------------------------------------------ *
  * Apps: three across, the third one opens on the web
@@ -1090,15 +1121,17 @@
   /* no drift-in on scroll: the page is simply there */
   .x-reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
 
-  .x-block + .x-block { margin-top: 5.6rem; }
-  .x-block-head { margin-bottom: 2.4rem; }
-  .x-tracks, .x-deploys { grid-template-columns: 1fr; gap: 1.6rem; }
-  .x-track { padding: 2.4rem; }
-  .x-studio { grid-template-columns: 1fr; align-items: start; gap: 2.4rem; padding: 2.4rem; }
-  .x-studio-side { width: 100%; }
+  .x-map { padding: 2.4rem 2rem; border-radius: 1.2rem; }
+  .x-map-title { margin-bottom: 2.4rem; }
+  .x-map-cols { grid-template-columns: 1fr; gap: 4rem; }
+  .x-map-class::before { left: 0; right: 0; top: -2rem; bottom: auto; width: auto; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, .18) 12%, rgba(255, 255, 255, .18) 88%, transparent); }
+  .x-map-sub { margin-top: 3.2rem; }
   .x-studio-cta { width: 100%; text-align: center; }
-  .x-deploy { padding: 2.2rem; }
-  .x-deploy-place { font-size: 1.8rem; }
+  .x-map-class .x-eco-steps { grid-template-columns: 1fr; }
+  .x-map-class .x-eco-card { border-left: none; border-top: 1px solid var(--x-line); }
+  .x-map-class .x-eco-card:first-child { border-top: none; }
+  .x-field-mark { width: 5.6rem; height: 3.6rem; }
 
   .x-spec { grid-template-columns: 1fr; border-top: none; }
   .x-spec-k { padding: 1.4rem 0 .2rem; border-bottom: none; font-size: 1.25rem; letter-spacing: .06em; text-transform: uppercase; }

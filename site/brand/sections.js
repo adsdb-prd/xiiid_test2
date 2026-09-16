@@ -30,40 +30,39 @@
   var PAPER_URL = 'https://xiiid.gitbook.io/xiiid';
 
   /* AI Tutor ships two ways: one built per institution, one open to anyone. */
-  var TRACKS = [
-    {
-      kicker: 'For institutions · B2B & B2G',
+  var TRACKS = {
+    pro: {
       name: 'AI Pro',
-      text: 'An agentic tutor that belongs to one place. It learns that country’s language, its curriculum and its exams, then teaches as if it had always been there.',
-      note: 'Built and tuned in AI Studio.'
+      kicker: 'For institutions · B2B & B2G',
+      text: 'An agentic tutor that belongs to one place. It learns that country’s language, its curriculum and its exams, then teaches as if it had always been there.'
     },
-    {
-      kicker: 'For everyone · B2C',
+    cls: {
       name: 'AI Class',
-      text: 'The same tutor, open to anyone. It reads how you answer and rebuilds the next question around you. Study long enough and no one else’s looks like yours.',
-      note: 'Live today as XClass.'
+      kicker: 'For everyone · B2C',
+      text: 'The same tutor, open to anyone. It reads how you answer and rebuilds the next question around you. Study long enough and no one else’s looks like yours. Live today as XClass.'
     }
-  ];
+  };
 
   var STUDIO = {
-    eyebrow: 'AI Studio',
-    title: 'Build the tutor. Skip the AI team.',
+    title: 'AI Studio builds it.',
     text: 'Give it a curriculum, a language and a question bank. It hands back an agentic tutor you can shape, retrain and put in front of a class — changed by the people who run the programme, not by engineers.',
-    note: 'Shipping as XPredict.',
     cta: { text: 'Open XPredict', href: XPREDICT_URL }
   };
 
   var DEPLOYMENTS = [
     {
       place: 'Samsung', product: 'OPicUP', kind: 'B2B · Korea', state: 'Live',
+      mark: '/brand/partners/wall/samsung.png', markKind: 'logo',
       text: 'Language assessment practice, delivered through a partnership with Samsung.'
     },
     {
       place: 'Colombia', product: 'EOSaber', kind: 'B2G · Public schools', state: 'Live',
+      mark: '/brand/modal/flag-co.png', markKind: 'flag',
       text: 'Saber exam preparation, running inside the country’s public education system.'
     },
     {
       place: 'Paraguay', product: 'National rollout', kind: 'B2G · Public schools', state: 'In progress',
+      mark: '/brand/modal/flag-py.png', markKind: 'flag',
       text: 'In agreement with the government, preparing to reach public classrooms nationwide.'
     }
   ];
@@ -366,50 +365,43 @@
     ]);
   }
 
-  function blockHead(eyebrow, title) {
-    return el('div', { class: 'x-block-head' }, [
-      el('p', { class: 'x-block-eyebrow', text: eyebrow }),
-      el('h3', { class: 'x-block-title', text: title })
-    ]);
+  function trackHead(t) {
+    return [
+      el('h4', { class: 'x-track-name', text: t.name }),
+      el('p', { class: 'x-track-kicker', text: t.kicker }),
+      el('p', { class: 'x-track-text', text: t.text })
+    ];
   }
 
   function ecosystemSection() {
-    var tracks = el('div', { class: 'x-tracks' }, TRACKS.map(function (t) {
-      return el('article', { class: 'x-track' }, [
-        el('p', { class: 'x-track-kicker', text: t.kicker }),
-        el('h4', { class: 'x-track-name', text: t.name }),
-        el('p', { class: 'x-track-text', text: t.text }),
-        el('p', { class: 'x-track-note', text: t.note })
+    /* Left column: who AI Pro is for, where it already runs, what builds it. */
+    var field = el('ul', { class: 'x-field' }, DEPLOYMENTS.map(function (d) {
+      return el('li', { class: 'x-field-row' }, [
+        el('span', { class: 'x-field-mark x-field-mark-' + d.markKind }, [img(d.mark, null, d.place)]),
+        el('div', { class: 'x-field-body' }, [
+          el('div', { class: 'x-field-top' }, [
+            el('h6', { class: 'x-field-place', text: d.place }),
+            el('span', { class: 'x-field-product', text: d.product }),
+            el('span', {
+              class: 'x-field-state' + (d.state === 'Live' ? ' is-live' : ''),
+              text: d.state
+            })
+          ]),
+          el('p', { class: 'x-field-text', text: d.text }),
+          el('p', { class: 'x-field-kind', text: d.kind })
+        ])
       ]);
     }));
 
-    var studio = el('article', { class: 'x-studio' }, [
-      el('div', { class: 'x-studio-body' }, [
-        el('p', { class: 'x-block-eyebrow', text: STUDIO.eyebrow }),
-        el('h4', { class: 'x-studio-title', text: STUDIO.title }),
-        el('p', { class: 'x-studio-text', text: STUDIO.text })
-      ]),
-      el('div', { class: 'x-studio-side' }, [
-        el('p', { class: 'x-studio-note', text: STUDIO.note }),
-        extLink(STUDIO.cta.href, 'x-studio-cta', STUDIO.cta.text)
-      ])
-    ]);
+    var proCol = el('div', { class: 'x-map-col x-map-pro' }, trackHead(TRACKS.pro).concat([
+      el('h5', { class: 'x-map-sub', text: 'AI Pro in the field' }),
+      field,
+      el('h5', { class: 'x-map-sub', text: STUDIO.title }),
+      el('p', { class: 'x-map-text', text: STUDIO.text }),
+      el('div', { class: 'x-map-cta-row' }, [extLink(STUDIO.cta.href, 'x-studio-cta', STUDIO.cta.text)])
+    ]));
 
-    var field = el('div', { class: 'x-deploys' }, DEPLOYMENTS.map(function (d) {
-      return el('article', { class: 'x-deploy' }, [
-        el('div', { class: 'x-deploy-top' }, [
-          el('h4', { class: 'x-deploy-place', text: d.place }),
-          el('span', {
-            class: 'x-deploy-state' + (d.state === 'Live' ? ' is-live' : ''),
-            text: d.state
-          })
-        ]),
-        el('p', { class: 'x-deploy-product', text: d.product }),
-        el('p', { class: 'x-deploy-text', text: d.text }),
-        el('p', { class: 'x-deploy-kind', text: d.kind })
-      ]);
-    }));
-
+    /* Right column: who AI Class is for, and the loop it runs on. */
     var steps = el('div', { class: 'x-eco-steps' }, ECOSYSTEM.map(function (s) {
       return el('article', { class: 'x-eco-card' }, [
         el('div', { class: 'x-eco-card-top' }, [
@@ -421,37 +413,25 @@
       ]);
     }));
 
+    var clsCol = el('div', { class: 'x-map-col x-map-class' }, trackHead(TRACKS.cls).concat([
+      el('h5', { class: 'x-map-sub', text: 'Study. Earn. Convert. Own.' }),
+      steps,
+      el('p', { class: 'x-eco-chain', text: 'Blockchain' }),
+      el('p', { class: 'x-eco-caption', text: 'Ownership is a reason to come back.' })
+    ]));
+
     return el('section', { class: 'x-section x-ecosystem', id: 'ecosystem' }, [
       el('div', { class: 'x-veil', 'aria-hidden': 'true' }),
       el('div', { class: 'x-inner' }, [
         el('div', { class: 'x-head x-head-eco' }, [
           el('h2', { class: 'x-title' }, [
-            document.createTextNode('Do the work.'), el('br'),
-            el('span', { class: 'x-underline', text: 'Own the result.' })
+            el('span', { class: 'x-underline', text: 'Ecosystem.' })
           ]),
-          el('p', {
-            class: 'x-lead',
-            text: 'One engine, two ways in. Institutions shape a tutor of their own in AI Studio. Everyone else opens XClass. Either way the effort you put in comes back as something you hold.'
-          })
+          el('p', { class: 'x-lead', text: 'Do the work. Own the result.' })
         ]),
-
-        el('div', { class: 'x-block' }, [
-          blockHead('AI Tutor', 'Two ways in.'),
-          tracks
-        ]),
-
-        el('div', { class: 'x-block' }, [studio]),
-
-        el('div', { class: 'x-block' }, [
-          blockHead('AI Pro in the field', 'Already teaching.'),
-          field
-        ]),
-
-        el('div', { class: 'x-block' }, [
-          blockHead('Inside XClass', 'Study. Earn. Convert. Own.'),
-          steps,
-          el('div', { class: 'x-eco-loop', 'aria-hidden': 'true' }),
-          el('p', { class: 'x-eco-caption', text: 'Ownership is a reason to come back.' })
+        el('div', { class: 'x-map' }, [
+          el('h3', { class: 'x-map-title', text: 'AI Tutor' }),
+          el('div', { class: 'x-map-cols' }, [proCol, clsCol])
         ])
       ])
     ]);
