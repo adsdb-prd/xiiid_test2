@@ -973,23 +973,26 @@
   background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .18) 12%, rgba(255, 255, 255, .18) 88%, transparent);
 }
 
+/* name and audience sit on one line */
+.x-track-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem 1.2rem; }
 .x-track-name { margin: 0; font-size: clamp(2.6rem, 3vw, 3.6rem); font-weight: 700; letter-spacing: -.025em; }
 .x-track-kicker {
-  margin: .8rem 0 0;
   font-size: 1.3rem;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--brand-cyan, #29ccff);
 }
 .x-map-pro .x-track-kicker { color: #a58cff; }
-.x-track-text { margin: 1.8rem 0 0; font-size: 1.55rem; line-height: 1.7; color: var(--x-text); }
+.x-track-text { margin: 1.6rem 0 0; font-size: 1.55rem; line-height: 1.7; color: var(--x-text); }
 
+/* the two section headings carry the same weight as the frame title */
 .x-map-sub {
-  margin: clamp(3.2rem, 3.4vw, 4.4rem) 0 2rem;
-  font-size: clamp(1.9rem, 2vw, 2.3rem);
+  margin: clamp(3.2rem, 3.4vw, 4.4rem) 0 2.4rem;
+  font-size: clamp(2.6rem, 3vw, 3.6rem);
   font-weight: 700;
-  letter-spacing: -.015em;
+  letter-spacing: -.025em;
 }
+.x-field { margin-top: 2.8rem; }
 .x-map-text { margin: 0; font-size: 1.5rem; line-height: 1.7; color: var(--x-text); }
 .x-map-cta-row { margin-top: 2.4rem; }
 /* the shared brand pill treatment picks this up via [class$="-cta"]; only the
@@ -1038,22 +1041,15 @@
 }
 .x-field-state.is-live { border-color: rgba(41, 204, 255, .55); color: var(--brand-cyan, #29ccff); }
 .x-field-text { margin: .8rem 0 0; font-size: 1.4rem; line-height: 1.6; color: var(--x-text); }
-.x-field-kind { margin: .8rem 0 0; font-size: 1.15rem; letter-spacing: .06em; text-transform: uppercase; color: rgba(210, 208, 235, .42); }
 
 /* The XClass loop sits inside its column, so it runs two across. */
 .x-map-class .x-eco-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .x-map-class .x-eco-card:nth-child(3) { border-top: 1px solid var(--x-line); }
 .x-map-class .x-eco-card:nth-child(4) { border-top: 1px solid var(--x-line); }
 .x-map-class .x-eco-card:nth-child(odd) { border-left: none; }
-.x-eco-chain {
-  margin: 1.6rem 0 0;
-  font-size: 1.15rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(210, 208, 235, .42);
-  text-align: center;
-}
-.x-map-class .x-eco-caption { margin-top: 1.2rem; }
+.x-map-class .x-eco-caption { margin-top: 1.6rem; }
+/* both columns close on a button, aligned to the bottom of the frame */
+.x-map-col .x-map-cta-row { margin-top: auto; padding-top: 2.4rem; }
 
 /* ------------------------------------------------------------------ *
  * Apps: three across, the third one opens on the web

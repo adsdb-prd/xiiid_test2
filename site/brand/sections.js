@@ -33,12 +33,12 @@
   var TRACKS = {
     pro: {
       name: 'AI Pro',
-      kicker: 'For institutions · B2B & B2G',
+      kicker: 'For institutions',
       text: 'An agentic tutor that belongs to one place. It learns that country’s language, its curriculum and its exams, then teaches as if it had always been there.'
     },
     cls: {
       name: 'AI Class',
-      kicker: 'For everyone · B2C',
+      kicker: 'For everyone',
       text: 'The same tutor, open to anyone. It reads how you answer and rebuilds the next question around you. Study long enough and no one else’s looks like yours. Live today as XClass.'
     }
   };
@@ -51,17 +51,17 @@
 
   var DEPLOYMENTS = [
     {
-      place: 'Samsung', product: 'OPicUP', kind: 'B2B · Korea', state: 'Live',
+      place: 'Samsung', product: 'OPicUP', state: 'Live',
       mark: '/brand/partners/wall/samsung.png', markKind: 'logo',
       text: 'Language assessment practice, delivered through a partnership with Samsung.'
     },
     {
-      place: 'Colombia', product: 'EOSaber', kind: 'B2G · Public schools', state: 'Live',
+      place: 'Colombia', product: 'EOSaber', state: 'Live',
       mark: '/brand/modal/flag-co.png', markKind: 'flag',
       text: 'Saber exam preparation, running inside the country’s public education system.'
     },
     {
-      place: 'Paraguay', product: 'National rollout', kind: 'B2G · Public schools', state: 'In progress',
+      place: 'Paraguay', product: 'National rollout', state: 'In progress',
       mark: '/brand/modal/flag-py.png', markKind: 'flag',
       text: 'In agreement with the government, preparing to reach public classrooms nationwide.'
     }
@@ -70,23 +70,19 @@
   var ECOSYSTEM = [
     {
       n: '1', title: 'Study on XClass',
-      text: 'Open AI Tutor inside XClass to master lessons, practice skills, and track progress.',
-      note: 'Free for everyone'
+      text: 'Open AI Tutor inside XClass to master lessons, practice skills, and track progress.'
     },
     {
       n: '2', title: 'Earn XPoints',
-      text: 'Every completed lesson, daily streak, and milestone earns XPoints. A direct proof of effort, not spending.',
-      note: 'Earned naturally'
+      text: 'Every completed lesson, daily streak, and milestone earns XPoints. A direct proof of effort, not spending.'
     },
     {
       n: '3', title: 'Convert in XWallet',
-      text: 'Move XPoints directly into XWallet to manage, hold, or convert your proof of work.',
-      note: 'Unified experience'
+      text: 'Move XPoints directly into XWallet to manage, hold, or convert your proof of work.'
     },
     {
       n: '4', title: 'Hold XIIID',
-      text: 'Turn effort into ownership. XIIID gives you a genuine, on-chain stake in the platform you use.',
-      note: 'Secured on-chain'
+      text: 'Turn effort into ownership. XIIID gives you a genuine, on-chain stake in the platform you use.'
     }
   ];
 
@@ -367,8 +363,10 @@
 
   function trackHead(t) {
     return [
-      el('h4', { class: 'x-track-name', text: t.name }),
-      el('p', { class: 'x-track-kicker', text: t.kicker }),
+      el('div', { class: 'x-track-head' }, [
+        el('h4', { class: 'x-track-name', text: t.name }),
+        el('span', { class: 'x-track-kicker', text: t.kicker })
+      ]),
       el('p', { class: 'x-track-text', text: t.text })
     ];
   }
@@ -387,14 +385,12 @@
               text: d.state
             })
           ]),
-          el('p', { class: 'x-field-text', text: d.text }),
-          el('p', { class: 'x-field-kind', text: d.kind })
+          el('p', { class: 'x-field-text', text: d.text })
         ])
       ]);
     }));
 
     var proCol = el('div', { class: 'x-map-col x-map-pro' }, trackHead(TRACKS.pro).concat([
-      el('h5', { class: 'x-map-sub', text: 'AI Pro in the field' }),
       field,
       el('h5', { class: 'x-map-sub', text: STUDIO.title }),
       el('p', { class: 'x-map-text', text: STUDIO.text }),
@@ -408,16 +404,15 @@
           el('span', { class: 'x-eco-num', text: s.n }),
           el('h3', { text: s.title })
         ]),
-        el('p', { class: 'x-eco-text', text: s.text }),
-        el('p', { class: 'x-eco-note', text: s.note })
+        el('p', { class: 'x-eco-text', text: s.text })
       ]);
     }));
 
     var clsCol = el('div', { class: 'x-map-col x-map-class' }, trackHead(TRACKS.cls).concat([
-      el('h5', { class: 'x-map-sub', text: 'Study. Earn. Convert. Own.' }),
+      el('h5', { class: 'x-map-sub', text: 'Blockchain System' }),
       steps,
-      el('p', { class: 'x-eco-chain', text: 'Blockchain' }),
-      el('p', { class: 'x-eco-caption', text: 'Ownership is a reason to come back.' })
+      el('p', { class: 'x-eco-caption', text: 'Ownership is a reason to come back.' }),
+      el('div', { class: 'x-map-cta-row' }, [extLink(XCLASS_URL, 'x-studio-cta', 'Open XClass')])
     ]));
 
     return el('section', { class: 'x-section x-ecosystem', id: 'ecosystem' }, [
@@ -430,7 +425,7 @@
           el('p', { class: 'x-lead', text: 'Do the work. Own the result.' })
         ]),
         el('div', { class: 'x-map' }, [
-          el('h3', { class: 'x-map-title', text: 'AI Tutor' }),
+          el('h3', { class: 'x-map-title', text: 'Two types of AI Tutor' }),
           el('div', { class: 'x-map-cols' }, [proCol, clsCol])
         ])
       ])
