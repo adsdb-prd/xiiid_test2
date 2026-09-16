@@ -26,7 +26,47 @@
 
   var XCLASS_URL = 'https://xclass.xiiid.ai/';
   var STUDIO_URL = 'https://xpredict-dev.web.app/sign-in';
+  var XPREDICT_URL = 'https://xpredict-dev.web.app/';
   var PAPER_URL = 'https://xiiid.gitbook.io/xiiid';
+
+  /* AI Tutor ships two ways: one built per institution, one open to anyone. */
+  var TRACKS = [
+    {
+      kicker: 'For institutions · B2B & B2G',
+      name: 'AI Pro',
+      text: 'An agentic tutor that belongs to one place. It learns that country’s language, its curriculum and its exams, then teaches as if it had always been there.',
+      note: 'Built and tuned in AI Studio.'
+    },
+    {
+      kicker: 'For everyone · B2C',
+      name: 'AI Class',
+      text: 'The same tutor, open to anyone. It reads how you answer and rebuilds the next question around you. Study long enough and no one else’s looks like yours.',
+      note: 'Live today as XClass.'
+    }
+  ];
+
+  var STUDIO = {
+    eyebrow: 'AI Studio',
+    title: 'Build the tutor. Skip the AI team.',
+    text: 'Give it a curriculum, a language and a question bank. It hands back an agentic tutor you can shape, retrain and put in front of a class — changed by the people who run the programme, not by engineers.',
+    note: 'Shipping as XPredict.',
+    cta: { text: 'Open XPredict', href: XPREDICT_URL }
+  };
+
+  var DEPLOYMENTS = [
+    {
+      place: 'Samsung', product: 'OPicUP', kind: 'B2B · Korea', state: 'Live',
+      text: 'Language assessment practice, delivered through a partnership with Samsung.'
+    },
+    {
+      place: 'Colombia', product: 'EOSaber', kind: 'B2G · Public schools', state: 'Live',
+      text: 'Saber exam preparation, running inside the country’s public education system.'
+    },
+    {
+      place: 'Paraguay', product: 'National rollout', kind: 'B2G · Public schools', state: 'In progress',
+      text: 'In agreement with the government, preparing to reach public classrooms nationwide.'
+    }
+  ];
 
   var ECOSYSTEM = [
     {
@@ -115,6 +155,11 @@
       text: 'The official wallet for XIIID. Seamlessly hold, convert, and manage your earnings directly from XClass.',
       play: 'https://play.google.com/store/apps/details?id=io.blad.xwallet',
       ios: 'https://apps.apple.com/kr/app/xwallet-by-xiiid/id6785023022'
+    },
+    {
+      name: 'XPredict',
+      text: 'AI Studio in a browser. Build, tune and ship an agentic tutor of your own, then hand it to a classroom.',
+      web: XPREDICT_URL
     }
   ];
 
@@ -124,9 +169,9 @@
     { label: 'GitHub', href: 'https://github.com/Xiiid', icon: '/brand/sns/github.png' },
     { label: 'CoinGecko', href: 'https://www.coingecko.com/en/coins/xiiid', icon: '/brand/sns/coingecko.svg' },
     { label: 'Medium', href: 'https://medium.com/@xiiid', icon: '/brand/sns/medium.png' },
-    { label: 'White Paper', href: PAPER_URL },
-    { label: 'Token', href: 'https://xiiidlabs.imweb.me/token' },
-    { label: 'KYC', href: 'https://xiiidlabs.imweb.me/kyc' }
+    { label: 'Token', href: '#token' },
+    { label: 'KYC', href: 'https://xiiidlabs.imweb.me/kyc' },
+    { label: 'White Paper', href: PAPER_URL }
   ];
 
   var FOOTER_COLUMNS = [
@@ -139,8 +184,30 @@
     }
   ];
 
+  var TOKEN_MINT = 'AtNfXEt9vSZtHovxVYKXrfFwATfddmeMvApugZzcdWiQ';
+
   /* Project modals — the long-form version of the three project cards. */
   var MODALS = {
+    'token': {
+      eyebrow: 'XIIID Token', title: 'Tokenomics',
+      lead: 'The token behind the loop: earned by studying, held on Solana, verifiable by anyone.',
+      table: [
+        { k: 'Token Name', v: 'XIIID' },
+        { k: 'Symbol', v: 'XIIID' },
+        { k: 'Network', v: 'SOLANA' },
+        { k: 'Token Standard', v: 'SPL Token' },
+        { k: 'Mint Address', v: TOKEN_MINT, wrap: true },
+        { k: 'Decimals', v: '9' },
+        { k: 'Total Supply', v: '10,000,000,000 XIIID' }
+      ],
+      links: [
+        { text: 'Official Website', href: 'https://xiiid.ai' },
+        { text: 'GitBook', href: 'https://xiiid.gitbook.io/xiiid' },
+        { text: 'Metadata URI', href: 'https://xclass.xiiid.ai/token/metadata.json' },
+        { text: 'Token Image', href: 'https://xclass.xiiid.ai/token/xiiid.png' },
+        { text: 'Solscan', href: 'https://solscan.io/token/' + TOKEN_MINT }
+      ]
+    },
     'project-ai-tutor': {
       eyebrow: '01', title: 'AI Tutor', orb: '/brand/modal/orb-tutor.gif',
       hero: '/brand/modal/ai-tutor.jpg',
@@ -299,7 +366,50 @@
     ]);
   }
 
+  function blockHead(eyebrow, title) {
+    return el('div', { class: 'x-block-head' }, [
+      el('p', { class: 'x-block-eyebrow', text: eyebrow }),
+      el('h3', { class: 'x-block-title', text: title })
+    ]);
+  }
+
   function ecosystemSection() {
+    var tracks = el('div', { class: 'x-tracks' }, TRACKS.map(function (t) {
+      return el('article', { class: 'x-track' }, [
+        el('p', { class: 'x-track-kicker', text: t.kicker }),
+        el('h4', { class: 'x-track-name', text: t.name }),
+        el('p', { class: 'x-track-text', text: t.text }),
+        el('p', { class: 'x-track-note', text: t.note })
+      ]);
+    }));
+
+    var studio = el('article', { class: 'x-studio' }, [
+      el('div', { class: 'x-studio-body' }, [
+        el('p', { class: 'x-block-eyebrow', text: STUDIO.eyebrow }),
+        el('h4', { class: 'x-studio-title', text: STUDIO.title }),
+        el('p', { class: 'x-studio-text', text: STUDIO.text })
+      ]),
+      el('div', { class: 'x-studio-side' }, [
+        el('p', { class: 'x-studio-note', text: STUDIO.note }),
+        extLink(STUDIO.cta.href, 'x-studio-cta', STUDIO.cta.text)
+      ])
+    ]);
+
+    var field = el('div', { class: 'x-deploys' }, DEPLOYMENTS.map(function (d) {
+      return el('article', { class: 'x-deploy' }, [
+        el('div', { class: 'x-deploy-top' }, [
+          el('h4', { class: 'x-deploy-place', text: d.place }),
+          el('span', {
+            class: 'x-deploy-state' + (d.state === 'Live' ? ' is-live' : ''),
+            text: d.state
+          })
+        ]),
+        el('p', { class: 'x-deploy-product', text: d.product }),
+        el('p', { class: 'x-deploy-text', text: d.text }),
+        el('p', { class: 'x-deploy-kind', text: d.kind })
+      ]);
+    }));
+
     var steps = el('div', { class: 'x-eco-steps' }, ECOSYSTEM.map(function (s) {
       return el('article', { class: 'x-eco-card' }, [
         el('div', { class: 'x-eco-card-top' }, [
@@ -321,12 +431,28 @@
           ]),
           el('p', {
             class: 'x-lead',
-            text: 'Learning, effort, and ownership in a single loop. Study with AI Tutor, earn XPoints as you progress, and convert them seamlessly in XWallet. End up holding a true stake in the network you helped build.'
+            text: 'One engine, two ways in. Institutions shape a tutor of their own in AI Studio. Everyone else opens XClass. Either way the effort you put in comes back as something you hold.'
           })
         ]),
-        steps,
-        el('div', { class: 'x-eco-loop', 'aria-hidden': 'true' }),
-        el('p', { class: 'x-eco-caption', text: 'Ownership is a reason to come back.' })
+
+        el('div', { class: 'x-block' }, [
+          blockHead('AI Tutor', 'Two ways in.'),
+          tracks
+        ]),
+
+        el('div', { class: 'x-block' }, [studio]),
+
+        el('div', { class: 'x-block' }, [
+          blockHead('AI Pro in the field', 'Already teaching.'),
+          field
+        ]),
+
+        el('div', { class: 'x-block' }, [
+          blockHead('Inside XClass', 'Study. Earn. Convert. Own.'),
+          steps,
+          el('div', { class: 'x-eco-loop', 'aria-hidden': 'true' }),
+          el('p', { class: 'x-eco-caption', text: 'Ownership is a reason to come back.' })
+        ])
       ])
     ]);
   }
@@ -399,17 +525,21 @@
     ]);
   }
 
+  var STORE_LABEL = { ios: 'App Store', play: 'Google Play', web: 'Open on the web' };
   function storeButton(href, store) {
-    return extLink(href, 'x-store x-store-' + store, store === 'ios' ? 'App Store' : 'Google Play');
+    return extLink(href, 'x-store x-store-' + store, STORE_LABEL[store] || 'Open');
   }
 
   function appsSection() {
     var cards = el('div', { class: 'x-apps-grid' }, APPS.map(function (a) {
+      var buttons = a.web
+        ? [storeButton(a.web, 'web')]
+        : [storeButton(a.ios, 'ios'), storeButton(a.play, 'play')];
       return el('article', { class: 'x-app-card' }, [
         el('div', { class: 'x-app-mark', 'aria-hidden': 'true' }),
         el('h3', { class: 'x-app-name', text: a.name }),
         el('p', { class: 'x-app-text', text: a.text }),
-        el('div', { class: 'x-app-stores' }, [storeButton(a.ios, 'ios'), storeButton(a.play, 'play')])
+        el('div', { class: 'x-app-stores' }, buttons)
       ]);
     }));
     return el('section', { class: 'x-section x-apps', id: 'apps' }, [
@@ -428,6 +558,11 @@
         iconLink.setAttribute('aria-label', c.label);
         iconLink.setAttribute('title', c.label);
         return iconLink;
+      }
+      if (c.href.charAt(0) === '#') {
+        return el('a', { href: c.href, class: 'x-community-link x-community-link-text' }, [
+          el('span', { text: c.label })
+        ]);
       }
       return extLink(c.href, 'x-community-link x-community-link-text', c.label);
     }));
@@ -497,7 +632,20 @@
       body.appendChild(el('div', { class: 'x-modal-cta-row' }, [extLink(d.cta.href, 'x-modal-cta', d.cta.text)]));
     }
     if (d.tail) body.appendChild(figure(d.tail.src, d.tail.caption, 'x-figure-wide x-figure-tail'));
-    body.appendChild(el('p', { class: 'x-modal-foot', text: d.footnote }));
+    if (d.table) {
+      body.appendChild(el('dl', { class: 'x-spec' }, d.table.reduce(function (rows, r) {
+        return rows.concat([
+          el('dt', { class: 'x-spec-k', text: r.k }),
+          el('dd', { class: 'x-spec-v' + (r.wrap ? ' x-spec-wrap' : ''), text: r.v })
+        ]);
+      }, [])));
+    }
+    if (d.links) {
+      body.appendChild(el('div', { class: 'x-modal-links' }, d.links.map(function (l) {
+        return extLink(l.href, 'x-modal-link', l.text);
+      })));
+    }
+    if (d.footnote) body.appendChild(el('p', { class: 'x-modal-foot', text: d.footnote }));
     return body;
   }
 
@@ -688,7 +836,10 @@
   function reveal(node) { node.classList.add('x-revealed'); }
 
   function enhanceRequestedElements() {
-    if (!window.IntersectionObserver || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.IntersectionObserver) return;
+    // phones get the page as it is: no drift-in on scroll
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (matchMedia('(max-width: 767px)').matches) return;
     if (!revealObserver) {
       revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {

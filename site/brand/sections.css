@@ -934,3 +934,194 @@
 
 /* The dashboard sits at the foot of the AI Studio modal. */
 .x-figure-tail { margin-top: 3.2rem; }
+
+/* ------------------------------------------------------------------ *
+ * Ecosystem map
+ * ------------------------------------------------------------------ */
+
+.x-block + .x-block { margin-top: clamp(6rem, 7vw, 10rem); }
+.x-block-head { margin: 0 0 3.2rem; }
+.x-block-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(210, 208, 235, .48);
+}
+.x-block-title {
+  margin: 0;
+  font-size: clamp(2.4rem, 2.6vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+
+/* AI Pro / AI Class */
+.x-tracks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem; }
+.x-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 3.2rem;
+  border-radius: 1.4rem;
+  border: 1px solid var(--x-line);
+  background: rgba(255, 255, 255, .035);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.x-track-kicker { margin: 0; font-size: 1.25rem; letter-spacing: .08em; text-transform: uppercase; color: var(--brand-cyan, #29ccff); }
+.x-track-name { margin: 0; font-size: clamp(2.6rem, 3vw, 3.6rem); font-weight: 700; letter-spacing: -.025em; }
+.x-track-text { margin: 0; font-size: 1.55rem; line-height: 1.65; color: var(--x-text); flex: 1 1 auto; }
+.x-track-note { margin: 0; font-size: 1.3rem; color: rgba(210, 208, 235, .5); }
+.x-track:first-child .x-track-kicker { color: #a58cff; }
+
+/* AI Studio band */
+.x-studio {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(2.4rem, 4vw, 6rem);
+  align-items: end;
+  padding: clamp(3rem, 4vw, 4.4rem);
+  border-radius: 1.4rem;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background:
+    linear-gradient(135deg, rgba(109, 79, 255, .22), rgba(41, 204, 255, .10) 60%, rgba(255, 255, 255, .03));
+}
+.x-studio-title { margin: 0 0 1.6rem; font-size: clamp(2.4rem, 2.8vw, 3.4rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.2; }
+.x-studio-text { margin: 0; font-size: 1.55rem; line-height: 1.7; color: rgba(228, 226, 245, .8); }
+.x-studio-side { display: flex; flex-direction: column; align-items: flex-start; gap: 1.6rem; }
+.x-studio-note { margin: 0; font-size: 1.3rem; color: rgba(210, 208, 235, .6); }
+/* the shared brand pill treatment picks this up via [class$="-cta"]; only the
+   size and the trailing affordance are set here */
+.x-studio-cta { font-size: 1.4rem; font-weight: 600; text-decoration: none; }
+.x-studio-cta::after { content: " \2197"; }
+
+/* Where AI Pro already runs */
+.x-deploys { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem; }
+.x-deploy {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  padding: 2.8rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--x-line);
+  background: rgba(255, 255, 255, .035);
+}
+.x-deploy-top { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; }
+.x-deploy-place { margin: 0; font-size: 2rem; font-weight: 700; letter-spacing: -.02em; }
+.x-deploy-state {
+  flex: 0 0 auto;
+  padding: .35em .9em;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  font-size: 1.1rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(228, 226, 245, .6);
+}
+.x-deploy-state.is-live { border-color: rgba(41, 204, 255, .55); color: var(--brand-cyan, #29ccff); }
+.x-deploy-product { margin: 0; font-size: 1.45rem; font-weight: 600; color: rgba(228, 226, 245, .92); }
+.x-deploy-text { margin: 0; font-size: 1.4rem; line-height: 1.6; color: var(--x-text); flex: 1 1 auto; }
+.x-deploy-kind { margin: 0; font-size: 1.2rem; letter-spacing: .06em; text-transform: uppercase; color: rgba(210, 208, 235, .42); }
+
+/* ------------------------------------------------------------------ *
+ * Apps: three across, the third one opens on the web
+ * ------------------------------------------------------------------ */
+
+.x-apps-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1023px) { .x-apps-grid { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------------ *
+ * Token sheet
+ * ------------------------------------------------------------------ */
+
+.x-spec {
+  display: grid;
+  grid-template-columns: minmax(14rem, 22rem) minmax(0, 1fr);
+  gap: 0;
+  margin: 0 0 3.2rem;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+}
+.x-spec-k, .x-spec-v {
+  margin: 0;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+.x-spec-k { color: rgba(210, 208, 235, .6); }
+.x-spec-v { color: #fff; font-weight: 500; }
+.x-spec-wrap { word-break: break-all; }
+
+.x-modal-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+.x-modal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.15em 1.8em;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, .04);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+.x-modal-link:hover { background: rgba(255, 255, 255, .1); border-color: rgba(41, 204, 255, .6); transform: translateY(-2px); }
+
+/* ------------------------------------------------------------------ *
+ * Phones
+ * ------------------------------------------------------------------ */
+
+/* Nuxt injects its own stylesheet after these files and resets ul padding,
+   which left the open mobile menu flush against the screen edge. */
+@media (max-width: 1023px) {
+  .x-nav-list { padding: 12rem var(--pwx, 3rem) 6rem !important; }
+}
+
+@media (max-width: 767px) {
+  /* no drift-in on scroll: the page is simply there */
+  .x-reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
+
+  .x-block + .x-block { margin-top: 5.6rem; }
+  .x-block-head { margin-bottom: 2.4rem; }
+  .x-tracks, .x-deploys { grid-template-columns: 1fr; gap: 1.6rem; }
+  .x-track { padding: 2.4rem; }
+  .x-studio { grid-template-columns: 1fr; align-items: start; gap: 2.4rem; padding: 2.4rem; }
+  .x-studio-side { width: 100%; }
+  .x-studio-cta { width: 100%; text-align: center; }
+  .x-deploy { padding: 2.2rem; }
+  .x-deploy-place { font-size: 1.8rem; }
+
+  .x-spec { grid-template-columns: 1fr; border-top: none; }
+  .x-spec-k { padding: 1.4rem 0 .2rem; border-bottom: none; font-size: 1.25rem; letter-spacing: .06em; text-transform: uppercase; }
+  .x-spec-v { padding: 0 0 1.4rem; font-size: 1.5rem; }
+  .x-modal-links { grid-template-columns: 1fr; }
+  .x-modal-link { width: 100%; }
+
+  /* comfortable tap targets */
+  .page-home [class$="-cta"],
+  .section-hero-cta,
+  .x-store,
+  .x-community-link-text,
+  .x-modal-link {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.4rem;
+  }
+  .x-store { flex: 1 1 auto; }
+  .x-nav-link { padding: .8rem 0; }
+  .x-footer-item a { display: inline-flex; align-items: center; min-height: 4rem; }
+  .x-footer-list { gap: 0; }
+  .x-nav-cta { min-height: 4rem; display: inline-flex; align-items: center; }
+  /* widen the hamburger's hit area without moving its bars */
+  .x-nav-toggle::after { content: ""; position: absolute; inset: -.7rem; }
+}
