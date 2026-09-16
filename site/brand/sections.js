@@ -124,26 +124,12 @@
     { label: 'GitHub', href: 'https://github.com/Xiiid', icon: '/brand/sns/github.png' },
     { label: 'CoinGecko', href: 'https://www.coingecko.com/en/coins/xiiid', icon: '/brand/sns/coingecko.svg' },
     { label: 'Medium', href: 'https://medium.com/@xiiid', icon: '/brand/sns/medium.png' },
-    { label: 'White Paper', href: PAPER_URL }
+    { label: 'White Paper', href: PAPER_URL },
+    { label: 'Token', href: 'https://xiiidlabs.imweb.me/token' },
+    { label: 'KYC', href: 'https://xiiidlabs.imweb.me/kyc' }
   ];
 
   var FOOTER_COLUMNS = [
-    {
-      title: 'Company', lines: [
-        'CEO Scott Kim',
-        'L208, B1, SparkPlus, 524 Bongeunsa-ro, Gangnam-gu, Seoul, Republic of Korea',
-        'Business registration 131-86-72383'
-      ],
-      links: [{ text: 'official@xiiid.ai', link: 'mailto:official@xiiid.ai' }]
-    },
-    {
-      title: 'Group', links: [
-        { text: 'BLAD Group', link: 'https://blad.ai/' },
-        { text: 'Ainocean', link: 'https://ainocean.com/' },
-        { text: 'Dixsoft', link: 'https://dixsoft.kr/' },
-        { text: 'Xidsoft', link: 'https://xidsoft.com/' }
-      ]
-    },
     {
       title: 'Resources', links: [
         { text: 'Whitepaper', link: PAPER_URL },
@@ -433,9 +419,17 @@
 
   function communitySection() {
     var links = el('div', { class: 'x-community-links' }, COMMUNITY.map(function (c) {
-      var icon = c.icon ? el('span', { class: 'x-community-icon' }, [img(c.icon, null, '')]) : null;
-      return extLink(c.href, 'x-community-link' + (c.icon ? '' : ' x-community-link-text'),
-                     c.label, icon ? [icon] : []);
+      // the icon buttons carry no visible label, so the name moves to the
+      // accessible name and the tooltip
+      if (c.icon) {
+        var iconLink = extLink(c.href, 'x-community-link x-community-link-icon', null, [
+          el('span', { class: 'x-community-icon' }, [img(c.icon, null, '')])
+        ]);
+        iconLink.setAttribute('aria-label', c.label);
+        iconLink.setAttribute('title', c.label);
+        return iconLink;
+      }
+      return extLink(c.href, 'x-community-link x-community-link-text', c.label);
     }));
     return el('section', { class: 'x-section x-community', id: 'community' }, [
       el('div', { class: 'x-inner' }, [sectionHead('Follow the work into the classroom.', null), links])
