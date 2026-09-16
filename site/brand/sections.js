@@ -452,7 +452,7 @@
 
     return el('section', { class: 'x-section x-partners', id: 'partners' }, [
       el('div', { class: 'x-inner' }, [
-        sectionHead('Built with people who ship at scale.', null),
+        sectionHead('Partners', null),
         roles,
         el('p', { class: 'x-partner-note', text: PARTNER_NOTE })
       ]),
@@ -475,7 +475,7 @@
       ]);
     }));
     return el('section', { class: 'x-section x-team', id: 'team' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('Built by proven builders.', null), people])
+      el('div', { class: 'x-inner' }, [sectionHead('Built by proven leaders.', null), people])
     ]);
   }
 
@@ -494,7 +494,7 @@
       ]);
     }));
     return el('section', { class: 'x-section x-news', id: 'news' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('What we shipped, where it landed.', null), items])
+      el('div', { class: 'x-inner' }, [sectionHead('News.', null), items])
     ]);
   }
 
@@ -516,7 +516,7 @@
       ]);
     }));
     return el('section', { class: 'x-section x-apps', id: 'apps' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('The classroom, in your pocket.', null), cards])
+      el('div', { class: 'x-inner' }, [sectionHead('Download Apps.', null), cards])
     ]);
   }
 
@@ -540,7 +540,7 @@
       return extLink(c.href, 'x-community-link x-community-link-text', c.label);
     }));
     return el('section', { class: 'x-section x-community', id: 'community' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('Follow the work into the classroom.', null), links])
+      el('div', { class: 'x-inner' }, [sectionHead('Follow the work.', null), links])
     ]);
   }
 
@@ -724,11 +724,7 @@
     inner.appendChild(el('div', { class: 'x-footer-grid' }, [
       el('div', { class: 'x-footer-brand' }, [
         el('div', { class: 'x-footer-mark', 'aria-hidden': 'true' }),
-        el('p', { class: 'x-footer-tagline', text: 'Education without borders.' }),
-        el('a', {
-          class: 'x-footer-cta', href: XCLASS_URL, target: '_blank',
-          rel: 'noopener noreferrer', text: 'Open XClass ↗', 'data-external': '1'
-        })
+        el('p', { class: 'x-footer-tagline', text: 'Education without borders.' })
       ]),
       columns
     ]));
