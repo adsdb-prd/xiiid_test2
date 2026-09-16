@@ -992,7 +992,6 @@
   font-weight: 700;
   letter-spacing: -.025em;
 }
-.x-field { margin-top: 2.8rem; }
 .x-map-text { margin: 0; font-size: 1.5rem; line-height: 1.7; color: var(--x-text); }
 .x-map-cta-row { margin-top: 2.4rem; }
 /* the shared brand pill treatment picks this up via [class$="-cta"]; only the
@@ -1001,7 +1000,7 @@
 .x-studio-cta::after { content: " \2197"; }
 
 /* Where AI Pro already runs */
-.x-field { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.x-field { margin: 4.4rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
 .x-field-row {
   display: flex;
   gap: 1.6rem;
@@ -1009,6 +1008,7 @@
   border-top: 1px solid var(--x-line);
 }
 .x-field-row:first-child { border-top: none; padding-top: 0; }
+@media (max-width: 767px) { .x-field { margin-top: 3.2rem; } }
 .x-field-mark {
   flex: 0 0 auto;
   width: 6.8rem;
