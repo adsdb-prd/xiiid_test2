@@ -34,6 +34,7 @@
     const anchor = event.target.closest?.('a[href]');
     if (!anchor || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     const href = anchor.getAttribute('href');
+    if (anchor.hasAttribute('data-local-page')) return;
     if (!href || href.startsWith('#') || href === '/' || href.startsWith('mailto:')) return;
     const url = new URL(href, location.href);
     if (url.origin === location.origin && !/\.(?:png|svg|jpg|woff2|json)$/.test(url.pathname)) {
