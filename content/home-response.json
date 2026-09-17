@@ -1,0 +1,140 @@
+{
+  "result": {
+    "_createdAt": "2026-01-26T15:48:08Z",
+    "_id": "home",
+    "_rev": "RR96da0IFfsFiYeikFGQxY",
+    "_system": {
+      "base": {
+        "id": "home",
+        "rev": "RR96da0IFfsFiYeikBxVV3"
+      }
+    },
+    "_type": "home",
+    "_updatedAt": "2026-02-24T16:21:23Z",
+    "section1": {
+      "ctaGroup": [
+        {
+          "_key": "cta-projects",
+          "_type": "cta",
+          "link": "#projects",
+          "text": "See the work"
+        }
+      ],
+      "heading": "Education Without Borders, XIIID AI Labs",
+      "text": "Adapted for every student. Built for every classroom."
+    },
+    "section2": {
+      "ctaGroup": [
+        {
+          "_key": "cta-mission",
+          "_type": "cta",
+          "link": "#mission",
+          "text": "Our Mission ↓"
+        }
+      ],
+      "heading": "Learning shouldn't have a price of entry.",
+      "text": "In much of the world, a good tutor is a luxury. We build the tools that let schools, ministries, and educators put one in front of every student."
+    },
+    "section4": {
+      "ctaGroup": null,
+      "heading": "It adapts.",
+      "side": "left",
+      "text": "Native to their language, tuned to their curriculum, and matched to their true pace."
+    },
+    "section5": {
+      "ctaGroup": null,
+      "heading": "It teaches.",
+      "side": "right",
+      "text": "Guides students to practice, measures progress, and drives real improvement."
+    },
+    "section6": {
+      "ctaGroup": null,
+      "heading": "It Scales.",
+      "side": "left",
+      "text": "Built open to flow across borders. What works in one country powers the next, seamlessly."
+    },
+    "section8": {
+      "cards": [
+        {
+          "_key": "card-1",
+          "_type": "card",
+          "ctaGroup": [
+            {
+              "_key": "cta-project-ai-tutor",
+              "_type": "cta",
+              "link": "#project-ai-tutor",
+              "text": "See more"
+            }
+          ],
+          "heading": "AI Tutor",
+          "text": "It starts by understanding the learner. Before teaching a single concept, AI Tutor adapts to each student's native language, exact syllabus, and personal pace. It then delivers precisely what is needed: the right explanation, targeted practice, and a timely nudge to keep going. We bring world-class instruction into real classrooms, ensuring great teaching never depends on income or geography."
+        },
+        {
+          "_key": "card-2",
+          "_type": "card",
+          "ctaGroup": [
+            {
+              "_key": "cta-project-ai-studio",
+              "_type": "cta",
+              "link": "#project-ai-studio",
+              "text": "See more"
+            }
+          ],
+          "heading": "AI Studio",
+          "text": "A modular environment designed to build, configure, and scale specialized AI Tutors effortlessly. Whether you are an individual teacher, an educational publisher, or a government ministry, AI Studio turns institutional knowledge into an active learning service without requiring a dedicated AI team."
+        },
+        {
+          "_key": "card-3",
+          "_type": "card",
+          "ctaGroup": [
+            {
+              "_key": "cta-project-blockchain",
+              "_type": "cta",
+              "link": "#project-blockchain",
+              "text": "See more"
+            }
+          ],
+          "heading": "Why blockchain?",
+          "text": "To powering a smarter AI Ecosystem. XIIID is building a decentralized AI network where creators, educators, and innovators shape the future of AI tutors—together."
+        }
+      ],
+      "heading": "Three parts. One system.",
+      "text": "We have three projects."
+    },
+    "seo": {
+      "_type": "seo",
+      "description": "Education Without Borders, XIIID AI Labs",
+      "image": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-154adc4df997f6b1fe8680543e03d926ec51543b-1200x630-png",
+          "_type": "reference"
+        }
+      },
+      "noindex": false,
+      "title": "XIIID AI Labs"
+    },
+    "slug": {
+      "_type": "slug",
+      "current": "index"
+    },
+    "storyJson": {
+      "asset": {
+        "url": "/sanity/files/fqkdy2l3/production/8715d40d501a7f92686587ed87387ca096fbe5c3.json"
+      }
+    },
+    "title": "XIIID AI Labs"
+  },
+  "syncTags": [
+    "s1:fNR6ow",
+    "s1:u1F+hg",
+    "s1:PK0wng",
+    "s1:OuwdMQ",
+    "s1:yC5ciw",
+    "s1:lZwNAw",
+    "s1:xSAuFQ",
+    "s1:yIqClA",
+    "s1:A8wojw"
+  ],
+  "ms": 35
+}
