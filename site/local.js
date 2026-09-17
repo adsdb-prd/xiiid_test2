@@ -2,8 +2,8 @@
 (() => {
   const localUrl = input => {
     const url = new URL(String(input), location.href);
-    if (url.pathname.includes('154adc4df997f6b1fe8680543e03d926ec51543b-1200x630')) return new URL('/brand/news/news-1.jpg', location.origin).href;
-    if (url.hostname.endsWith('.api.sanity.io')) return new URL('/content/home-response.json?v=11', location.origin).href;
+    if (url.pathname.includes('154adc4df997f6b1fe8680543e03d926ec51543b-1200x630')) return new URL('/brand/og-hero.png', location.origin).href;
+    if (url.hostname.endsWith('.api.sanity.io')) return new URL('/content/home-response.json?v=12', location.origin).href;
     if (url.hostname === 'cdn.sanity.io') return new URL('/sanity' + url.pathname, location.origin).href;
     return String(input);
   };
@@ -44,9 +44,27 @@
     }
   }, true);
   addEventListener('DOMContentLoaded', () => {
-    const mark = () => { if(document.title !== 'XIIID AI Labs') document.title = 'XIIID AI Labs'; };
+    /* The app rewrites the head from the saved CMS payload, so the title and
+       the social tags are pinned here rather than left to the static markup. */
+    const OG_IMAGE = new URL('/brand/og-hero.png', location.origin).href;
+    const HEAD = [
+      ['meta[name="description"]', 'Education Without Borders, XIIID AI Labs'],
+      ['meta[property="og:title"]', 'XIIID AI Labs'],
+      ['meta[property="og:description"]', 'Education Without Borders, XIIID AI Labs'],
+      ['meta[property="og:image"]', OG_IMAGE],
+      ['meta[name="twitter:title"]', 'XIIID AI Labs'],
+      ['meta[name="twitter:description"]', 'Education Without Borders, XIIID AI Labs'],
+      ['meta[name="twitter:image"]', OG_IMAGE]
+    ];
+    const mark = () => {
+      if(document.title !== 'XIIID AI Labs') document.title = 'XIIID AI Labs';
+      HEAD.forEach(([sel, want]) => {
+        const tag = document.head.querySelector(sel);
+        if(tag && tag.getAttribute('content') !== want) tag.setAttribute('content', want);
+      });
+    };
     mark();
-    new MutationObserver(mark).observe(document.querySelector('title'), {childList:true});
+    new MutationObserver(mark).observe(document.head, {subtree:true, childList:true, attributes:true, attributeFilter:['content']});
     const labelNavigation = () => {
       const toggle = document.querySelector('.header-nav-mobile-toggle');
       if(toggle) {
