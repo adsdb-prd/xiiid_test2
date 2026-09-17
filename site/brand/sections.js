@@ -533,7 +533,7 @@
     var grid = el('div', { class: 'x-blog-list' });
     var section = el('section', { class: 'x-section x-blog', id: 'blog', 'aria-label': 'Blog' }, [
       el('div', { class: 'x-inner' }, [
-        el('div', { class: 'x-blog-heading' }, [el('h2', { text: 'Blog' }), extLink('https://medium.com/@xiiid', 'x-blog-all', 'All stories on Medium ↗')]), grid
+        el('div', { class: 'x-blog-heading' }, [el('h2', { text: 'Blog' })]), grid
       ])
     ]);
     fetch('/content/blog.json').then(function (r) { if (!r.ok) throw new Error('Blog unavailable'); return r.json(); }).then(function (data) {

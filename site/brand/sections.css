@@ -1243,9 +1243,8 @@
 .x-service-link { display: inline-flex; min-height: 4.4rem; align-items: center; margin-top: 1.6rem; padding: .8rem 1.6rem; border: 1px solid #797092; border-radius: 999px; color: #fff; font-size: 1.3rem; text-decoration: none; }
 .x-service-link:hover { border-color: #29ccff; background: #ffffff0d; }
 .x-blog { padding-top: 1rem; }
-.x-blog-heading { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-bottom: 2.8rem; }
+.x-blog-heading { margin-bottom: 2.8rem; }
 .x-blog-heading h2 { font-size: 2.8rem; font-weight: 600; }
-.x-blog-all { color: #b9b4ca; font-size: 1.4rem; }
 .x-blog-list { border-top: 1px solid #ffffff20; }
 .x-blog-row {
   display: grid;
@@ -1265,8 +1264,17 @@
 .x-blog-row:hover .x-blog-read { opacity: 1; }
 a:focus-visible, button:focus-visible { outline: 2px solid #29ccff; outline-offset: 5px; }
 @media(max-width:767px) {
-  .header-main.x-header .header-logo { width: 15rem !important; min-height: 3.5rem; flex-basis: 15rem; }
+  /* Phone top bar: the logo was reading far too large next to the pill and
+     the hamburger, so all three come down together and keep their balance. */
+  .header-main.x-header .header-logo { width: 11.4rem !important; min-height: 2.7rem; flex-basis: 11.4rem; }
+  .x-nav { gap: 1.1rem; }
+  .x-nav-cta { font-size: 1.1rem; padding: .7em 1.35em; min-height: 3.2rem; }
+  .x-nav-toggle { width: 2.6rem; height: 2.6rem; }
+  .x-nav-toggle span { left: .2rem; right: .2rem; }
+  .x-nav-toggle span:first-child { top: .85rem; }
+  .x-nav-toggle span:last-child { top: 1.5rem; }
+  .x-nav-open .x-nav-toggle span:first-child { transform: translateY(.32rem) rotate(45deg); }
+  .x-nav-open .x-nav-toggle span:last-child { transform: translateY(-.33rem) rotate(-45deg); }
   .x-blog-row { grid-template-columns: 1fr; gap: .8rem; align-items: start; padding: 2rem .2rem; }
   .x-blog-row:hover { padding-inline: .2rem; }
-  .x-blog-heading { align-items: start; flex-direction: column; gap: 1.2rem; }
 }
