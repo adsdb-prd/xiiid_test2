@@ -390,7 +390,7 @@
             })
           ]),
           el('p', { class: 'x-field-text', text: d.text }),
-          d.href ? extLink(d.href, 'x-service-link', 'Visit ' + d.product + ' ↗') : null
+          d.href ? extLink(d.href, 'x-service-link', 'Open ' + d.product) : null
         ])
       ]);
     }));

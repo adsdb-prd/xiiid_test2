@@ -676,7 +676,6 @@
   transition: color .2s ease;
 }
 .x-footer-item a:hover { color: #fff; }
-.x-footer-item a[data-external]::after { content: "↗"; padding-left: .25em; }
 
 .x-footer-bar { margin-top: 3rem; padding: 3rem 0 0; }
 .x-footer-copy {
@@ -1033,7 +1032,6 @@
 /* the shared brand pill treatment picks this up via [class$="-cta"]; only the
    size and the trailing affordance are set here */
 .x-studio-cta { font-size: 1.4rem; font-weight: 600; text-decoration: none; }
-.x-studio-cta::after { content: " \2197"; }
 
 /* Where AI Pro already runs */
 .x-field { margin: 5.6rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
@@ -1262,6 +1260,9 @@
 .x-blog-title { margin: 0; font-size: 1.7rem; line-height: 1.5; font-weight: 500; }
 .x-blog-read { color: #a99aee; font-size: 1.3rem; white-space: nowrap; opacity: .75; transition: opacity .2s ease; }
 .x-blog-row:hover .x-blog-read { opacity: 1; }
+/* The bundle appends an arrow to its CTA links; buttons carry no arrow here. */
+.section-logoCards-card-cta::after, .section-imgCards-card-cta::after,
+.section-text-card-side-cta::after, .footer-content .footer-links .footer-link a::after { content: none !important; }
 a:focus-visible, button:focus-visible { outline: 2px solid #29ccff; outline-offset: 5px; }
 @media(max-width:767px) {
   /* Phone top bar: the logo was reading far too large next to the pill and
