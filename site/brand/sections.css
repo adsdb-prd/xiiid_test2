@@ -182,7 +182,6 @@
 
 .x-partner-note {
   margin: 4rem 0 0;
-  max-width: 86rem;
   font-size: 1.35rem;
   line-height: 1.75;
   color: rgba(210, 208, 235, .55);
@@ -233,7 +232,7 @@
  * Team
  * ------------------------------------------------------------------ */
 
-.x-team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem; max-width: 108rem; }
+.x-team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem; }
 .x-team-card {
   display: flex;
   gap: 2.4rem;
@@ -377,17 +376,18 @@
 .x-header .header-nav-mobile-toggle { display: none !important; }
 .x-header .header-logo { cursor: pointer; }
 
-.x-nav { display: flex; align-items: center; gap: 3.2rem; margin-left: auto; }
-.x-nav-list { display: flex; align-items: center; gap: 2.8rem; margin: 0; padding: 0; list-style: none; }
+.x-nav { display: flex; align-items: center; gap: 2.6rem; margin-left: auto; }
+.x-nav-list { display: flex; align-items: center; gap: 2.2rem; margin: 0; padding: 0; list-style: none; }
 .x-nav-link {
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: 1.55rem;
+  font-weight: 600;
   color: #fff;
   text-decoration: none;
   opacity: .75;
   transition: opacity .2s ease;
 }
 .x-nav-link:hover { opacity: 1; }
+.x-nav-link { opacity: .85; }
 .x-nav-cta {
   display: inline-block;
   padding: .85em 1.9em;
@@ -1230,7 +1230,12 @@
 /* Unified content width and continuous section backdrop. */
 .header-main.x-header { padding-inline: var(--pwx, 4rem); }
 .header-main.x-header .header-inner { width: 100%; max-width: 132rem; margin-inline: auto; padding-inline: 0; }
-.header-main.x-header .header-logo { width: 20rem !important; height: auto !important; min-height: 4.7rem; flex: 0 0 20rem; }
+.header-main.x-header .header-logo { width: 17rem !important; height: auto !important; min-height: 4rem; flex: 0 0 17rem; }
+/* The logo used to jump straight from the phone size to the full one at
+   768px, which read as a sudden blow-up on tablets. This is the step in between. */
+@media (max-width: 1023px) {
+  .header-main.x-header .header-logo { width: 13rem !important; min-height: 3rem; flex-basis: 13rem; }
+}
 .footer-main.x-footer .footer-inner, .x-marquee-wrap { width: 100%; max-width: 132rem; margin-inline: auto; }
 .x-sections { isolation: isolate; }
 .x-sections::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(to bottom, transparent, rgba(6,4,15,.78) 65rem, #04030c 100%); backdrop-filter: blur(26px) saturate(115%); -webkit-backdrop-filter: blur(26px) saturate(115%); mask-image: linear-gradient(to bottom, transparent, #000 45rem); }
@@ -1242,7 +1247,6 @@
 .x-service-link:hover { border-color: #29ccff; background: #ffffff0d; }
 .x-blog { padding-top: 1rem; }
 .x-blog-heading { margin-bottom: 2.8rem; }
-.x-blog-heading h2 { font-size: 2.8rem; font-weight: 600; }
 .x-blog-list { border-top: 1px solid #ffffff20; }
 .x-blog-row {
   display: grid;
@@ -1263,11 +1267,163 @@
 /* The bundle appends an arrow to its CTA links; buttons carry no arrow here. */
 .section-logoCards-card-cta::after, .section-imgCards-card-cta::after,
 .section-text-card-side-cta::after, .footer-content .footer-links .footer-link a::after { content: none !important; }
+
+/* ------------------------------------------------------------------ *
+ * Roadmap
+ *
+ * One lane of years on desktop, a single stacked column on phones. Each
+ * year keeps its own rail so a long year does not drag the others down,
+ * and shipped items are marked rather than hidden.
+ * ------------------------------------------------------------------ */
+
+.x-roadmap { padding-top: 2rem; }
+.x-road-lane {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.4rem;
+  align-items: start;
+}
+.x-road-year {
+  padding: 2.8rem 2.4rem 3rem;
+  border-radius: 1.4rem;
+  border: 1px solid var(--x-line);
+  background: rgba(255, 255, 255, .03);
+}
+.x-road-year.is-now {
+  border-color: rgba(109, 79, 255, .55);
+  background: linear-gradient(180deg, rgba(109, 79, 255, .14), rgba(255, 255, 255, .03) 42%);
+}
+.x-road-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .8rem 1.2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2.4rem;
+  border-bottom: 1px solid var(--x-line);
+}
+.x-road-num {
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+.x-road-note { margin: 0; font-size: 1.3rem; color: rgba(210, 208, 235, .6); }
+.x-road-badge {
+  margin-left: auto;
+  padding: .45em 1em;
+  border-radius: 999px;
+  background-image: linear-gradient(115deg, #d46fff, #29ccff);
+  color: #05030f;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.x-road-list { margin: 0; padding: 0; list-style: none; }
+.x-road-item {
+  position: relative;
+  display: flex;
+  gap: 1.4rem;
+  padding-bottom: 1.8rem;
+}
+.x-road-item:last-child { padding-bottom: 0; }
+/* the rail runs between the dots, never past the last one */
+.x-road-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: .55rem; top: 1.7rem; bottom: .2rem;
+  width: 1px;
+  background: var(--x-line);
+}
+.x-road-dot {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1.2rem; height: 1.2rem;
+  margin-top: .55rem;
+  border-radius: 50%;
+  border: 1px solid rgba(210, 208, 235, .45);
+  background: #0a0818;
+}
+.x-road-item.is-done .x-road-dot {
+  border-color: transparent;
+  background-image: linear-gradient(115deg, #d46fff, #29ccff);
+}
+.x-road-body { min-width: 0; }
+.x-road-text {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.55;
+  color: rgba(210, 208, 235, .72);
+}
+.x-road-item.is-done .x-road-text { color: #fff; }
+.x-road-when {
+  margin: .4rem 0 0;
+  font-size: 1.2rem;
+  letter-spacing: .04em;
+  color: rgba(210, 208, 235, .48);
+  font-variant-numeric: tabular-nums;
+}
+.x-road-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 4.4rem;
+  margin-top: 4rem;
+  padding: .9rem 2rem;
+  border: 1px solid #797092;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+.x-road-more:hover { border-color: #29ccff; background: rgba(255, 255, 255, .05); }
+
+/* Team member link ------------------------------------------------- */
+.x-team-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 4rem;
+  margin-top: 1.8rem;
+  padding: .7rem 1.6rem;
+  border: 1px solid #797092;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+.x-team-link:hover { border-color: #29ccff; background: rgba(255, 255, 255, .05); }
+
+/* The bundle caps the story card copy well short of the card edge,
+   which left a dead column inside every card. */
+.section-logoCards-card-text,
+.section-imgCards-card-text { max-width: none !important; }
+
+@media (max-width: 1023px) {
+  .x-road-lane { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .x-road-lane { grid-template-columns: 1fr; gap: 1.6rem; }
+  .x-road-year { padding: 2.2rem 1.8rem 2.4rem; }
+  .x-road-num { font-size: 2.4rem; }
+  .x-road-head { padding-bottom: 1.6rem; margin-bottom: 2rem; }
+  .x-road-more { width: 100%; justify-content: center; }
+  .x-team-link { width: 100%; justify-content: center; }
+}
 a:focus-visible, button:focus-visible { outline: 2px solid #29ccff; outline-offset: 5px; }
 @media(max-width:767px) {
+  /* One gutter for the whole page. The bundle's story blocks doubled it up —
+     a 6rem inset against our 3rem — so the top of the page stepped in and out
+     as you scrolled. Everything now sits on var(--pwx), and that gutter is
+     narrower on phones so the content is not squeezed into a thin column. */
+  :root { --pwx: 2rem !important; }
+  .section-text-card-side { padding-inline: var(--pwx) !important; }
+  .section-text-card-inner, .section-imgCards-inner, .section-logoCards-inner { padding-inline: 0 !important; }
+  .section-text-card, .section-logoCards-header, .section-imgCards-header { padding-inline: var(--pwx) !important; }
   /* Phone top bar: the logo was reading far too large next to the pill and
      the hamburger, so all three come down together and keep their balance. */
-  .header-main.x-header .header-logo { width: 11.4rem !important; min-height: 2.7rem; flex-basis: 11.4rem; }
+  .header-main.x-header .header-logo { width: 9.8rem !important; min-height: 2.3rem; flex-basis: 9.8rem; }
   .x-nav { gap: 1.1rem; }
   .x-nav-cta { font-size: 1.1rem; padding: .7em 1.35em; min-height: 3.2rem; }
   .x-nav-toggle { width: 2.6rem; height: 2.6rem; }

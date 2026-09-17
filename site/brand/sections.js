@@ -19,6 +19,8 @@
   var NAV = [
     { label: 'Projects', href: '#projects' },
     { label: 'Ecosystem', href: '#ecosystem' },
+    { label: 'Team', href: '#team' },
+    { label: 'Partners', href: '#partners' },
     { label: 'News', href: '#news' },
     { label: 'Token', href: 'token.html', 'data-local-page': '1' }
   ];
@@ -62,7 +64,8 @@
     {
       place: 'Paraguay', product: 'National rollout', state: 'In progress',
       mark: '/brand/modal/flag-py.png', markKind: 'flag',
-      text: 'In agreement with the government, preparing to reach public classrooms nationwide.'
+      text: 'In agreement with the government, preparing to reach public classrooms nationwide.',
+      cta: { text: 'Open Beta', href: 'https://xdotup-dev.web.app/' }
     }
   ];
 
@@ -116,11 +119,60 @@
   var TEAM = [
     {
       name: 'Scott Kim', role: 'Founder and CEO', photo: '/brand/team/scott.png',
+      linkedin: 'https://www.linkedin.com/in/scott-kim-517a4a85',
       text: "Scott has led XIIID from the start. Formerly Chief Governance Officer at Riiid, he spearheaded the company's global expansion."
     },
     {
       name: 'Vu D. Christopher', role: 'Co-founder and CTO', photo: '/brand/team/vu.png',
       text: 'MIT Computer Science graduate and former technical lead at Riiid, where he led AI-driven global initiatives.'
+    }
+  ];
+
+  /* Roadmap, as published on the GitBook page. 'done' marks shipped items so
+     the timeline can show what is already behind us. */
+  var ROADMAP = [
+    {
+      year: '2025', note: 'Foundation',
+      items: [
+        { text: 'XIIID Project Launch', when: '2025.02.06', done: true },
+        { text: 'Modularization of AI Studio', done: true },
+        { text: 'Development of AI Class Platform', done: true },
+        { text: 'Preparation for ENEM service in Brazil', done: true }
+      ]
+    },
+    {
+      year: '2026', note: 'Launch', now: true,
+      items: [
+        { text: 'Preparation for AI Class Service in Paraguay', done: true },
+        { text: 'Paraguay Internship in US', when: '2026.06.06-22', done: true },
+        { text: 'XClass Web / App Beta Launch', when: '2026.06.14', done: true },
+        { text: 'XClass Web Official Launch', when: '2026.06.26', done: true },
+        { text: 'XWallet App Beta Launch', when: '2026.06.28', done: true },
+        { text: 'XClass App Official Launch (iOS / Android)', when: '2026.06.30', done: true },
+        { text: 'XWallet App Official Launch (iOS / Android)' },
+        { text: 'Launch AI Class Service in Paraguay' },
+        { text: 'Preparation for ENEM Service in Brazil' }
+      ]
+    },
+    {
+      year: '2027', note: 'Expansion',
+      items: [
+        { text: 'Launch ENEM Service in Brazil' },
+        { text: 'Preparation for SAEB Service in Brazil' },
+        { text: 'Launch SAEB Service in Brazil' },
+        { text: 'Preparation for Online Education Certification service' },
+        { text: 'Launch of Online Education Certification service' },
+        { text: 'Expansion of international exams (GED, IELTS, TOEFL)' },
+        { text: 'Advancement of AI Studio' }
+      ]
+    },
+    {
+      year: '2028', note: 'Beyond',
+      items: [
+        { text: 'Preparation for Online School' },
+        { text: 'Launch of Online School' },
+        { text: 'Preparation for Metaverse School service' }
+      ]
     }
   ];
 
@@ -322,10 +374,9 @@
       return el('li', null, [el('a', { class: 'x-nav-link', href: item.href, text: item.label, 'data-local-page': item.label === 'Token' ? '1' : null })]);
     }));
 
-    var cta = el('a', {
-      class: 'x-nav-cta', href: XCLASS_URL, target: '_blank',
-      rel: 'noopener noreferrer', text: 'XClass', 'data-external': '1'
-    });
+    /* The pill points at the store row further down the page rather than
+       opening the web app, so the visit does not end here. */
+    var cta = el('a', { class: 'x-nav-cta', href: '#apps', text: 'APP' });
 
     var toggle = el('button', {
       class: 'x-nav-toggle', type: 'button', 'aria-label': 'Open navigation', 'aria-expanded': 'false',
@@ -390,7 +441,8 @@
             })
           ]),
           el('p', { class: 'x-field-text', text: d.text }),
-          d.href ? extLink(d.href, 'x-service-link', 'Open ' + d.product) : null
+          d.cta ? extLink(d.cta.href, 'x-service-link', d.cta.text)
+                : d.href ? extLink(d.href, 'x-service-link', 'Open ' + d.product) : null
         ])
       ]);
     }));
@@ -417,7 +469,7 @@
       el('h5', { class: 'x-map-sub', text: 'Blockchain System.' }),
       steps,
       el('p', { class: 'x-eco-caption', text: 'Ownership is a reason to come back.' }),
-      el('div', { class: 'x-map-cta-row' }, [extLink(XCLASS_URL, 'x-studio-cta', 'Open XClass')])
+      el('div', { class: 'x-map-cta-row' }, [el('a', { class: 'x-studio-cta', href: '#apps', text: 'Open XClass' })])
     ]));
 
     return el('section', { class: 'x-section x-ecosystem', id: 'ecosystem' }, [
@@ -476,12 +528,43 @@
         el('div', { class: 'x-team-body' }, [
           el('h3', { class: 'x-team-name', text: m.name }),
           el('p', { class: 'x-team-role', text: m.role }),
-          el('p', { class: 'x-team-text', text: m.text })
+          el('p', { class: 'x-team-text', text: m.text }),
+          m.linkedin ? extLink(m.linkedin, 'x-team-link', 'LinkedIn') : null
         ])
       ]);
     }));
     return el('section', { class: 'x-section x-team', id: 'team' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('Built by proven leaders.', null), people])
+      el('div', { class: 'x-inner' }, [sectionHead('Team.', null), people])
+    ]);
+  }
+
+  function roadmapSection() {
+    var lane = el('div', { class: 'x-road-lane' }, ROADMAP.map(function (y) {
+      var list = el('ul', { class: 'x-road-list' }, y.items.map(function (it) {
+        return el('li', { class: 'x-road-item' + (it.done ? ' is-done' : '') }, [
+          el('span', { class: 'x-road-dot', 'aria-hidden': 'true' }),
+          el('div', { class: 'x-road-body' }, [
+            el('p', { class: 'x-road-text', text: it.text }),
+            it.when ? el('p', { class: 'x-road-when', text: it.when }) : null
+          ])
+        ]);
+      }));
+      return el('div', { class: 'x-road-year' + (y.now ? ' is-now' : '') }, [
+        el('div', { class: 'x-road-head' }, [
+          el('h3', { class: 'x-road-num', text: y.year }),
+          el('p', { class: 'x-road-note', text: y.note }),
+          y.now ? el('span', { class: 'x-road-badge', text: 'Now' }) : null
+        ]),
+        list
+      ]);
+    }));
+
+    return el('section', { class: 'x-section x-roadmap', id: 'roadmap' }, [
+      el('div', { class: 'x-inner' }, [
+        sectionHead('Roadmap.', null),
+        lane,
+        extLink('https://xiiid.gitbook.io/xiiid/additional-infomation/roadmap', 'x-road-more', 'Full roadmap')
+      ])
     ]);
   }
 
@@ -533,7 +616,7 @@
     var grid = el('div', { class: 'x-blog-list' });
     var section = el('section', { class: 'x-section x-blog', id: 'blog', 'aria-label': 'Blog' }, [
       el('div', { class: 'x-inner' }, [
-        el('div', { class: 'x-blog-heading' }, [el('h2', { text: 'Blog' })]), grid
+        el('div', { class: 'x-blog-heading' }, [el('h2', { class: 'x-title', text: 'Blog' })]), grid
       ])
     ]);
     fetch('/content/blog.json').then(function (r) { if (!r.ok) throw new Error('Blog unavailable'); return r.json(); }).then(function (data) {
@@ -808,7 +891,7 @@
     if (!page.querySelector('.x-sections')) {
       markAnchors();
       page.appendChild(el('div', { class: 'x-sections' }, [
-        ecosystemSection(), partnersSection(), teamSection(),
+        ecosystemSection(), teamSection(), roadmapSection(), partnersSection(),
         newsSection(), blogSection(), appsSection(), communitySection()
       ]));
       built = true;
@@ -862,7 +945,7 @@
   var revealObserver;
   var REVEAL_TARGETS = [
     '.section-logoCards-card', '.x-head', '.x-eco-card', '.x-partner-role',
-    '.x-partner-note', '.x-marquee-wrap', '.x-team-card', '.x-news-card',
+    '.x-partner-note', '.x-marquee-wrap', '.x-team-card', '.x-road-year', '.x-news-card',
     '.x-app-card', '.x-community-links', '.x-footer-grid', '.x-footer-bar',
     'main h1', 'main h2', 'main p'
   ].join(', ');
