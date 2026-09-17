@@ -990,14 +990,33 @@
  * Ecosystem map — one AI Tutor frame, two columns inside
  * ------------------------------------------------------------------ */
 
-.x-map {
+/* The frosted card. .x-map is the original (the AI Tutor block); .x-panel is
+   the exact same treatment, applied by panel() in sections.js to the Team,
+   News, Blog, Roadmap and Apps blocks. A translucent fill over a backdrop
+   blur — no grain — so the 3D mark stays visible but stops competing. */
+.x-map,
+.x-panel {
+  position: relative;
+  isolation: isolate;
   border: 1px solid rgba(255, 255, 255, .16);
   border-radius: 1.6rem;
   background: rgba(255, 255, 255, .03);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  padding: clamp(3.6rem, 4vw, 6rem);
   box-shadow: 0 2rem 6rem rgba(0, 0, 0, .45);
+}
+.x-map { padding: clamp(3.6rem, 4vw, 6rem); }
+.x-panel { padding: clamp(2.8rem, 3vw, 4.4rem); }
+
+/* Inside a panel the cards no longer need their own filled background —
+   two frosted layers stacked just muddies both. */
+.x-panel .x-team-card,
+.x-panel .x-news-card,
+.x-panel .x-app-card,
+.x-panel .x-road-year {
+  background: rgba(255, 255, 255, .02);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 .x-map-title {
   margin: 0 0 clamp(4.4rem, 4.6vw, 6.4rem);
@@ -1254,27 +1273,24 @@
 }
 .footer-main.x-footer .footer-inner, .x-marquee-wrap { width: 100%; max-width: 132rem; margin-inline: auto; }
 .x-sections { isolation: isolate; }
-/* One veil over the whole section stack. The mask — not the fill — drives
-   the fade, so the blur and the tint come up together: barely there at the
-   top, roughly two thirds covered by Download Apps, solid by Follow the
-   work. Percentages keep that timing if sections are added or removed. */
+/* One veil over the whole section stack, and the only thing that blurs the
+   3D mark behind the page.
+
+   The mask — not the fill — drives the fade, so the blur and the tint come up
+   together: it starts from nothing at the top of Ecosystem, is roughly two
+   thirds in by Download Apps (the mark is still readable there) and is solid
+   by Follow the work. Stops are percentages so the timing survives sections
+   being added or removed.
+
+   Scope note: this is a child of .x-sections, which ends before the footer, so
+   the footer's video is never blurred by it. The footer runs its own tint — see
+   the footer join block further down. */
 .x-sections::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(6, 4, 15, .88), #04030c 70%);
-  backdrop-filter: blur(26px) saturate(115%);
-  -webkit-backdrop-filter: blur(26px) saturate(115%);
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, .28) 14%,
-    rgba(0, 0, 0, .48) 50%,
-    rgba(0, 0, 0, .70) 83%,
-    #000 95%
-  );
   -webkit-mask-image: linear-gradient(
     to bottom,
     transparent 0%,
@@ -1283,9 +1299,21 @@
     rgba(0, 0, 0, .70) 83%,
     #000 95%
   );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, .28) 14%,
+    rgba(0, 0, 0, .48) 50%,
+    rgba(0, 0, 0, .70) 83%,
+    #000 95%
+  );
+  background: linear-gradient(to bottom, rgba(6, 4, 15, .88), #04030c 70%);
+  backdrop-filter: blur(26px) saturate(115%);
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
 }
+
 .x-sections .x-section { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; isolation: auto; }
-.x-section::after, .x-veil { display: none; }
+.x-section::after, .x-veil { display: none; }  /* per-section panels; the veil above replaces them */
 .footer-main.x-footer { background: #04030c; }
 .footer-main.x-footer::before, .footer-main.x-footer::after { display: none; }
 .x-service-link { display: inline-flex; min-height: 4.4rem; align-items: center; margin-top: 1.6rem; padding: .8rem 1.6rem; border: 1px solid #797092; border-radius: 999px; color: #fff; font-size: 1.3rem; text-decoration: none; }

@@ -426,6 +426,13 @@
    * Sections
    * ------------------------------------------------------------------ */
 
+  /* The frosted card the 'Two types of AI Tutor' block sits on. Sections that
+     want the same treatment wrap their content in this rather than repeating
+     the border / blur / grain rules. */
+  function panel(children) {
+    return el('div', { class: 'x-panel' }, children);
+  }
+
   function sectionHead(title, text) {
     return el('div', { class: 'x-head' }, [
       el('h2', { class: 'x-title', text: title }),
@@ -493,9 +500,7 @@
       el('div', { class: 'x-veil', 'aria-hidden': 'true' }),
       el('div', { class: 'x-inner' }, [
         el('div', { class: 'x-head x-head-eco' }, [
-          el('h2', { class: 'x-title' }, [
-            el('span', { class: 'x-underline', text: 'Ecosystem.' })
-          ])
+          el('h2', { class: 'x-title', text: 'Ecosystem.' })
         ]),
         el('div', { class: 'x-map' }, [
           el('h3', { class: 'x-map-title', text: 'Two types of AI Tutor' }),
@@ -551,7 +556,7 @@
       ]);
     }));
     return el('section', { class: 'x-section x-team', id: 'team' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('Team.', null), people])
+      el('div', { class: 'x-inner' }, [sectionHead('Team.', null), panel([people])])
     ]);
   }
 
@@ -579,7 +584,7 @@
     return el('section', { class: 'x-section x-roadmap', id: 'roadmap' }, [
       el('div', { class: 'x-inner' }, [
         sectionHead('Roadmap.', null),
-        lane
+        panel([lane])
       ])
     ]);
   }
@@ -624,7 +629,7 @@
     setTimeout(sync, 0);
 
     return el('section', { class: 'x-section x-news', id: 'news' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('News.', null), rail])
+      el('div', { class: 'x-inner' }, [sectionHead('News.', null), panel([rail])])
     ]);
   }
 
@@ -632,7 +637,7 @@
     var grid = el('div', { class: 'x-blog-list' });
     var section = el('section', { class: 'x-section x-blog', id: 'blog', 'aria-label': 'Blog' }, [
       el('div', { class: 'x-inner' }, [
-        el('div', { class: 'x-blog-heading' }, [el('h2', { class: 'x-title', text: 'Blog' })]), grid
+        el('div', { class: 'x-blog-heading' }, [el('h2', { class: 'x-title', text: 'Blog' })]), panel([grid])
       ])
     ]);
     fetch('/content/blog.json').then(function (r) { if (!r.ok) throw new Error('Blog unavailable'); return r.json(); }).then(function (data) {
@@ -667,7 +672,7 @@
       ]);
     }));
     return el('section', { class: 'x-section x-apps', id: 'apps' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('Download Apps.', null), cards])
+      el('div', { class: 'x-inner' }, [sectionHead('Download Apps.', null), panel([cards])])
     ]);
   }
 
@@ -889,6 +894,43 @@
    * Wiring
    * ------------------------------------------------------------------ */
 
+  /* In-page nav jumps land instantly by default, which reads as the page
+     blinking to a new place. This eases the jump and offsets the landing by
+     the fixed header, and steps aside for prefers-reduced-motion. */
+  function smoothAnchors() {
+    var HEADER_OFFSET = 90;
+
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      var link = e.target.closest ? e.target.closest('a[href]') : null;
+      if (!link) return;
+
+      var href = link.getAttribute('href');
+      if (!href || href.charAt(0) !== '#' || href === '#') return;
+
+      var target = document.getElementById(href.slice(1));
+      if (!target) return;
+
+      e.preventDefault();
+
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+
+      window.scrollTo({ top: top < 0 ? 0 : top, behavior: reduce ? 'auto' : 'smooth' });
+
+      /* Keep the address bar in step without letting it re-jump the page. */
+      if (window.history && window.history.replaceState) window.history.replaceState(null, '', href);
+
+      /* Close the phone menu if the tap came from inside it. */
+      var header = document.querySelector('.header-main');
+      if (header && header.classList.contains('x-nav-open')) {
+        var toggle = header.querySelector('.x-nav-toggle');
+        if (toggle) toggle.click();
+      }
+    }, true);
+  }
+
   function markAnchors() {
     var projects = document.querySelector('.section-logoCards');
     if (projects && !projects.id) projects.id = 'projects';
@@ -906,9 +948,10 @@
 
     if (!page.querySelector('.x-sections')) {
       markAnchors();
+      smoothAnchors();
       page.appendChild(el('div', { class: 'x-sections' }, [
-        ecosystemSection(), teamSection(), roadmapSection(), partnersSection(),
-        newsSection(), blogSection(), appsSection(), communitySection()
+        ecosystemSection(), teamSection(), partnersSection(), newsSection(),
+        blogSection(), roadmapSection(), appsSection(), communitySection()
       ]));
       built = true;
     }
