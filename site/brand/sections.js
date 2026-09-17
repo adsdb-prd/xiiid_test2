@@ -486,7 +486,7 @@
   }
 
   function newsSection() {
-    var items = el('div', { class: 'x-news-grid' }, NEWS.map(function (a) {
+    var track = el('div', { class: 'x-news-track' }, NEWS.map(function (a) {
       return el('a', {
         class: 'x-news-card', href: a.href, target: '_blank',
         rel: 'noopener noreferrer', 'data-external': '1'
@@ -499,13 +499,38 @@
         ])
       ]);
     }));
+    var prev = el('button', { class: 'x-news-arrow x-news-prev', type: 'button', 'aria-label': 'Previous news' }, [el('span', { text: '←' })]);
+    var next = el('button', { class: 'x-news-arrow x-news-next', type: 'button', 'aria-label': 'Next news' }, [el('span', { text: '→' })]);
+    var rail = el('div', { class: 'x-news-rail' }, [track, prev, next]);
+
+    function step() {
+      var card = track.firstElementChild;
+      if (!card) return track.clientWidth;
+      var gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+    function sync() {
+      var thumb = track.querySelector('.x-news-thumb');
+      if (thumb) rail.style.setProperty('--news-arrow-y', (thumb.getBoundingClientRect().height / 2) + 'px');
+      var max = track.scrollWidth - track.clientWidth - 2;
+      var off = max <= 0;
+      rail.classList.toggle('x-news-static', off);
+      prev.disabled = off || track.scrollLeft <= 2;
+      next.disabled = off || track.scrollLeft >= max;
+    }
+    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    setTimeout(sync, 0);
+
     return el('section', { class: 'x-section x-news', id: 'news' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('News.', null), items])
+      el('div', { class: 'x-inner' }, [sectionHead('News.', null), rail])
     ]);
   }
 
   function blogSection() {
-    var grid = el('div', { class: 'x-blog-grid' });
+    var grid = el('div', { class: 'x-blog-list' });
     var section = el('section', { class: 'x-section x-blog', id: 'blog', 'aria-label': 'Blog' }, [
       el('div', { class: 'x-inner' }, [
         el('div', { class: 'x-blog-heading' }, [el('h2', { text: 'Blog' }), extLink('https://medium.com/@xiiid', 'x-blog-all', 'All stories on Medium ↗')]), grid
@@ -515,10 +540,10 @@
       data.posts.slice(0, 3).forEach(function (post) {
         var url = new URL(post.url);
         if (url.protocol !== 'https:' || url.hostname !== 'medium.com') return;
-        grid.appendChild(extLink(url.href, 'x-blog-card', null, [
-          el('p', { class: 'x-blog-date', text: post.date }),
-          el('h3', { text: post.title }),
-          el('span', { class: 'x-blog-read', text: 'Read story ↗' })
+        grid.appendChild(extLink(url.href, 'x-blog-row', null, [
+          el('p', { class: 'x-blog-date', text: String(post.date || '').slice(0, 7) }),
+          el('h3', { class: 'x-blog-title', text: post.title }),
+          el('span', { class: 'x-blog-read', text: 'Read the story ↗' })
         ]));
       });
     }).catch(function () { grid.appendChild(el('p', { text: 'Read the latest stories on Medium.' })); });
