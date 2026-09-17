@@ -1,6 +1,23 @@
 /*!
- * sections.css — styling for the XIIID sections, anchor nav, project modals
- * and footer that brand/sections.js builds. Loaded after the bundled styles.
+ * sections.css — XIIID page styling for the static site.
+ *
+ * HOW THIS FILE IS ORGANISED
+ *   1. Tokens and shared section furniture (.x-section, .x-inner, .x-title …)
+ *   2. One block per section, in the order the page renders them
+ *   3. "Follow-up fixes" near the end: overrides for the bundled Nuxt/Sanity
+ *      styles we do not own
+ *   4. Responsive blocks last (1179px → tablet, 767px → phone)
+ *
+ * WHY THERE ARE !important RULES
+ *   The Nuxt bundle injects its stylesheet AFTER this one, so a handful of
+ *   rules that have to beat it are marked !important. Each of those carries a
+ *   comment naming what it is overriding. Nothing else in the file uses it.
+ *
+ * LAYOUT CONTRACT
+ *   Every section's content sits in a 132rem column centred in the viewport,
+ *   with a minimum side gutter of var(--pwx). The header, our own sections and
+ *   the bundle's full-bleed story panels all resolve to the same left and right
+ *   edge — see the .story-section rule in the follow-up block.
  */
 
 .x-sections {
@@ -383,11 +400,10 @@
   font-weight: 600;
   color: #fff;
   text-decoration: none;
-  opacity: .75;
+  opacity: .85;
   transition: opacity .2s ease;
 }
 .x-nav-link:hover { opacity: 1; }
-.x-nav-link { opacity: .85; }
 .x-nav-cta {
   display: inline-block;
   padding: .85em 1.9em;
@@ -1190,7 +1206,7 @@
 }
 
 /* Copy the section no longer needs. */
-.section-logoCards-text { display: none !important; }
+.section-logoCards-text { display: none !important; }  /* unused CMS lead-in */
 
 /* The loop cards get a little more room inside, to match the section. */
 .x-map-class .x-eco-card { padding: 3.2rem 2.8rem; gap: 1.6rem; }
@@ -1238,7 +1254,36 @@
 }
 .footer-main.x-footer .footer-inner, .x-marquee-wrap { width: 100%; max-width: 132rem; margin-inline: auto; }
 .x-sections { isolation: isolate; }
-.x-sections::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(to bottom, transparent, rgba(6,4,15,.78) 65rem, #04030c 100%); backdrop-filter: blur(26px) saturate(115%); -webkit-backdrop-filter: blur(26px) saturate(115%); mask-image: linear-gradient(to bottom, transparent, #000 45rem); }
+/* One veil over the whole section stack. The mask — not the fill — drives
+   the fade, so the blur and the tint come up together: barely there at the
+   top, roughly two thirds covered by Download Apps, solid by Follow the
+   work. Percentages keep that timing if sections are added or removed. */
+.x-sections::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(6, 4, 15, .88), #04030c 70%);
+  backdrop-filter: blur(26px) saturate(115%);
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, .28) 14%,
+    rgba(0, 0, 0, .48) 50%,
+    rgba(0, 0, 0, .70) 83%,
+    #000 95%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, .28) 14%,
+    rgba(0, 0, 0, .48) 50%,
+    rgba(0, 0, 0, .70) 83%,
+    #000 95%
+  );
+}
 .x-sections .x-section { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; isolation: auto; }
 .x-section::after, .x-veil { display: none; }
 .footer-main.x-footer { background: #04030c; }
@@ -1276,7 +1321,7 @@
  * and shipped items are marked rather than hidden.
  * ------------------------------------------------------------------ */
 
-.x-roadmap { padding-top: 2rem; }
+.x-roadmap { padding-top: 10rem; }
 .x-road-lane {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1366,19 +1411,6 @@
   color: rgba(210, 208, 235, .48);
   font-variant-numeric: tabular-nums;
 }
-.x-road-more {
-  display: inline-flex;
-  align-items: center;
-  min-height: 4.4rem;
-  margin-top: 4rem;
-  padding: .9rem 2rem;
-  border: 1px solid #797092;
-  border-radius: 999px;
-  color: #fff;
-  font-size: 1.3rem;
-  text-decoration: none;
-}
-.x-road-more:hover { border-color: #29ccff; background: rgba(255, 255, 255, .05); }
 
 /* Team member link ------------------------------------------------- */
 .x-team-link {
@@ -1398,31 +1430,48 @@
 /* The story panels stay full-bleed, but their inline padding now matches
    the centred 132rem column the other sections use, so the left edge of
    the page holds still as you scroll instead of stepping in and out. */
-.story-section { padding-inline: max(var(--pwx, 4rem), calc((100% - 132rem) / 2)) !important; }
+/* The bundle caps these panels at 160rem and centres them, which threw the
+   padding sum off against the header on wide screens. They run full-bleed
+   now, so the calc below resolves against the viewport like the header does. */
+.story-section {
+  max-width: none !important;
+  margin-inline: 0 !important;
+  padding-inline: max(var(--pwx, 4rem), calc((100% - 132rem) / 2)) !important;
+}
+.section-text-card-inner,
+.section-text-card-side-inner,
+.section-logoCards-inner,
+.section-imgCards-inner { padding-inline: 0 !important; }
 
 /* The bundle caps the story card copy well short of the card edge,
    which left a dead column inside every card. */
 .section-logoCards-card-text,
 .section-imgCards-card-text { max-width: none !important; }
 
-@media (max-width: 1023px) {
-  .x-road-lane { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Below this width four columns stop fitting, and a 2-up grid leaves a
+   ragged half-empty row, so the lane drops straight to a single column. */
+@media (max-width: 1179px) {
+  .x-road-lane { grid-template-columns: 1fr; gap: 1.6rem; }
 }
 @media (max-width: 767px) {
   .x-road-lane { grid-template-columns: 1fr; gap: 1.6rem; }
   .x-road-year { padding: 2.2rem 1.8rem 2.4rem; }
   .x-road-num { font-size: 2.4rem; }
   .x-road-head { padding-bottom: 1.6rem; margin-bottom: 2rem; }
-  .x-road-more { width: 100%; justify-content: center; }
   .x-team-link { width: 100%; justify-content: center; }
 }
 a:focus-visible, button:focus-visible { outline: 2px solid #29ccff; outline-offset: 5px; }
 @media(max-width:767px) {
+  /* The fixed bar overlaps the hero, so the headline needs room of its own
+     to clear it rather than starting right under the logo. */
+  .section-hero .section-hero-inner,
+  .section-hero-content { padding-top: 13rem; }
+
   /* One gutter for the whole page. The bundle's story blocks doubled it up —
      a 6rem inset against our 3rem — so the top of the page stepped in and out
      as you scrolled. Everything now sits on var(--pwx), and that gutter is
      narrower on phones so the content is not squeezed into a thin column. */
-  :root { --pwx: 2rem !important; }
+  :root { --pwx: 1.6rem !important; }
   .section-text-card-side { padding-inline: var(--pwx) !important; }
   .section-text-card-inner, .section-imgCards-inner, .section-logoCards-inner { padding-inline: 0 !important; }
   .section-text-card, .section-logoCards-header, .section-imgCards-header { padding-inline: var(--pwx) !important; }

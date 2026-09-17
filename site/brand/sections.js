@@ -1,13 +1,30 @@
 /*!
- * sections.js — XIIID page furniture for the local site.
+ * sections.js — XIIID page furniture for the static site.
  *
- * The bundled Vue app only knows how to render the CMS section types it shipped
- * with, so everything XIIID-specific that has no CMS equivalent is built here:
- * the anchor nav, the project modals, and the Ecosystem / Partners / Team /
- * News / Apps / Community sections, plus the rebuilt footer.
+ * WHAT THIS FILE DOES
+ *   The bundled Vue app only renders the CMS section types it shipped with, so
+ *   everything XIIID-specific that has no CMS equivalent is built here and
+ *   appended after the app mounts: the anchor nav, the project modals, and the
+ *   Ecosystem / Team / Roadmap / Partners / News / Blog / Apps / Community
+ *   sections, plus the rebuilt footer. The original header, story sections and
+ *   3D background keep working untouched.
  *
- * It runs after the app mounts and appends into the existing layout, so the
- * original header, story sections and 3D background keep working untouched.
+ * WHERE TO CHANGE WHAT
+ *   Copy, links and data      → the CONTENT block at the top (NAV, TRACKS,
+ *                               DEPLOYMENTS, ROADMAP, TEAM, NEWS, APPS …).
+ *                               Editing those is all most changes need.
+ *   Markup for a section      → its build function, e.g. roadmapSection().
+ *   Order of sections         → the single array in the mount step near the
+ *                               bottom of the file.
+ *   Styling                   → sections.css; nothing here sets inline styles
+ *                               except the one measured value the news rail
+ *                               needs for its arrows.
+ *
+ * CONVENTIONS
+ *   el(tag, attrs, children) builds a node; a null child is skipped, so
+ *   `cond ? node : null` is the idiom for optional markup. extLink() is el()
+ *   plus target/rel for anything leaving the site. Everything is ES5-level
+ *   syntax to match the rest of the bundle.
  */
 (function () {
   'use strict';
@@ -376,7 +393,7 @@
 
     /* The pill points at the store row further down the page rather than
        opening the web app, so the visit does not end here. */
-    var cta = el('a', { class: 'x-nav-cta', href: '#apps', text: 'APP' });
+    var cta = el('a', { class: 'x-nav-cta', href: '#apps', text: 'App' });
 
     var toggle = el('button', {
       class: 'x-nav-toggle', type: 'button', 'aria-label': 'Open navigation', 'aria-expanded': 'false',
@@ -562,8 +579,7 @@
     return el('section', { class: 'x-section x-roadmap', id: 'roadmap' }, [
       el('div', { class: 'x-inner' }, [
         sectionHead('Roadmap.', null),
-        lane,
-        extLink('https://xiiid.gitbook.io/xiiid/additional-infomation/roadmap', 'x-road-more', 'Full roadmap')
+        lane
       ])
     ]);
   }
