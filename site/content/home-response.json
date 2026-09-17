@@ -103,7 +103,7 @@
     },
     "seo": {
       "_type": "seo",
-      "description": "Verifiable cloud for the Agentic Era. Build apps and agents your users can trust.",
+      "description": "Education Without Borders, XIIID AI Labs",
       "image": {
         "_type": "image",
         "asset": {
@@ -112,7 +112,7 @@
         }
       },
       "noindex": false,
-      "title": "XIIID – Verifiable cloud for the Agentic Era"
+      "title": "XIIID AI Labs"
     },
     "slug": {
       "_type": "slug",
