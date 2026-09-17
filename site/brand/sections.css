@@ -1395,6 +1395,11 @@
 }
 .x-team-link:hover { border-color: #29ccff; background: rgba(255, 255, 255, .05); }
 
+/* The story panels stay full-bleed, but their inline padding now matches
+   the centred 132rem column the other sections use, so the left edge of
+   the page holds still as you scroll instead of stepping in and out. */
+.story-section { padding-inline: max(var(--pwx, 4rem), calc((100% - 132rem) / 2)) !important; }
+
 /* The bundle caps the story card copy well short of the card edge,
    which left a dead column inside every card. */
 .section-logoCards-card-text,
