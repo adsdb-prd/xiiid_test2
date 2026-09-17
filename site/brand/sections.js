@@ -19,9 +19,8 @@
   var NAV = [
     { label: 'Projects', href: '#projects' },
     { label: 'Ecosystem', href: '#ecosystem' },
-    { label: 'Team', href: '#team' },
     { label: 'News', href: '#news' },
-    { label: 'App', href: '#apps' }
+    { label: 'Token', href: 'token.html', 'data-local-page': '1' }
   ];
 
   var XCLASS_URL = 'https://xclass.xiiid.ai/';
@@ -32,12 +31,12 @@
   /* AI Tutor ships two ways: one built per institution, one open to anyone. */
   var TRACKS = {
     pro: {
-      name: 'AI Pro',
+      name: 'XClass Pro',
       kicker: 'For institutions',
       text: 'An agentic tutor that belongs to one place. It learns that country’s language, its curriculum and its exams, then teaches as if it had always been there.'
     },
     cls: {
-      name: 'AI Class',
+      name: 'XClass',
       kicker: 'For everyone',
       text: 'The same tutor, open to anyone. It reads how you answer and rebuilds the next question around you. Study long enough and no one else’s looks like yours. Live today as XClass.'
     }
@@ -51,12 +50,12 @@
 
   var DEPLOYMENTS = [
     {
-      place: 'Samsung', product: 'OPicUP', state: 'Live',
+      place: 'Samsung', product: 'OPicUP', state: 'Live', href: 'https://www.opicup.com/',
       mark: '/brand/partners/wall/samsung.png', markKind: 'logo',
       text: 'Language assessment practice, delivered through a partnership with Samsung.'
     },
     {
-      place: 'Colombia', product: 'EOSaber', state: 'Live',
+      place: 'Colombia', product: 'EOSaber', state: 'Live', href: 'https://grupoeducativooe.edu.co/oe-saber/',
       mark: '/brand/modal/flag-co.png', markKind: 'flag',
       text: 'Saber exam preparation, running inside the country’s public education system.'
     },
@@ -108,6 +107,11 @@
     '3dtada.png', 'kyungshin.png', 'pulmuone.png', 'mail.png', 'ybm.png', 'carrot-global.png',
     'cg-education.png', 'jyp.png', 'yuanta.png', 'eagle.png', 'theplan-g.png'
   ];
+
+  var WALL_ALL = WALL_A.concat(WALL_B);
+  WALL_A = WALL_ALL.slice(0, 12);
+  WALL_B = WALL_ALL.slice(12, 23);
+  var WALL_C = WALL_ALL.slice(23);
 
   var TEAM = [
     {
@@ -164,7 +168,7 @@
     { label: 'GitHub', href: 'https://github.com/Xiiid', icon: '/brand/sns/github.png' },
     { label: 'CoinGecko', href: 'https://www.coingecko.com/en/coins/xiiid', icon: '/brand/sns/coingecko.svg' },
     { label: 'Medium', href: 'https://medium.com/@xiiid', icon: '/brand/sns/medium.png' },
-    { label: 'Token', href: '#token' },
+    { label: 'Token', href: 'token.html' },
     { label: 'KYC', href: 'https://xiiidlabs.imweb.me/kyc' },
     { label: 'Whitepaper', href: PAPER_URL }
   ];
@@ -315,7 +319,7 @@
     header.classList.add('x-header');
 
     var list = el('ul', { class: 'x-nav-list' }, NAV.map(function (item) {
-      return el('li', null, [el('a', { class: 'x-nav-link', href: item.href, text: item.label })]);
+      return el('li', null, [el('a', { class: 'x-nav-link', href: item.href, text: item.label, 'data-local-page': item.label === 'Token' ? '1' : null })]);
     }));
 
     var cta = el('a', {
@@ -372,7 +376,7 @@
   }
 
   function ecosystemSection() {
-    /* Left column: who AI Pro is for, where it already runs, what builds it. */
+    /* Left column: who XClass Pro is for, where it already runs, what builds it. */
     var field = el('ul', { class: 'x-field' }, DEPLOYMENTS.map(function (d) {
       return el('li', { class: 'x-field-row' }, [
         el('span', { class: 'x-field-mark x-field-mark-' + d.markKind }, [img(d.mark, null, d.place)]),
@@ -385,7 +389,8 @@
               text: d.state
             })
           ]),
-          el('p', { class: 'x-field-text', text: d.text })
+          el('p', { class: 'x-field-text', text: d.text }),
+          d.href ? extLink(d.href, 'x-service-link', 'Visit ' + d.product + ' ↗') : null
         ])
       ]);
     }));
@@ -397,7 +402,7 @@
       el('div', { class: 'x-map-cta-row' }, [extLink(STUDIO.cta.href, 'x-studio-cta', STUDIO.cta.text)])
     ]));
 
-    /* Right column: who AI Class is for, and the loop it runs on. */
+    /* Right column: who XClass is for, and the loop it runs on. */
     var steps = el('div', { class: 'x-eco-steps' }, ECOSYSTEM.map(function (s) {
       return el('article', { class: 'x-eco-card' }, [
         el('div', { class: 'x-eco-card-top' }, [
@@ -458,7 +463,8 @@
       ]),
       el('div', { class: 'x-marquee-wrap' }, [
         marqueeRow(WALL_A, 'left'),
-        marqueeRow(WALL_B, 'right')
+        marqueeRow(WALL_B, 'right'),
+        marqueeRow(WALL_C, 'left')
       ])
     ]);
   }
@@ -498,6 +504,27 @@
     ]);
   }
 
+  function blogSection() {
+    var grid = el('div', { class: 'x-blog-grid' });
+    var section = el('section', { class: 'x-section x-blog', id: 'blog', 'aria-label': 'Blog' }, [
+      el('div', { class: 'x-inner' }, [
+        el('div', { class: 'x-blog-heading' }, [el('h2', { text: 'Blog' }), extLink('https://medium.com/@xiiid', 'x-blog-all', 'All stories on Medium ↗')]), grid
+      ])
+    ]);
+    fetch('/content/blog.json').then(function (r) { if (!r.ok) throw new Error('Blog unavailable'); return r.json(); }).then(function (data) {
+      data.posts.slice(0, 3).forEach(function (post) {
+        var url = new URL(post.url);
+        if (url.protocol !== 'https:' || url.hostname !== 'medium.com') return;
+        grid.appendChild(extLink(url.href, 'x-blog-card', null, [
+          el('p', { class: 'x-blog-date', text: post.date }),
+          el('h3', { text: post.title }),
+          el('span', { class: 'x-blog-read', text: 'Read story ↗' })
+        ]));
+      });
+    }).catch(function () { grid.appendChild(el('p', { text: 'Read the latest stories on Medium.' })); });
+    return section;
+  }
+
   var STORE_LABEL = { ios: 'App Store', play: 'Google Play', web: 'Open on the web' };
   function storeButton(href, store) {
     return extLink(href, 'x-store x-store-' + store, STORE_LABEL[store] || 'Open');
@@ -532,6 +559,7 @@
         iconLink.setAttribute('title', c.label);
         return iconLink;
       }
+      if (c.label === 'Token') return el('a', { href: c.href, class: 'x-community-link x-community-link-text', text: c.label, 'data-local-page': '1' });
       if (c.href.charAt(0) === '#') {
         return el('a', { href: c.href, class: 'x-community-link x-community-link-text' }, [
           el('span', { text: c.label })
@@ -626,7 +654,7 @@
   var lastFocus = null;
 
   function buildModals(host) {
-    Object.keys(MODALS).forEach(function (id) {
+    Object.keys(MODALS).filter(function (id) { return id !== 'token'; }).forEach(function (id) {
       var d = MODALS[id];
       var close = el('button', { class: 'x-modal-close', type: 'button', 'aria-label': 'Close', text: '✕' });
       var dialog = el('div', {
@@ -744,6 +772,8 @@
     if (panels.length && !panels[0].id) panels[0].id = 'mission';
   }
 
+  var initialAnchorTimer;
+  var initialAnchorDone = false;
   function build() {
     var page = document.querySelector('.page-home');
     var experience = document.querySelector('.rubiks-experience');
@@ -754,7 +784,7 @@
       markAnchors();
       page.appendChild(el('div', { class: 'x-sections' }, [
         ecosystemSection(), partnersSection(), teamSection(),
-        newsSection(), appsSection(), communitySection()
+        newsSection(), blogSection(), appsSection(), communitySection()
       ]));
       built = true;
     }
@@ -768,6 +798,15 @@
     var footer = document.querySelector('.footer-main');
     if (footer && !footer.querySelector('.x-footer-grid')) { buildFooter(footer); built = true; }
     enhanceRequestedElements();
+    // Home sections are inserted after hydration; resolve cross-page anchors then.
+    if (built && !initialAnchorDone && location.hash) {
+      clearTimeout(initialAnchorTimer);
+      initialAnchorTimer = setTimeout(function () {
+        var id = location.hash.slice(1);
+        if (id === 'token') { location.replace('token.html'); return; }
+        if (scrollToId(id)) initialAnchorDone = true;
+      }, 700);
+    }
     return built;
   }
 
@@ -784,6 +823,7 @@
       var t = header.querySelector('.x-nav-toggle');
       if (t) { t.setAttribute('aria-expanded', 'false'); t.setAttribute('aria-label', 'Open navigation'); }
     }
+    if (id === 'token') { e.preventDefault(); location.href = 'token.html'; return; }
     if (MODALS[id]) { e.preventDefault(); e.stopPropagation(); openModal(id); return; }
     if (scrollToId(id)) { e.preventDefault(); e.stopPropagation(); }
   }, true);
