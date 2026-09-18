@@ -255,8 +255,6 @@
   gap: 2.4rem;
   padding: 3rem;
   border-radius: 1.4rem;
-  border: 1px solid var(--x-line);
-  background: rgba(255, 255, 255, .035);
 }
 .x-team-photo {
   flex: 0 0 auto;
@@ -314,8 +312,6 @@
   flex-direction: column;
   border-radius: 1.2rem;
   overflow: hidden;
-  background: rgba(255, 255, 255, .035);
-  border: 1px solid var(--x-line);
   color: inherit;
   text-decoration: none;
   transition: transform .25s ease, border-color .25s ease;
@@ -337,8 +333,6 @@
 .x-app-card {
   padding: 3.2rem;
   border-radius: 1.4rem;
-  border: 1px solid var(--x-line);
-  background: rgba(255, 255, 255, .035);
   display: flex; flex-direction: column; gap: 1.2rem;
 }
 .x-app-mark { width: 4rem; height: 4rem; background: url("/brand/mark-x.svg") no-repeat 50% / contain; }
@@ -990,20 +984,30 @@
  * Ecosystem map — one AI Tutor frame, two columns inside
  * ------------------------------------------------------------------ */
 
-/* The frosted card behind the 'Two types of AI Tutor' block: a translucent
-   fill over a backdrop blur, so the 3D mark stays visible behind the content
-   but stops competing with it. It is the only section-level frame on the page —
-   every other section holds cards or a ruled list of its own, and wrapping
-   those would just frame a frame. */
-.x-map {
+/* FROSTED GLASS
+   ------------------------------------------------------------------
+   One recipe, used by the 'Two types of AI Tutor' block and by the cards in
+   Team, News, Roadmap and Download Apps: a barely-there fill over a backdrop
+   blur, so the 3D mark reads through the card as soft colour and texture
+   instead of being hidden by it.
+
+   The fill has to stay this light — much past 5% and the blur has nothing
+   left to show. Change it here and every glass surface follows. */
+.x-map,
+.x-team-card,
+.x-news-card,
+.x-app-card,
+.x-road-year {
   position: relative;
   isolation: isolate;
   border: 1px solid rgba(255, 255, 255, .16);
-  border-radius: 1.6rem;
   background: rgba(255, 255, 255, .03);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   box-shadow: 0 2rem 6rem rgba(0, 0, 0, .45);
+}
+.x-map {
+  border-radius: 1.6rem;
   padding: clamp(3.6rem, 4vw, 6rem);
 }
 .x-map-title {
@@ -1347,12 +1351,12 @@
 .x-road-year {
   padding: 2.8rem 2.4rem 3rem;
   border-radius: 1.4rem;
-  border: 1px solid var(--x-line);
-  background: rgba(255, 255, 255, .03);
 }
+/* The current year keeps its violet wash, kept translucent so the blur
+   underneath still shows through. */
 .x-road-year.is-now {
   border-color: rgba(109, 79, 255, .55);
-  background: linear-gradient(180deg, rgba(109, 79, 255, .14), rgba(255, 255, 255, .03) 42%);
+  background: linear-gradient(180deg, rgba(109, 79, 255, .12), rgba(255, 255, 255, .03) 42%);
 }
 .x-road-head {
   display: flex;
