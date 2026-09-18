@@ -1509,3 +1509,38 @@ a:focus-visible, button:focus-visible { outline: 2px solid #29ccff; outline-offs
   .x-blog-row { grid-template-columns: 1fr; gap: .8rem; align-items: start; padding: 2rem .2rem; }
   .x-blog-row:hover { padding-inline: .2rem; }
 }
+
+/* ------------------------------------------------------------------ *
+ * Hero headline — line wrapping
+ * ------------------------------------------------------------------ *
+ * index.html writes the headline as two <span class="section-hero-line">
+ * groups, one per authored line. The removed Nuxt bundle used to measure the
+ * headline on every resize and re-group the words so no line ever ran past
+ * the viewport. Letting each authored line wrap on its own does the same job
+ * with no JavaScript: the line break the copy asks for is kept, and a line
+ * that is too wide for the screen breaks between words instead of
+ * overflowing. To change the headline, edit the words in index.html.
+ */
+.section-hero .section-hero-inner .section-hero-line {
+  flex-wrap: wrap;
+  /* !important because story-late.css loads after this file and sets the `gap`
+     shorthand; .35em matches the gap the headline uses between its own lines,
+     so a wrapped row sits exactly where an authored line would. */
+  row-gap: .35em !important;
+  max-width: 100%;
+}
+
+/* Words inside .section-hero-keep must not be split across two rows. Normally
+   the wrapper is invisible to layout (display: contents), so each word is a
+   flex item of the line exactly as if the wrapper were not there. Once the
+   line has to wrap, the wrapper becomes a single flex item, so the words it
+   holds move to the next row together. */
+.section-hero .section-hero-inner .section-hero-keep {
+  display: contents;
+}
+@media (max-width: 1023px) {
+  .section-hero .section-hero-inner .section-hero-keep {
+    display: inline-flex;
+    gap: .25em;
+  }
+}

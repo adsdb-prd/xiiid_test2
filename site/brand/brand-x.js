@@ -4,9 +4,9 @@
  * Replaces the original voxel/rubiks background with an extruded, bevelled 3D
  * version of the brand X mark. Pure WebGL (no dependencies, works offline).
  *
- * Registers window.__createBrandXExperience, which the patched Nuxt plugin
- * uses in place of the original $createRubiksExperience factory. The contract
- * is the same: create({ container, story, params, scroll }) -> { destroy() }.
+ * Draws into .rubiks-canvas, which it finds and mounts itself on DOM ready.
+ * Also exposed as window.__createBrandXExperience({ container }) -> { destroy() }
+ * for anything that wants a second instance.
  *
  * Interaction
  *   - page scroll  : plays a keyframed camera track (see SHOTS) - the mark is
@@ -924,4 +924,19 @@
   }
 
   window.__createBrandXExperience = createExperience;
+
+  /* Mount. The Nuxt plugin used to call the factory; with the bundle gone the
+     page just starts it itself, once the container is in the document. */
+  function mount() {
+    var container = document.querySelector('.rubiks-canvas');
+    if (!container || container.dataset.brandXMounted === '1') return;
+    container.dataset.brandXMounted = '1';
+    createExperience({ container: container });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mount);
+  } else {
+    mount();
+  }
 })();
