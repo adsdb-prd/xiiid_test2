@@ -1006,6 +1006,14 @@
   backdrop-filter: blur(14px);
   box-shadow: 0 2rem 6rem rgba(0, 0, 0, .45);
 }
+
+/* News cards drop the shadow. They sit directly over the brightest part of
+   the 3D mark, where a 6rem pool of black spreads well past the card edge and
+   reads as a grey slab behind it rather than as depth. The border and the
+   backdrop blur already separate the card from the background. */
+.x-news-card {
+  box-shadow: none;
+}
 .x-map {
   border-radius: 1.6rem;
   padding: clamp(3.6rem, 4vw, 6rem);
