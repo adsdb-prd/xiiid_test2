@@ -426,13 +426,6 @@
    * Sections
    * ------------------------------------------------------------------ */
 
-  /* The frosted card the 'Two types of AI Tutor' block sits on. Sections that
-     want the same treatment wrap their content in this rather than repeating
-     the border / blur / grain rules. */
-  function panel(children) {
-    return el('div', { class: 'x-panel' }, children);
-  }
-
   function sectionHead(title, text) {
     return el('div', { class: 'x-head' }, [
       el('h2', { class: 'x-title', text: title }),
@@ -556,7 +549,7 @@
       ]);
     }));
     return el('section', { class: 'x-section x-team', id: 'team' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('Team.', null), panel([people])])
+      el('div', { class: 'x-inner' }, [sectionHead('Team.', null), people])
     ]);
   }
 
@@ -584,7 +577,7 @@
     return el('section', { class: 'x-section x-roadmap', id: 'roadmap' }, [
       el('div', { class: 'x-inner' }, [
         sectionHead('Roadmap.', null),
-        panel([lane])
+        lane
       ])
     ]);
   }
@@ -629,7 +622,7 @@
     setTimeout(sync, 0);
 
     return el('section', { class: 'x-section x-news', id: 'news' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('News.', null), panel([rail])])
+      el('div', { class: 'x-inner' }, [sectionHead('News.', null), rail])
     ]);
   }
 
@@ -637,7 +630,7 @@
     var grid = el('div', { class: 'x-blog-list' });
     var section = el('section', { class: 'x-section x-blog', id: 'blog', 'aria-label': 'Blog' }, [
       el('div', { class: 'x-inner' }, [
-        el('div', { class: 'x-blog-heading' }, [el('h2', { class: 'x-title', text: 'Blog' })]), panel([grid])
+        el('div', { class: 'x-blog-heading' }, [el('h2', { class: 'x-title', text: 'Blog' })]), grid
       ])
     ]);
     fetch('/content/blog.json').then(function (r) { if (!r.ok) throw new Error('Blog unavailable'); return r.json(); }).then(function (data) {
@@ -672,7 +665,7 @@
       ]);
     }));
     return el('section', { class: 'x-section x-apps', id: 'apps' }, [
-      el('div', { class: 'x-inner' }, [sectionHead('Download Apps.', null), panel([cards])])
+      el('div', { class: 'x-inner' }, [sectionHead('Download Apps.', null), cards])
     ]);
   }
 

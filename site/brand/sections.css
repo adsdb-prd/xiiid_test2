@@ -990,12 +990,12 @@
  * Ecosystem map — one AI Tutor frame, two columns inside
  * ------------------------------------------------------------------ */
 
-/* The frosted card. .x-map is the original (the AI Tutor block); .x-panel is
-   the exact same treatment, applied by panel() in sections.js to the Team,
-   News, Blog, Roadmap and Apps blocks. A translucent fill over a backdrop
-   blur — no grain — so the 3D mark stays visible but stops competing. */
-.x-map,
-.x-panel {
+/* The frosted card behind the 'Two types of AI Tutor' block: a translucent
+   fill over a backdrop blur, so the 3D mark stays visible behind the content
+   but stops competing with it. It is the only section-level frame on the page —
+   every other section holds cards or a ruled list of its own, and wrapping
+   those would just frame a frame. */
+.x-map {
   position: relative;
   isolation: isolate;
   border: 1px solid rgba(255, 255, 255, .16);
@@ -1004,19 +1004,7 @@
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   box-shadow: 0 2rem 6rem rgba(0, 0, 0, .45);
-}
-.x-map { padding: clamp(3.6rem, 4vw, 6rem); }
-.x-panel { padding: clamp(2.8rem, 3vw, 4.4rem); }
-
-/* Inside a panel the cards no longer need their own filled background —
-   two frosted layers stacked just muddies both. */
-.x-panel .x-team-card,
-.x-panel .x-news-card,
-.x-panel .x-app-card,
-.x-panel .x-road-year {
-  background: rgba(255, 255, 255, .02);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+  padding: clamp(3.6rem, 4vw, 6rem);
 }
 .x-map-title {
   margin: 0 0 clamp(4.4rem, 4.6vw, 6.4rem);
