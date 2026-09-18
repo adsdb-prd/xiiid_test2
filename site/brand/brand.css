@@ -1,0 +1,218 @@
+/*!
+ * brand.css — brand mark, typography and key colour layer.
+ * Loaded after the bundled stylesheets, so it only overrides what it needs to.
+ */
+
+/* ------------------------------------------------------------------ *
+ * Typography — Pretendard replaces the bundled display and mono faces
+ * (SIL Open Font License, see brand/fonts/Pretendard-LICENSE.txt)
+ * ------------------------------------------------------------------ */
+
+@font-face {
+  font-family: "Pretendard XIIID";
+  src: url("/brand/fonts/Pretendard-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard XIIID";
+  src: url("/brand/fonts/Pretendard-Medium.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard XIIID";
+  src: url("/brand/fonts/Pretendard-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard XIIID";
+  src: url("/brand/fonts/Pretendard-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+:root {
+  --font-primary: "Pretendard XIIID", "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-secondary: var(--font-primary);
+}
+
+/* The bundled rules hard-code the old stacks as fallbacks,
+
+so restate them. */
+body,
+
+button,
+
+input,
+
+select,
+
+textarea,
+
+[class*="section-"],
+
+[class*="footer-"],
+
+[class*="header-"] {
+  font-family: var(--font-primary);
+}
+
+:root {
+  /* Key colours, sampled from the logo artwork. */
+  --brand-violet: #6d4fff;
+  --brand-violet-light: #d46fff;
+  --brand-cyan: #29ccff;
+  --brand-cyan-deep: #2f9cd7;
+  --brand-ink: #030208;
+  --brand-ink-2: #0c0726;
+
+  --brand-gradient: linear-gradient(115deg, var(--brand-violet-light) 0%, var(--brand-violet) 42%, var(--brand-cyan) 100%);
+  --brand-glow: 0 0 4rem rgba(109, 79, 255, 0.45);
+}
+
+html { background-color: var(--brand-ink); }
+
+body {
+  background-color: var(--brand-ink);
+  /* the WebGL scene paints the hero; this keeps the rest of the page on-brand */
+  background-image: none;
+}
+
+::selection { background: var(--brand-cyan); color: #04030c; }
+
+/* ------------------------------------------------------------------ *
+ * Logo — brand X mark + XIIID wordmark
+ * ------------------------------------------------------------------ */
+
+.header-logo {
+  aspect-ratio: 428 / 100;
+  background: url("/brand/logo-xiiid.svg") no-repeat 0 50% / contain;
+  width: auto;
+}
+.header-logo .svg-logo { display: none; }
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--brand-cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Section CTAs: brand gradient, proper button padding and shape.
+   Several of these are plain text links in the source, so the padding,
+   radius and inline-block are set here rather than only the colours. */
+.page-home [class$="-cta"],
+.section-hero-cta {
+  display: inline-block;
+  background-image: var(--brand-gradient) !important;
+  background-color: transparent !important;
+  color: #05030f !important;
+  border: none;
+  border-radius: 999px;
+  padding: 0.95em 2.1em !important;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-decoration: none;
+  white-space: nowrap;
+  text-box-trim: none;
+  transition: filter .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+/* The ↗ affordance the bundled styles append to some links stays inside. */
+.page-home [class$="-cta"]::after { margin-left: .15em; }
+
+@media (hover: hover) {
+  .page-home [class$="-cta"]:hover,
+  .section-hero-cta:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: var(--brand-glow);
+  }
+}
+
+/* Groups of CTAs need breathing room between the pills. */
+.page-home .cta-group { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
+
+@media (max-width: 767px) {
+  .page-home [class$="-cta"],
+  .section-hero-cta { padding: 0.9em 1.7em !important; white-space: normal; }
+}
+
+/* The bundled styles draw a currentColor rule under card CTAs; with the pill
+   treatment that reads as a stray black underline, so it goes. */
+.page-home [class$="-cta"]::before { display: none !important; }
+.page-home [class$="-cta"] { overflow: visible; }
+
+/* Card CTAs sit at the bottom of their card, so keep them inline-sized.
+   The 4rem gap below the button is the bundle's value: it loaded a second
+   copy of its CSS after this file and set it, so that is the spacing the
+   cards have always had. This rule used to ask for 0 and never got it. */
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group [class$="-cta"] {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-bottom: 4rem;
+}
+.section-logoCards .section-logoCards-cards .section-logoCards-card { justify-content: flex-start; }
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group { margin-top: auto; }
+
+/* ------------------------------------------------------------------ *
+ * Story panels — the three "It adapts / teaches / scales" cards
+ * ------------------------------------------------------------------ */
+
+/* Nuxt injects the page's own stylesheet at mount time, after these files,
+   so the sizes below have to be marked important to survive it. */
+.section-text-card-side .section-text-card-side-heading {
+  font-size: clamp(3.2rem, 4.4vw, 5.6rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -.03em;
+}
+.section-text-card-side .section-text-card-side-text {
+  margin-top: 1.4rem;
+  font-size: clamp(1.7rem, 1.7vw, 2.2rem) !important;
+  line-height: 1.5 !important;
+  /* 20em, not 22em: the bundle used to load a second copy of its CSS after
+     this file and cap the column at 20em, so that is the width the page has
+     always had. Now that the bundle is gone the value lives here. */
+  max-width: 20em;
+}
+.section-text-card-side .section-text-card-side-inner { max-width: 56rem; }
+
+/* Scrollbar + link accents pick up the key colour. */
+* { scrollbar-color: var(--brand-violet) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #050310; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--brand-violet-light), var(--brand-cyan));
+  border-radius: 10px;
+}
+
+/* ------------------------------------------------------------------ *
+ * 3D scene canvas
+ * ------------------------------------------------------------------ */
+
+.rubiks-canvas {
+  background: var(--brand-ink);
+  overflow: hidden;
+  /* The bundled fade ties the canvas opacity to a word-cloud section this
+     build no longer has, which pins it at 0. The sections below are
+     translucent by design, so the scene simply stays on. */
+  opacity: 1 !important;
+}
+.rubiks-canvas .brand-x-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Used only when WebGL is unavailable. */
+.rubiks-canvas.brand-x-fallback {
+  background:
+    url("/brand/mark-x.svg") no-repeat 50% 46% / min(52vw, 46vh) auto,
+    radial-gradient(70rem 70rem at 50% 45%, rgba(109, 79, 255, .34), transparent 65%),
+    var(--brand-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rubiks-canvas .brand-x-canvas { opacity: .82; }
+}
