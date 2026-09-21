@@ -599,14 +599,14 @@
 .x-footer-columns { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; }
 .x-footer-col-title {
   margin: 0 0 1.6rem;
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: rgba(228, 226, 245, .42);
 }
 .x-footer-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .8rem; }
 .x-footer-item a {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   color: rgba(228, 226, 245, .78);
   text-decoration: none;
   transition: color .2s ease;
@@ -616,7 +616,7 @@
 .x-footer-bar { margin-top: 3rem; padding: 3rem 0 0; }
 .x-footer-copy {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   letter-spacing: .08em;
   color: rgba(228, 226, 245, .42);
   white-space: nowrap;
