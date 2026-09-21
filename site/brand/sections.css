@@ -1414,7 +1414,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid #29ccff; outline-offs
      the hamburger, so all three come down together and keep their balance. */
   .header-main.x-header .header-logo { width: 9.8rem !important; min-height: 2.3rem; flex-basis: 9.8rem; }
   .x-nav { gap: 1.1rem; }
-  .x-nav-cta { font-size: 1.1rem; padding: .7em 1.35em; min-height: 3.2rem; }
+  /* Keep the mobile header App pill compact; the content buttons retain the
+     Open XPredict reference sizing above. */
+  .x-nav-cta { font-size: 1.1rem !important; padding: .7em 1.35em !important; min-height: 3.2rem !important; }
   .x-nav-toggle { width: 2.6rem; height: 2.6rem; }
   .x-nav-toggle span { left: .2rem; right: .2rem; }
   .x-nav-toggle span:first-child { top: .85rem; }
