@@ -1207,11 +1207,12 @@
 .x-service-link { display: inline-flex; min-height: 4.4rem; align-items: center; margin-top: 1.6rem; padding: .8rem 1.6rem; border: 1px solid #797092; border-radius: 999px; color: #fff; font-size: 1.3rem; text-decoration: none; }
 .x-service-link:hover { border-color: #29ccff; background: #ffffff0d; }
 
-/* All text buttons use the Open XPredict control as the shared size/type
-   reference. Backgrounds are intentionally left to each component so the
-   existing gradient and transparent treatments remain unchanged. */
+/* Main text buttons use the Open XPredict control as the shared size/type
+   reference. The header App pill is deliberately kept separate so it stays
+   compact against the logo and navigation. Backgrounds are intentionally
+   left to each component so the existing gradient and transparent treatments
+   remain unchanged. */
 .page-home [class$="-cta"],
-.x-nav-cta,
 .x-store,
 .x-community-link-text,
 .x-service-link {
@@ -1221,6 +1222,24 @@
   font-weight: 600 !important;
   line-height: 1 !important;
   padding: .95em 2.1em !important;
+  min-height: 4.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header App pill: compact control, not a full-size content CTA. */
+.x-nav-cta {
+  box-sizing: border-box;
+  font-family: var(--font-primary) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  padding: .78em 1.6em !important;
+  min-height: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .x-blog-heading { margin-bottom: 2.8rem; }
 .x-blog-list { border-top: 1px solid #ffffff20; }
@@ -1414,9 +1433,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid #29ccff; outline-offs
      the hamburger, so all three come down together and keep their balance. */
   .header-main.x-header .header-logo { width: 9.8rem !important; min-height: 2.3rem; flex-basis: 9.8rem; }
   .x-nav { gap: 1.1rem; }
-  /* Keep the mobile header App pill compact; the content buttons retain the
-     Open XPredict reference sizing above. */
-  .x-nav-cta { font-size: 1.1rem !important; padding: .7em 1.35em !important; min-height: 3.2rem !important; }
+  /* Keep the mobile header App pill visibly compact; content buttons keep
+     the Open XPredict reference height. */
+  .x-nav-cta { font-size: 1.05rem !important; padding: .65em 1.25em !important; min-height: 2.9rem !important; }
   .x-nav-toggle { width: 2.6rem; height: 2.6rem; }
   .x-nav-toggle span { left: .2rem; right: .2rem; }
   .x-nav-toggle span:first-child { top: .85rem; }
