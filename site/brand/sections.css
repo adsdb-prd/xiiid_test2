@@ -143,7 +143,6 @@
  * Partners
  * ------------------------------------------------------------------ */
 
-.x-partners { padding-bottom: 8rem; }
 .x-partner-roles {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -313,7 +312,6 @@
  * Community
  * ------------------------------------------------------------------ */
 
-.x-community { padding-bottom: 16rem; }
 .x-community-links { display: flex; flex-wrap: wrap; gap: 1.2rem; }
 .x-community-link {
   display: inline-flex;
@@ -599,24 +597,34 @@
 .x-footer-columns { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; }
 .x-footer-col-title {
   margin: 0 0 1.6rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: rgba(228, 226, 245, .42);
 }
 .x-footer-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .8rem; }
 .x-footer-item a {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: rgba(228, 226, 245, .78);
   text-decoration: none;
   transition: color .2s ease;
 }
 .x-footer-item a:hover { color: #fff; }
 
-.x-footer-bar { margin-top: 3rem; padding: 3rem 0 0; }
+.x-footer-bar { margin-top: 3rem; padding: 3rem 0 0; display: flex; flex-direction: column; gap: .8rem; }
+.x-footer-email {
+  display: inline-block;
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: .02em;
+  color: rgba(228, 226, 245, .62);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.x-footer-email:hover { color: #fff; }
 .x-footer-copy {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   letter-spacing: .08em;
   color: rgba(228, 226, 245, .42);
   white-space: nowrap;
@@ -713,7 +721,8 @@
   .x-team-photo { width: 9rem; height: 9rem; }
 
   .x-footer-columns { grid-template-columns: 1fr; gap: 2.8rem; }
-  .x-footer-copy { white-space: nowrap; font-size: 1.05rem; letter-spacing: .04em; }
+  .x-footer-email { font-size: 1.3rem; }
+  .x-footer-copy { white-space: nowrap; font-size: 1.15rem; letter-spacing: .04em; }
 
   .x-modal { padding: 2vh 1.5vw; }
   .x-modal-dialog { width: 94vw; max-height: 94vh; }
@@ -1089,7 +1098,9 @@
 
   .x-store,
 
-  .x-community-link-text {
+  .x-community-link-text,
+
+  .x-service-link {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
@@ -1099,7 +1110,7 @@
   .x-nav-link { padding: .8rem 0; }
   .x-footer-item a { display: inline-flex; align-items: center; min-height: 4rem; }
   .x-footer-list { gap: 0; }
-  .x-nav-cta { min-height: 4rem; display: inline-flex; align-items: center; }
+  .x-nav-cta { min-height: 4.4rem; display: inline-flex; align-items: center; }
   /* widen the hamburger's hit area without moving its bars */
   .x-nav-toggle::after { content: ""; position: absolute; inset: -.7rem; }
 }  /* unused CMS lead-in */
@@ -1195,7 +1206,22 @@
 .footer-main.x-footer::before, .footer-main.x-footer::after { display: none; }
 .x-service-link { display: inline-flex; min-height: 4.4rem; align-items: center; margin-top: 1.6rem; padding: .8rem 1.6rem; border: 1px solid #797092; border-radius: 999px; color: #fff; font-size: 1.3rem; text-decoration: none; }
 .x-service-link:hover { border-color: #29ccff; background: #ffffff0d; }
-.x-blog { padding-top: 1rem; }
+
+/* All text buttons use the Open XPredict control as the shared size/type
+   reference. Backgrounds are intentionally left to each component so the
+   existing gradient and transparent treatments remain unchanged. */
+.page-home [class$="-cta"],
+.x-nav-cta,
+.x-store,
+.x-community-link-text,
+.x-service-link {
+  box-sizing: border-box;
+  font-family: var(--font-primary) !important;
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  padding: .95em 2.1em !important;
+}
 .x-blog-heading { margin-bottom: 2.8rem; }
 .x-blog-list { border-top: 1px solid #ffffff20; }
 .x-blog-row {
@@ -1225,7 +1251,6 @@
  * and shipped items are marked rather than hidden.
  * ------------------------------------------------------------------ */
 
-.x-roadmap { padding-top: 10rem; }
 .x-road-lane {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
