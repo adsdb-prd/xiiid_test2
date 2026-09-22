@@ -11,7 +11,7 @@
   // Future activity API integration: update data-count before starting this animation.
   const start = performance.now();
   function count(now) {
-    const progress = reduced.matches ? 1 : Math.min((now - start) / 1600, 1);
+    const progress = reduced.matches ? 1 : Math.min((now - start) / 3400, 1);
     counters.forEach(node => {
       node.textContent = Math.round(Number(node.dataset.count) * (1 - (1 - progress) ** 3)).toLocaleString('en-US');
     });
@@ -25,13 +25,6 @@
   const copy = run.cloneNode(true);
   copy.setAttribute('aria-hidden', 'true');
   run.parentNode.append(copy);
-  const pause = ribbon.querySelector('button');
-  pause.addEventListener('click', () => {
-    const paused = ribbon.classList.toggle('is-paused');
-    pause.setAttribute('aria-pressed', String(paused));
-    pause.setAttribute('aria-label', paused ? 'Resume price ticker' : 'Pause price ticker');
-    pause.textContent = paused ? '▶' : 'Ⅱ';
-  });
   const TOKEN = 'AtNfXEt9vSZtHovxVYKXrfFwATfddmeMvApugZzcdWiQ';
   const quotes = new Map();
   const valid = value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value));
