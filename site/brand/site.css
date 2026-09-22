@@ -1,0 +1,4417 @@
+/*
+ * XIIID 통합 스타일시트
+ * 기존 story → brand → sections → updates → token 순서를 유지합니다.
+ * 뒤쪽 규칙·미디어 쿼리는 앞쪽 기본값을 덮어쓰므로 임의로 재정렬하지 마세요.
+ * Token 스타일은 전용 클래스(.x-token-page / .x-donut 등)에만 적용됩니다.
+ * 이미지 경로는 이 파일과 동일한 brand 폴더 구조를 기준으로 유지합니다.
+ */
+/* ==========================================================================
+* 1. 기본 초기화와 스토리 레이아웃 (기존 story.css)
+* ========================================================================== */
+.section-hero .section-hero-inner .section-hero-cta {
+  background: none rgb(149, 191, 255);
+  border: none;
+  cursor: pointer;
+  margin: 0px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: var(--color-black,#000);
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1;
+  padding: 1em;
+  text-box: cap alphabetic;
+  transition: background-color var(--duration-default,.25s);
+}
+
+@media (hover: hover) {
+  .section-hero .section-hero-inner .section-hero-cta:hover {
+    background-color: rgba(149, 191, 255, 0.85);
+  }
+
+}
+
+.section-text-card .section-text-card-inner [class$="-cta"] {
+  background: none rgb(149, 191, 255);
+  border: none;
+  cursor: pointer;
+  margin: 0px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: var(--color-black,#000);
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1;
+  padding: 1em;
+  text-box: cap alphabetic;
+  transition: background-color var(--duration-default,.25s);
+}
+
+@media (hover: hover) {
+  .section-text-card .section-text-card-inner [class$="-cta"]:hover {
+    background-color: rgba(149, 191, 255, 0.85);
+  }
+
+}
+
+.section-logoCards .section-logoCards-header [class$="-cta"] {
+  background: none rgb(149, 191, 255);
+  border: none;
+  cursor: pointer;
+  margin: 0px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: var(--color-black,#000);
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1;
+  padding: 1em;
+  text-box: cap alphabetic;
+  transition: background-color var(--duration-default,.25s);
+}
+
+@media (hover: hover) {
+  .section-logoCards .section-logoCards-header [class$="-cta"]:hover {
+    background-color: rgba(149, 191, 255, 0.85);
+  }
+
+}
+
+/* 공통 폰트는 아래 Pretendard 정의를 사용합니다. */
+html {
+  box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+ol[class],
+ul[class] {
+  padding: 0px;
+}
+
+blockquote,
+body,
+dd,
+dl,
+figcaption,
+figure,
+h1,
+h2,
+h3,
+h4,
+li,
+ol,
+p,
+ul {
+  margin: 0px;
+}
+
+body {
+  line-height: 1.5;
+}
+
+ol[class],
+ul[class] {
+  list-style: none;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 400;
+}
+
+html {
+  font-size: 62.5%;
+  scrollbar-gutter: stable;
+}
+
+body,
+html {
+  min-height: -webkit-fill-available;
+}
+
+body {
+  background-color: var(--color-bg,var(--color-black,#000));
+  color: var(--color-text,var(--color-white,#fff));
+  font-family: var(--font-primary,"ABC Repro","Helvetica","Arial",serif);
+  font-size: var(--size-medium,1.6rem);
+  line-height: var(--line-height,1.4);
+  margin: 0px;
+  padding: 0px;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.01em;
+  max-width: 100vw;
+  transition: background-color var(--duration-default,.25s),color var(--duration-default,.25s);
+}
+
+::selection {
+  background-color: var(--color-text,var(--color-white,#fff));
+  color: var(--color-bg,var(--color-black,#000));
+}
+
+:focus-visible {
+  outline: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+@media (max-width: 767.98px) {
+  input {
+    border-radius: 0px;
+  }
+
+}
+
+h1,
+h2,
+h3 {
+  font: inherit;
+}
+
+img,
+picture,
+video {
+  user-select: none;
+}
+
+p + p {
+  margin-top: 1em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+:root {
+  --vh100: calc(var(--vh, 1vh)*100);
+}
+
+.sr-only {
+  border: 0px !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0px !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+@media (max-width: 1439.98px) {
+  :root {
+    --size-xxlarge: 8rem;
+  }
+
+}
+
+@media screen and (min-width: 1112px) and (max-height: 700px) {
+  :root {
+    --size-xxlarge: 7.2rem;
+  }
+
+}
+
+@media (max-width: 1179.98px) {
+  :root {
+    --vh: 1svh;
+  }
+
+}
+
+@media (max-width: 767px) {
+  :root {
+    --pwy: 3rem;
+    --pwx: 3rem;
+    --size-body: 1.4rem;
+    --gutter-caption: 2.5em;
+    --size-xxlarge: 5.6rem;
+    --size-xlarge: 3rem;
+    --size-large2: 2rem;
+  }
+
+}
+
+@media (max-width: 375.98px) {
+  :root {
+    --size-xxlarge: 4.8rem;
+  }
+
+}
+
+.rubiks-experience {
+  min-height: 100lvh;
+  position: relative;
+}
+
+.rubiks-canvas {
+  height: 100lvh;
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+}
+
+.rubiks-experience .story-section {
+  min-height: 100lvh;
+  pointer-events: none;
+  position: relative;
+}
+
+.rubiks-experience .story-section * {
+  pointer-events: auto;
+}
+
+.cta-group {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gutter,2rem);
+}
+
+.section-hero {
+  align-items: flex-start;
+  display: flex;
+  height: calc(var(--vh, 1vh)*200);
+  justify-content: center;
+  overflow-x: hidden;
+  padding: 0 var(--pwx,4rem);
+}
+
+.section-hero .section-hero-inner {
+  align-items: center;
+  display: flex;
+  filter: drop-shadow(rgba(0, 0, 0, 0.33) 0px 0px 4rem);
+  flex-direction: column;
+  font-size: var(--size-xxlarge,9.4rem);
+  font-weight: 700;
+  height: 50%;
+  justify-content: center;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0px auto;
+  max-width: 11em;
+  pointer-events: none;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.section-hero .section-hero-inner .section-hero-title {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  width: 100%;
+}
+
+.section-hero .section-hero-inner .section-hero-line {
+  display: inline-flex;
+  gap: 0.25em;
+  justify-content: center;
+  will-change: transform;
+}
+
+.section-hero .section-hero-inner .section-hero-word {
+  display: inline-block;
+  text-box: cap alphabetic;
+}
+
+.section-hero .section-hero-inner .section-hero-body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--size-large2,2.4rem);
+  font-weight: 400;
+  gap: var(--gutter,2rem);
+  letter-spacing: normal;
+  line-height: 1.3;
+  margin-top: 2em;
+  pointer-events: auto;
+}
+
+.section-hero .section-hero-inner p {
+  margin: 0px;
+}
+
+.section-hero .section-hero-inner .section-hero-cta {
+  background: none rgb(41, 204, 255);
+  border: none;
+  cursor: pointer;
+  margin: 0px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: var(--color-black,#000);
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1;
+  padding: 1em;
+  text-box: cap alphabetic;
+  transition: background-color var(--duration-default,.25s);
+}
+
+@media (hover: hover) {
+  .section-hero .section-hero-inner .section-hero-cta:hover {
+    background-color: rgba(41, 204, 255, 0.85);
+  }
+
+}
+
+.section-text-card {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--pwx,4rem);
+}
+
+.section-text-card .section-text-card-inner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter-large,4rem);
+  text-align: center;
+  width: 100%;
+}
+
+.section-text-card .section-text-card-inner [class$="-heading"] {
+  font-size: var(--size-xlarge,3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  max-width: 13.5em;
+  text-box: cap alphabetic;
+  text-wrap: balance;
+}
+
+.section-text-card .section-text-card-inner [class$="-text"] {
+  font-size: var(--size-medium,1.6rem);
+  font-weight: 400;
+  line-height: 1.3;
+  max-width: 24em;
+}
+
+.section-text-card .section-text-card-inner [class$="-cta"] {
+  background: none rgb(41, 204, 255);
+  border: none;
+  cursor: pointer;
+  margin: 0px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: var(--color-black,#000);
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1;
+  padding: 1em;
+  text-box: cap alphabetic;
+  transition: background-color var(--duration-default,.25s);
+}
+
+@media (hover: hover) {
+  .section-text-card .section-text-card-inner [class$="-cta"]:hover {
+    background-color: rgba(41, 204, 255, 0.85);
+  }
+
+}
+
+.section-text-card .section-text-card-inner {
+  filter: drop-shadow(rgba(0, 0, 0, 0.4) 0px 0px 4rem);
+}
+
+@media (max-width: 767px) {
+  .section-text-card .section-text-card-inner {
+    padding: 0 var(--pwx,4rem);
+  }
+
+}
+
+.section-text-card-side {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--container-max-width,160rem);
+  padding: 0 var(--pwx,4rem);
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .section-text-card-side {
+    padding: 0 calc(var(--pwx, 4rem)*2);
+  }
+
+}
+
+.section-text-card-side.is-left {
+  justify-content: flex-start;
+}
+
+.section-text-card-side.is-right {
+  justify-content: flex-end;
+}
+
+.section-text-card-side .section-text-card-side-inner {
+  display: flex;
+  filter: drop-shadow(rgba(0, 0, 0, 0.4) 0px 0px 4rem);
+  flex-direction: column;
+  gap: var(--gutter,2rem);
+}
+
+.section-text-card-side .section-text-card-side-heading {
+  font-size: var(--size-large,2rem);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.section-text-card-side .section-text-card-side-text {
+  max-width: 20em;
+}
+
+.section-text-card-side .section-text-card-side-text {
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.section-logoCards {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 15rem 0px;
+  width: 100%;
+}
+
+.section-logoCards .section-logoCards-inner {
+  width: 100%;
+}
+
+.section-logoCards .section-logoCards-header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter-large,4rem);
+  text-align: center;
+  width: 100%;
+}
+
+.section-logoCards .section-logoCards-header [class$="-heading"] {
+  font-size: var(--size-xlarge,3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  max-width: 13.5em;
+  text-box: cap alphabetic;
+  text-wrap: balance;
+}
+
+.section-logoCards .section-logoCards-header [class$="-text"] {
+  font-size: var(--size-medium,1.6rem);
+  font-weight: 400;
+  line-height: 1.3;
+  max-width: 24em;
+}
+
+.section-logoCards .section-logoCards-header [class$="-cta"] {
+  background: none rgb(41, 204, 255);
+  border: none;
+  cursor: pointer;
+  margin: 0px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: var(--color-black,#000);
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1;
+  padding: 1em;
+  text-box: cap alphabetic;
+  transition: background-color var(--duration-default,.25s);
+}
+
+@media (hover: hover) {
+  .section-logoCards .section-logoCards-header [class$="-cta"]:hover {
+    background-color: rgba(41, 204, 255, 0.85);
+  }
+
+}
+
+.section-logoCards .section-logoCards-header {
+  padding: 0 var(--pwx,4rem);
+}
+
+.section-logoCards .section-logoCards-cards {
+  display: flex;
+  gap: var(--gutter,2rem);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6rem;
+  max-width: var(--container-max-width,160rem);
+  padding: 0 var(--pwx,4rem);
+  width: 100%;
+}
+
+@media (max-width: 1179.98px) {
+  .section-logoCards .section-logoCards-cards {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .section-logoCards .section-logoCards-cards ::-webkit-scrollbar,
+  .section-logoCards .section-logoCards-cards::-webkit-scrollbar {
+    display: none;
+    height: 0px !important;
+    width: 0px !important;
+  }
+
+  .section-logoCards .section-logoCards-cards {
+    scroll-snap-type: x mandatory;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .section-logoCards .section-logoCards-cards {
+    padding: 0 var(--pwx,4rem);
+  }
+
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card {
+  aspect-ratio: 0.8 / 1;
+  backdrop-filter: blur(5rem);
+  background-color: var(--color-grey-2-50,rgba(172,177,188,.5));
+  border-radius: 1.2rem;
+  color: var(--color-white,#fff);
+  display: flex;
+  flex-direction: column;
+  padding: 2.4rem;
+  scroll-snap-align: center;
+  width: 25%;
+}
+
+@media (max-width: 1179.98px) {
+  .section-logoCards .section-logoCards-cards .section-logoCards-card {
+    max-width: 50vw;
+    min-width: 50vw;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .section-logoCards .section-logoCards-cards .section-logoCards-card {
+    max-width: 80vw;
+    min-width: 80vw;
+  }
+
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .section-logoCards-card-index {
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  text-box: cap alphabetic;
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .section-logoCards-card-heading {
+  font-size: var(--size-large,2rem);
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  text-box: cap alphabetic;
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .section-logoCards-card-text {
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  max-width: 19em;
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group .section-logoCards-card-cta {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: currentcolor;
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group .section-logoCards-card-cta::before {
+  background-color: currentcolor;
+  bottom: -0.0625em;
+  content: "";
+  height: 0.0625em;
+  left: 0px;
+  position: absolute;
+  transform: scaleX(1) rotate(0.001deg);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.625, 0.05, 0, 1);
+  width: 100%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group .section-logoCards-card-cta:hover::before {
+    transform: scaleX(0) rotate(0.001deg);
+    transform-origin: right center;
+  }
+
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group .section-logoCards-card-cta {
+  position: relative;
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group .section-logoCards-card-cta::after {
+  content: "↗";
+  display: inline-block;
+  padding-left: 0.25em;
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group .section-logoCards-card-cta {
+  margin-bottom: var(--gutter-large,4rem);
+  text-align: left;
+}
+
+.page-home {
+  position: relative;
+  width: 100%;
+}
+
+.svg-logo {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.svg-logo path {
+  fill: currentcolor;
+}
+
+.header-main {
+  background-image: linear-gradient(rgb(0, 0, 0) 0px, rgba(0, 0, 0, 0.75) 18%, rgba(0, 0, 0, 0.52) 36%, rgba(0, 0, 0, 0.34) 52%, rgba(0, 0, 0, 0.2) 66%, rgba(0, 0, 0, 0.11) 78%, rgba(0, 0, 0, 0.05) 88%, rgba(0, 0, 0, 0.02) 95%, transparent);
+  color: var(--color-white,#fff);
+  left: 0px;
+  pointer-events: none;
+  position: fixed;
+  top: 0px;
+  transform: translateZ(0px);
+  width: 100%;
+  z-index: 100;
+}
+
+.header-main .header-inner {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--pwy,4rem) var(--pwx,4rem) calc(var(--pwy, 4rem)*3) var(--pwx,4rem);
+  position: relative;
+  width: 100%;
+}
+
+.header-main .header-inner > * {
+  pointer-events: auto;
+}
+
+.header-main .header-inner .header-logo {
+  display: block;
+  height: 2.4rem;
+  position: relative;
+  transition: opacity 0.35s 0.2s;
+  width: auto;
+  z-index: 100;
+}
+
+@media (max-width: 767px) {
+  .header-main .header-inner .header-logo {
+    height: 2.1rem;
+  }
+
+}
+
+.header-main .header-inner .header-logo svg {
+  height: 100%;
+  width: auto;
+}
+
+.footer-main {
+  background: linear-gradient(rgba(26, 12, 109, 0) -7.94%, rgb(26, 12, 109));
+  font-family: var(--font-secondary,"ABC Repro Mono","Courier New",monospace);
+  font-size: var(--size-small,1.2rem);
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 20rem var(--pwx,4rem) var(--pwy,4rem) var(--pwx,4rem);
+  position: relative;
+}
+
+.footer-main .footer-inner {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .footer-main .footer-inner {
+    flex-direction: column-reverse;
+    gap: 14rem;
+  }
+
+  .footer-main .footer-inner > * {
+    padding: 0px !important;
+    width: 100% !important;
+  }
+
+}
+
+main#main {
+  min-height: calc(var(--vh, 1vh)*100);
+}
+
+.skip-link {
+  background: rgb(0, 0, 0);
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  left: 6px;
+  padding: 8px;
+  position: absolute;
+  text-decoration: none;
+  top: -40px;
+  transition: top 0.3s;
+  z-index: 100001;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* ==========================================================================
+* 2. 브랜드 색상·폰트·3D 배경 (기존 brand.css)
+* ========================================================================== */
+/* ------------------------------------------------------------------ *
+* Typography — Pretendard replaces the bundled display and mono faces
+* (SIL Open Font License, see brand/fonts/Pretendard-LICENSE.txt)
+* ------------------------------------------------------------------ */
+@font-face {
+  font-family: "Pretendard XIIID";
+  src: url("/brand/fonts/Pretendard-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard XIIID";
+  src: url("/brand/fonts/Pretendard-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard XIIID";
+  src: url("/brand/fonts/Pretendard-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard XIIID";
+  src: url("/brand/fonts/Pretendard-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-primary: "Pretendard XIIID", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-secondary: var(--font-primary);
+}
+
+/* The bundled rules hard-code the old stacks as fallbacks,
+
+so restate them. */
+body,
+button,
+input,
+select,
+textarea,
+[class*="section-"],
+[class*="footer-"],
+[class*="header-"] {
+  font-family: var(--font-primary);
+}
+
+:root {
+  /* Key colours, sampled from the logo artwork. */
+  --brand-violet: #6d4fff;
+  --brand-violet-light: #d46fff;
+  --brand-cyan: #29ccff;
+  --brand-cyan-deep: #2f9cd7;
+  --brand-ink: #030208;
+  --brand-ink-2: #0c0726;
+  --brand-gradient: linear-gradient(115deg, var(--brand-violet-light) 0%, var(--brand-violet) 42%, var(--brand-cyan) 100%);
+  --brand-glow: 0 0 4rem rgba(109, 79, 255, 0.45);
+}
+
+html {
+  background-color: var(--brand-ink);
+}
+
+body {
+  background-color: var(--brand-ink);
+  /* the WebGL scene paints the hero; this keeps the rest of the page on-brand */
+  background-image: none;
+}
+
+::selection {
+  background: var(--brand-cyan);
+  color: #04030c;
+}
+
+/* ------------------------------------------------------------------ *
+* Logo — brand X mark + XIIID wordmark
+* ------------------------------------------------------------------ */
+.header-logo {
+  aspect-ratio: 428 / 100;
+  background: url("/brand/logo-xiiid.svg") no-repeat 0 50% / contain;
+  width: auto;
+}
+
+.header-logo .svg-logo {
+  display: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--brand-cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Section CTAs: brand gradient, proper button padding and shape.
+Several of these are plain text links in the source, so the padding,
+radius and inline-block are set here rather than only the colours. */
+.page-home [class$="-cta"],
+.section-hero-cta {
+  display: inline-block;
+  background-image: var(--brand-gradient) !important;
+  background-color: transparent !important;
+  color: #05030f !important;
+  border: none;
+  border-radius: 999px;
+  padding: 0.95em 2.1em !important;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-decoration: none;
+  white-space: nowrap;
+  text-box-trim: none;
+  transition: filter .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+/* The ↗ affordance the bundled styles append to some links stays inside. */
+.page-home [class$="-cta"]::after {
+  margin-left: .15em;
+}
+
+@media (hover: hover) {
+  .page-home [class$="-cta"]:hover,
+  .section-hero-cta:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: var(--brand-glow);
+  }
+
+}
+
+/* Groups of CTAs need breathing room between the pills. */
+.page-home .cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .page-home [class$="-cta"],
+  .section-hero-cta {
+    padding: 0.9em 1.7em !important;
+    white-space: normal;
+  }
+
+}
+
+/* The bundled styles draw a currentColor rule under card CTAs; with the pill
+treatment that reads as a stray black underline, so it goes. */
+.page-home [class$="-cta"]::before {
+  display: none !important;
+}
+
+.page-home [class$="-cta"] {
+  overflow: visible;
+}
+
+/* Card CTAs sit at the bottom of their card, so keep them inline-sized.
+The 4rem gap below the button is the bundle's value: it loaded a second
+copy of its CSS after this file and set it, so that is the spacing the
+cards have always had. This rule used to ask for 0 and never got it. */
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group [class$="-cta"] {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-bottom: 4rem;
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card {
+  justify-content: flex-start;
+}
+
+.section-logoCards .section-logoCards-cards .section-logoCards-card .cta-group {
+  margin-top: auto;
+}
+
+/* ------------------------------------------------------------------ *
+* Story panels — the three "It adapts / teaches / scales" cards
+* ------------------------------------------------------------------ */
+/* 기존 우선순위를 유지하기 위한 명시적 덮어쓰기입니다. */
+.section-text-card-side .section-text-card-side-heading {
+  font-size: clamp(3.2rem, 4.4vw, 5.6rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -.03em;
+}
+
+.section-text-card-side .section-text-card-side-text {
+  margin-top: 1.4rem;
+  font-size: clamp(1.7rem, 1.7vw, 2.2rem) !important;
+  line-height: 1.5 !important;
+  /* 20em, not 22em: the bundle used to load a second copy of its CSS after
+  this file and cap the column at 20em, so that is the width the page has
+  always had. Now that the bundle is gone the value lives here. */
+  max-width: 20em;
+}
+
+.section-text-card-side .section-text-card-side-inner {
+  max-width: 56rem;
+}
+
+/* Scrollbar + link accents pick up the key colour. */
+* {
+  scrollbar-color: var(--brand-violet) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050310;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--brand-violet-light), var(--brand-cyan));
+  border-radius: 10px;
+}
+
+/* ------------------------------------------------------------------ *
+* 3D scene canvas
+* ------------------------------------------------------------------ */
+.rubiks-canvas {
+  background: var(--brand-ink);
+  overflow: hidden;
+  /* The bundled fade ties the canvas opacity to a word-cloud section this
+  build no longer has, which pins it at 0. The sections below are
+  translucent by design, so the scene simply stays on. */
+  opacity: 1 !important;
+}
+
+.rubiks-canvas .brand-x-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Used only when WebGL is unavailable. */
+.rubiks-canvas.brand-x-fallback {
+  background: url("/brand/mark-x.svg") no-repeat 50% 46% / min(52vw, 46vh) auto, radial-gradient(70rem 70rem at 50% 45%, rgba(109, 79, 255, .34), transparent 65%), var(--brand-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rubiks-canvas .brand-x-canvas {
+    opacity: .82;
+  }
+
+}
+
+/* ==========================================================================
+* 3. 메뉴·섹션·모달·반응형 스타일 (기존 sections.css)
+* ========================================================================== */
+.x-sections {
+  --x-ink: #05030e;
+  --x-panel: rgba(6, 4, 15, .72);
+  --x-line: rgba(255, 255, 255, .10);
+  --x-text: rgba(228, 226, 245, .74);
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+/* Sections sit on top of the 3D scene rather than hiding it: a translucent
+panel plus a backdrop blur keeps the mark and its motion legible behind. */
+.x-section {
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 9rem;
+  padding: 13rem var(--pwx, 4rem) 12rem;
+  background: var(--x-panel);
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
+  backdrop-filter: blur(26px) saturate(115%);
+  color: #fff;
+}
+
+/* Film grain over the blurred scene. */
+.x-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("/brand/media/grain.png");
+  background-size: 160px 160px;
+  opacity: .14;
+  mix-blend-mode: overlay;
+}
+
+.x-inner {
+  width: 100%;
+  max-width: 132rem;
+  margin: 0 auto;
+}
+
+.x-head {
+  max-width: 64rem;
+  margin: 0 0 6.4rem;
+}
+
+.x-title {
+  margin: 0;
+  font-size: clamp(3rem, 4.2vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------------ *
+* Ecosystem — where the 3D mark is gradually veiled
+* ------------------------------------------------------------------ */
+.x-ecosystem {
+  background: linear-gradient( to bottom, rgba(5, 3, 14, 0) 0%, rgba(5, 3, 14, .28) 16%, rgba(5, 3, 14, .56) 34%, rgba(6, 4, 15, .80) 56%, rgba(6, 4, 15, .80) 100% );
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  padding-top: 20rem;
+}
+
+/* The blur itself fades in, so the mark dissolves rather than cutting off. */
+.x-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
+  backdrop-filter: blur(26px) saturate(115%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 42%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 42%);
+}
+
+.x-ecosystem::after {
+  opacity: .10;
+}
+
+.x-head-eco {
+  max-width: 68rem;
+}
+
+.x-eco-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, .55);
+}
+
+.x-eco-card {
+  background: rgba(16, 13, 34, .78);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-left: 1px solid var(--x-line);
+  padding: 2.8rem 2.4rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.x-eco-card:first-child {
+  border-left: none;
+}
+
+.x-eco-card-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.x-eco-card-top h3 {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+
+.x-eco-num {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #05030f;
+  background: #a58cff;
+}
+
+.x-eco-card:nth-child(2) .x-eco-num {
+  background: #7e9bff;
+}
+
+.x-eco-card:nth-child(3) .x-eco-num {
+  background: #52b9f5;
+}
+
+.x-eco-card:nth-child(4) .x-eco-num {
+  background: #29ccff;
+}
+
+.x-eco-text {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.65;
+  color: var(--x-text);
+  flex: 1 1 auto;
+}
+
+.x-eco-caption {
+  margin: 0;
+  text-align: center;
+  font-size: 1.35rem;
+  color: rgba(210, 208, 235, .55);
+}
+
+.x-partner-role {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.x-partner-note {
+  margin: 4rem 0 0;
+  font-size: 1.35rem;
+  line-height: 1.75;
+  color: rgba(210, 208, 235, .55);
+}
+
+/* Logo marquee ----------------------------------------------------- */
+.x-marquee-wrap {
+  margin-top: 8rem;
+}
+
+.x-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.x-marquee + .x-marquee {
+  margin-top: 1.6rem;
+}
+
+.x-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.x-marquee-left .x-marquee-track {
+  animation: x-marquee-left 58s linear infinite;
+}
+
+.x-marquee-right .x-marquee-track {
+  animation: x-marquee-right 66s linear infinite;
+}
+
+.x-marquee:hover .x-marquee-track {
+  animation-play-state: paused;
+}
+
+.x-marquee-run {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.x-marquee-item {
+  flex: 0 0 auto;
+  width: 17rem;
+  height: 8rem;
+  display: grid;
+  place-items: center;
+  padding: 1.4rem 2rem;
+}
+
+.x-marquee-item img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+@keyframes x-marquee-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+
+}
+
+@keyframes x-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .x-marquee-track {
+    animation: none !important;
+  }
+
+}
+
+/* ------------------------------------------------------------------ *
+* Team
+* ------------------------------------------------------------------ */
+.x-team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.4rem;
+}
+
+.x-team-card {
+  display: flex;
+  gap: 2.4rem;
+  padding: 3rem;
+  border-radius: 1.4rem;
+}
+
+.x-team-photo {
+  flex: 0 0 auto;
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, .06);
+}
+
+.x-team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.x-team-body {
+  min-width: 0;
+}
+
+.x-team-name {
+  margin: .4rem 0 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.x-team-role {
+  margin: .5rem 0 1.4rem;
+  font-size: 1.3rem;
+  color: var(--brand-cyan, #29ccff);
+}
+
+.x-team-text {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.7;
+  color: var(--x-text);
+}
+
+/* ------------------------------------------------------------------ *
+* News
+* ------------------------------------------------------------------ */
+.x-news-rail {
+  position: relative;
+}
+
+.x-news-track {
+  display: flex;
+  gap: 2.4rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: .4rem;
+}
+
+.x-news-track::-webkit-scrollbar {
+  display: none;
+}
+
+.x-news-track > .x-news-card {
+  flex: 0 0 calc((100% - 4.8rem) / 3);
+  scroll-snap-align: start;
+}
+
+.x-news-arrow {
+  position: absolute;
+  top: var(--news-arrow-y, 12rem);
+  transform: translateY(-50%);
+  width: 4.4rem;
+  height: 4.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(10, 8, 26, .78);
+  -webkit-backdrop-filter: blur(.8rem);
+  backdrop-filter: blur(.8rem);
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity .2s ease, border-color .2s ease, background .2s ease;
+  z-index: 3;
+}
+
+.x-news-arrow:hover:not(:disabled) {
+  border-color: rgba(109, 79, 255, .75);
+  background: rgba(20, 14, 48, .9);
+}
+
+.x-news-arrow:disabled {
+  opacity: .25;
+  cursor: default;
+}
+
+.x-news-static .x-news-arrow {
+  display: none;
+}
+
+.x-news-prev {
+  left: -2.2rem;
+}
+
+.x-news-next {
+  right: -2.2rem;
+}
+
+.x-news-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.x-news-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(109, 79, 255, .55);
+}
+
+.x-news-thumb {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0b0920;
+}
+
+.x-news-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+
+.x-news-card:hover .x-news-thumb img {
+  transform: scale(1.04);
+}
+
+.x-news-body {
+  padding: 2.2rem 2.2rem 2.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1 1 auto;
+}
+
+.x-news-meta {
+  margin: 0;
+  font-size: 1.25rem;
+  color: rgba(210, 208, 235, .5);
+}
+
+.x-news-title {
+  margin: 0;
+  font-size: 1.7rem;
+  line-height: 1.4;
+  font-weight: 600;
+  flex: 1 1 auto;
+}
+
+.x-news-more {
+  font-size: 1.3rem;
+  color: var(--brand-cyan, #29ccff);
+}
+
+/* ------------------------------------------------------------------ *
+* Apps
+* ------------------------------------------------------------------ */
+.x-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.4rem;
+}
+
+.x-app-card {
+  padding: 3.2rem;
+  border-radius: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.x-app-mark {
+  width: 4rem;
+  height: 4rem;
+  background: url("/brand/mark-x.svg") no-repeat 50% / contain;
+}
+
+.x-app-name {
+  margin: .8rem 0 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.x-app-text {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.65;
+  color: var(--x-text);
+  flex: 1 1 auto;
+}
+
+.x-app-stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.x-store {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, .05);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.x-store:hover {
+  background: rgba(255, 255, 255, .12);
+  border-color: rgba(41, 204, 255, .6);
+}
+
+/* ------------------------------------------------------------------ *
+* Community
+* ------------------------------------------------------------------ */
+.x-community-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.x-community-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 2.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+
+.x-community-icon {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.x-community-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.x-community-link:hover {
+  background: rgba(255, 255, 255, .12);
+  border-color: rgba(41, 204, 255, .6);
+  transform: translateY(-2px);
+}
+
+.x-community-link-text {
+  padding-inline: 2.6rem;
+}
+
+.x-header .header-logo {
+  cursor: pointer;
+}
+
+.x-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.6rem;
+  margin-left: auto;
+}
+
+.x-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.x-nav-link {
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  opacity: .85;
+  transition: opacity .2s ease;
+}
+
+.x-nav-link:hover {
+  opacity: 1;
+}
+
+.x-nav-cta {
+  display: inline-block;
+  padding: .85em 1.9em;
+  border-radius: 999px;
+  background-image: var(--brand-gradient, linear-gradient(115deg, #d46fff, #29ccff));
+  color: #05030f;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: filter .25s ease, transform .25s ease;
+}
+
+.x-nav-cta:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.x-nav-toggle {
+  display: none;
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 95;
+  /* stays above the full-screen menu panel */
+}
+
+.x-nav-toggle span {
+  position: absolute;
+  left: .5rem;
+  right: .5rem;
+  height: 2px;
+  background: #fff;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.x-nav-toggle span:first-child {
+  top: 1.2rem;
+}
+
+.x-nav-toggle span:last-child {
+  top: 2rem;
+}
+
+.x-nav-open .x-nav-toggle span:first-child {
+  transform: translateY(.4rem) rotate(45deg);
+}
+
+.x-nav-open .x-nav-toggle span:last-child {
+  transform: translateY(-.4rem) rotate(-45deg);
+}
+
+@media (max-width: 1023px) {
+  .x-nav-toggle {
+    display: block;
+    order: 3;
+  }
+
+  .x-nav {
+    gap: 1.4rem;
+  }
+
+  .x-nav-list {
+    /* .header-main is a fixed, transformed element, so it — not the viewport —
+    is the containing block here; size the panel explicitly or it only
+    slides up by the height of the header and its items peek out. */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    height: 100vh;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.8rem;
+    padding: 12rem var(--pwx, 4rem) 6rem;
+    background: rgba(5, 3, 14, .97);
+    -webkit-backdrop-filter: blur(1.4rem);
+    backdrop-filter: blur(1.4rem);
+    transform: translateY(-110%);
+    transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+    z-index: 90;
+  }
+
+  .x-nav-open .x-nav-list {
+    transform: translateY(0);
+  }
+
+  .x-nav-link {
+    font-size: 2.4rem;
+  }
+
+  .x-nav-cta {
+    position: relative;
+    z-index: 95;
+    font-size: 1.2rem;
+    padding: .8em 1.5em;
+  }
+
+}
+
+/* ------------------------------------------------------------------ *
+* Project modals
+* ------------------------------------------------------------------ */
+/* display:grid below beats the UA [hidden] rule, so restate it */
+.x-modal[hidden] {
+  display: none !important;
+}
+
+.x-modal-lock,
+.x-modal-lock body {
+  overflow: hidden !important;
+}
+
+.x-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 3vh 2vw;
+  background: rgba(2, 1, 8, .86);
+  -webkit-backdrop-filter: blur(1rem);
+  backdrop-filter: blur(1rem);
+  opacity: 0;
+  transition: opacity .22s ease;
+}
+
+.x-modal.is-open {
+  opacity: 1;
+}
+
+.x-modal-dialog {
+  position: relative;
+  width: 90vw;
+  max-width: 132rem;
+  max-height: 92vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(2.4rem, 3.6vw, 5.2rem);
+  border-radius: 1.8rem;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: #080614;
+  color: #fff;
+  transform: translateY(1.6rem) scale(.985);
+  transition: transform .26s cubic-bezier(.2, .8, .2, 1);
+}
+
+.x-modal.is-open .x-modal-dialog {
+  transform: none;
+}
+
+.x-modal-dialog:focus {
+  outline: none;
+}
+
+.x-modal-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  width: 4rem;
+  height: 4rem;
+  margin: -1rem -1rem 0 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(10, 8, 26, .9);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.x-modal-close:hover {
+  background: rgba(109, 79, 255, .45);
+}
+
+.x-modal-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2.4rem, 3vw, 5rem);
+  align-items: center;
+  margin-bottom: 4.8rem;
+}
+
+.x-modal-head {
+  min-width: 0;
+}
+
+.x-modal-orb {
+  width: 7rem;
+  height: 7rem;
+  margin-bottom: 1.6rem;
+}
+
+.x-modal-orb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.x-modal-eyebrow {
+  margin: 0 0 .8rem;
+  font-size: 1.3rem;
+  letter-spacing: .18em;
+  color: var(--brand-cyan, #29ccff);
+}
+
+.x-modal-title {
+  margin: 0;
+  font-size: clamp(2.8rem, 4.2vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+}
+
+.x-modal-kicker {
+  display: inline-block;
+  margin: 1.6rem 0 0;
+  padding: .45rem 1.1rem;
+  border-radius: .5rem;
+  background: rgba(255, 255, 255, .12);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.x-modal-lead {
+  margin: 1.8rem 0 0;
+  font-size: clamp(1.5rem, 1.4vw, 1.8rem);
+  line-height: 1.65;
+  color: rgba(226, 224, 248, .78);
+}
+
+.x-modal-hero {
+  border-radius: 1.4rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: #0b0920;
+}
+
+.x-modal-hero img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 3 / 2;
+}
+
+.x-modal-grid {
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 2.4rem;
+}
+
+.x-modal-exams {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.x-modal-tests {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.x-tile {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .04);
+}
+
+.x-tile-flag {
+  display: block;
+  width: 5.6rem;
+}
+
+.x-tile-flag img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: .3rem;
+}
+
+.x-tile-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.x-tile-size {
+  font-size: 1.3rem;
+  color: var(--brand-cyan, #29ccff);
+}
+
+.x-tile-test {
+  align-items: center;
+  justify-content: center;
+  min-height: 9rem;
+  padding: 2rem 2.4rem;
+}
+
+.x-tile-test img {
+  max-width: 100%;
+  max-height: 4.4rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.x-figure {
+  margin: 0 0 2.6rem;
+}
+
+.x-figure-frame {
+  border-radius: 1.4rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: #0b0920;
+}
+
+.x-figure-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.x-figure figcaption {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: rgba(226, 224, 248, .5);
+}
+
+.x-modal-cta-row {
+  margin: 0 0 2.6rem;
+}
+
+.x-modal-cta {
+  display: inline-block;
+  padding: 1.1em 2.6em;
+  border-radius: 999px;
+  background: #fff;
+  color: #05030f;
+  font-size: 1.45rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.x-modal-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1rem 3rem rgba(109, 79, 255, .5);
+}
+
+.x-modal-foot {
+  margin: 0;
+  padding-top: 2.4rem;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: rgba(226, 224, 248, .58);
+}
+
+/* ------------------------------------------------------------------ *
+* Footer
+* ------------------------------------------------------------------ */
+.footer-main.x-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #04030c;
+  padding: 16rem var(--pwx, 4rem) 4rem;
+}
+
+.x-footer-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.x-footer-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* the clip fades up from the section top so it arrives gradually */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .35) 18%, #000 52%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .35) 18%, #000 52%);
+}
+
+.x-footer-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(4, 3, 12, .96) 0%, rgba(4, 3, 12, .74) 30%, rgba(4, 3, 12, .80) 100%);
+}
+
+.footer-main.x-footer .footer-inner {
+  display: block;
+}
+
+.x-footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: clamp(3rem, 5vw, 8rem);
+  padding-bottom: 8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+
+.x-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.x-footer-mark {
+  width: min(32rem, 70%);
+  aspect-ratio: 428 / 100;
+  background: url("/brand/logo-xiiid.svg") no-repeat 0 50% / contain;
+}
+
+.x-footer-tagline {
+  margin: 0;
+  font-size: 1.6rem;
+  color: rgba(228, 226, 245, .66);
+}
+
+.x-footer-bar {
+  margin-top: 3rem;
+  padding: 3rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.x-footer-email {
+  display: inline-block;
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: .02em;
+  color: rgba(228, 226, 245, .62);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.x-footer-email:hover {
+  color: #fff;
+}
+
+.x-footer-copy {
+  margin: 0;
+  font-size: 1.3rem;
+  letter-spacing: .08em;
+  color: rgba(228, 226, 245, .42);
+  white-space: nowrap;
+  text-transform: none;
+}
+
+/* ------------------------------------------------------------------ *
+* Projects section — three cards instead of the original four
+* ------------------------------------------------------------------ */
+@media (min-width: 768px) {
+  .section-logoCards .section-logoCards-cards {
+    justify-content: center !important;
+    overflow-x: visible !important;
+  }
+
+  .section-logoCards .section-logoCards-cards .section-logoCards-card {
+    width: 34% !important;
+    max-width: 42rem !important;
+    min-width: 0 !important;
+    /* the original four-up layout locked the cards to a 0.8 ratio; with three
+    longer cards they need to grow to fit their copy instead */
+    aspect-ratio: auto !important;
+    min-height: 42rem;
+    /* 2.4rem, not the 3rem/2.8rem this rule used to ask for: the bundle
+    loaded a second copy of its CSS after this file and set 2.4rem, so that
+    is the padding the cards have always had. Now that the bundle is gone
+    the value lives here. */
+    padding: 2.4rem;
+    background-color: rgba(12, 10, 28, .62) !important;
+    border: 1px solid rgba(255, 255, 255, .14);
+  }
+
+}
+
+.section-logoCards .section-logoCards-card-index {
+  font-size: 1.2rem !important;
+  letter-spacing: .12em;
+  opacity: .6;
+}
+
+.section-logoCards .section-logoCards-card-heading {
+  margin-top: .6rem;
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -.02em;
+}
+
+.section-logoCards .section-logoCards-card-text {
+  margin-top: 1.4rem;
+  margin-bottom: 2.4rem;
+  font-size: 1.45rem !important;
+  line-height: 1.65 !important;
+  flex: 1 1 auto;
+}
+
+/* Keep the card plate dark at every width — the bundled grey reads as a
+washed-out violet over the bright mark. */
+.section-logoCards .section-logoCards-cards .section-logoCards-card {
+  background-color: rgba(12, 10, 28, .62) !important;
+}
+
+/* ------------------------------------------------------------------ *
+* Responsive
+* ------------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .x-section {
+    padding: 9rem var(--pwx, 3rem);
+  }
+
+  .x-ecosystem {
+    padding-top: 14rem;
+  }
+
+  .x-eco-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .x-eco-card {
+    border-top: 1px solid var(--x-line);
+  }
+
+  .x-eco-card:nth-child(-n+2) {
+    border-top: none;
+  }
+
+  .x-eco-card:nth-child(odd) {
+    border-left: none;
+  }
+
+  .x-news-track > .x-news-card {
+    flex-basis: calc((100% - 2.4rem) / 2);
+  }
+
+  .x-news-prev {
+    left: .6rem;
+  }
+
+  .x-news-next {
+    right: .6rem;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .x-section {
+    padding: 7.5rem var(--pwx, 2.4rem);
+  }
+
+  .x-head {
+    margin-bottom: 4rem;
+  }
+
+  .x-eco-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .x-eco-card {
+    border-left: none;
+    border-top: 1px solid var(--x-line);
+  }
+
+  .x-eco-card:first-child {
+    border-top: none;
+  }
+
+  .x-partner-role {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--x-line);
+  }
+
+  .x-marquee-item {
+    width: 13rem;
+    height: 6.4rem;
+    padding: 1rem 1.4rem;
+  }
+
+  .x-team-grid,
+  .x-apps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .x-news-track > .x-news-card {
+    flex-basis: 100%;
+  }
+
+  .x-team-card {
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .x-team-photo {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .x-footer-email {
+    font-size: 1.3rem;
+  }
+
+  .x-footer-copy {
+    white-space: nowrap;
+    font-size: 1.15rem;
+    letter-spacing: .04em;
+  }
+
+  .x-modal {
+    padding: 2vh 1.5vw;
+  }
+
+  .x-modal-dialog {
+    width: 94vw;
+    max-height: 94vh;
+  }
+
+  .x-modal-top {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+}
+
+/* Requested mobile layout, logo spacing, footer and scroll motion. */
+/* 1. The three project cards stack down the page on phones instead of
+sitting in a horizontal strip that cuts off after the first card. */
+@media (max-width: 767px) {
+  .section-logoCards .section-logoCards-cards {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 2.4rem !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  .section-logoCards .section-logoCards-cards .section-logoCards-card {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    padding: 2.8rem !important;
+  }
+
+}
+
+/* 5. Logo wall: a taller cell with more breathing room, and images bounded by
+max-width/max-height so a tall mark scales down instead of being clipped.
+(height:100% on a grid child resolves to auto here, which is what let the
+tall marks overflow the row.) */
+.x-marquee-item {
+  box-sizing: border-box;
+  width: 18rem;
+  height: 10.4rem;
+  padding: 0;
+  align-items: center;
+}
+
+/* A fixed box plus object-fit keeps every mark inside its cell: a tall logo
+scales down rather than spilling past the row and getting clipped. */
+.x-marquee-item img {
+  display: block;
+  width: 13.2rem;
+  height: 6.4rem;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+}
+
+.x-marquee + .x-marquee {
+  margin-top: 2.4rem;
+}
+
+@media (max-width: 767px) {
+  .x-marquee-item {
+    width: 13.6rem;
+    height: 7.6rem;
+    padding: 0;
+  }
+
+  .x-marquee-item img {
+    width: 10.4rem;
+    height: 4.8rem;
+  }
+
+  .x-marquee + .x-marquee {
+    margin-top: 1.6rem;
+  }
+
+}
+
+/* 6. A taller footer stage so the clip plays with more room around it. */
+.footer-main.x-footer {
+  padding-top: clamp(30rem, 34vw, 50rem) !important;
+  padding-bottom: 9rem !important;
+}
+
+.x-footer-video {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .35) 12%, #000 38%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .35) 12%, #000 38%);
+}
+
+/* 7. Everything drifts up into place as it scrolls into view. */
+.x-reveal {
+  opacity: 0;
+  translate: 0 28px;
+  transition: opacity .7s ease, translate .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.x-reveal.x-revealed {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .x-reveal {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+}
+
+/* ------------------------------------------------------------------ *
+* Follow-up fixes
+* ------------------------------------------------------------------ */
+/* The bundled stylesheet never shipped rules for these four classes, so the
+story headings and their lead paragraphs fell back to the browser default
+16px. Match the scale the sibling story text already uses:
+--size-large resolves to clamp(3.2rem, 4.4vw, 5.6rem) and
+--size-small to clamp(1.7rem, 1.7vw, 2.2rem). */
+.section-text-card-heading,
+.section-logoCards-heading {
+  font-size: var(--size-large, clamp(3.2rem, 4.4vw, 5.6rem));
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  max-width: 20em;
+  text-wrap: balance;
+}
+
+.section-text-card-text {
+  font-family: var(--font-secondary, "ABC Repro Mono", "Courier New", monospace);
+  font-size: var(--size-small, clamp(1.7rem, 1.7vw, 2.2rem));
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 42em;
+  margin-inline: auto;
+}
+
+/* Footer join: the section above keeps its blurred, grained panel, the footer
+opens on that same tint so there is no step at the seam, and the tint then
+closes to solid quickly so the 3D mark is gone a short way in. The blur and
+grain are carried across the join and faded out with it. */
+.footer-main.x-footer {
+  isolation: auto;
+  z-index: 0;
+  background-color: transparent;
+  background-image: linear-gradient( to bottom, rgba(8, 7, 16, .72) 0%, rgba(7, 6, 15, .86) 6%, rgba(5, 4, 13, .96) 12%, #04030c 19% );
+}
+
+.footer-main.x-footer::before,
+.footer-main.x-footer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: clamp(12rem, 16vw, 22rem);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, .55) 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, .55) 45%, transparent 100%);
+}
+
+.footer-main.x-footer::before {
+  z-index: -2;
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
+  backdrop-filter: blur(26px) saturate(115%);
+}
+
+.footer-main.x-footer::after {
+  z-index: -1;
+  background-image: url("/brand/media/grain.png");
+  background-size: 160px 160px;
+  opacity: .14;
+  mix-blend-mode: overlay;
+}
+
+/* the clip arrives once the mark is already gone */
+.x-footer-video {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .12) 10%, rgba(0, 0, 0, .5) 24%, #000 42%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .12) 10%, rgba(0, 0, 0, .5) 24%, #000 42%);
+}
+
+.x-footer-scrim {
+  background: linear-gradient( to bottom, rgba(4, 3, 12, .2) 0%, rgba(4, 3, 12, .38) 14%, rgba(4, 3, 12, .62) 28%, rgba(4, 3, 12, .78) 55%, rgba(4, 3, 12, .82) 100% );
+}
+
+/* Footer columns: only Resources is left, so it sits beside the brand block
+rather than stretching across three tracks. */
+.x-footer-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, .8fr);
+}
+
+@media (max-width: 1023px) {
+  .x-footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* Social row: the platform links are icon-only pills, the rest stay as text. */
+.x-community-link-icon {
+  width: 4.8rem;
+  height: 4.8rem;
+  padding: 0;
+  justify-content: center;
+  gap: 0;
+}
+
+.x-community-link-icon .x-community-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (max-width: 767px) {
+  .x-community-link-icon {
+    width: 4.4rem;
+    height: 4.4rem;
+  }
+
+  .x-community-link-text {
+    padding-inline: 2rem;
+  }
+
+}
+
+/* The dashboard sits at the foot of the AI Studio modal. */
+.x-figure-tail {
+  margin-top: 3.2rem;
+}
+
+/* ------------------------------------------------------------------ *
+* Ecosystem map — one AI Tutor frame, two columns inside
+* ------------------------------------------------------------------ */
+/* FROSTED GLASS
+------------------------------------------------------------------
+One recipe, used by the 'Two types of AI Tutor' block and by the cards in
+Team, News, Roadmap and Download Apps: a barely-there fill over a backdrop
+blur, so the 3D mark reads through the card as soft colour and texture
+instead of being hidden by it.
+
+The fill has to stay this light — much past 5% and the blur has nothing
+left to show. Change it here and every glass surface follows. */
+.x-map,
+.x-team-card,
+.x-news-card,
+.x-app-card,
+.x-road-year {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .03);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, .45);
+}
+
+/* News cards drop the shadow. They sit directly over the brightest part of
+the 3D mark, where a 6rem pool of black spreads well past the card edge and
+reads as a grey slab behind it rather than as depth. The border and the
+backdrop blur already separate the card from the background. */
+.x-news-card {
+  box-shadow: none;
+}
+
+.x-map {
+  border-radius: 1.6rem;
+  padding: clamp(3.6rem, 4vw, 6rem);
+}
+
+.x-map-title {
+  margin: 0 0 clamp(4.4rem, 4.6vw, 6.4rem);
+  font-size: clamp(2.6rem, 3vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  text-align: center;
+}
+
+.x-map-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(4rem, 5vw, 7.2rem);
+}
+
+.x-map-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* the divider the sketch draws between the two halves */
+.x-map-class {
+  position: relative;
+}
+
+.x-map-class::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(clamp(4rem, 5vw, 7.2rem) / -2);
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .18) 12%, rgba(255, 255, 255, .18) 88%, transparent);
+}
+
+/* name and audience sit on one line */
+.x-track-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .4rem 1.2rem;
+}
+
+.x-track-name {
+  margin: 0;
+  font-size: clamp(2.6rem, 3vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+}
+
+.x-track-kicker {
+  font-size: 1.3rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--brand-cyan, #29ccff);
+}
+
+.x-map-pro .x-track-kicker {
+  color: #a58cff;
+}
+
+.x-track-text {
+  margin: 2.6rem 0 0;
+  font-size: 1.55rem;
+  line-height: 1.75;
+  color: var(--x-text);
+}
+
+/* the two section headings carry the same weight as the frame title */
+.x-map-sub {
+  margin: clamp(5.6rem, 5.4vw, 8rem) 0 3.2rem;
+  font-size: clamp(2.6rem, 3vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+}
+
+.x-map-text {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.75;
+  color: var(--x-text);
+}
+
+.x-map-cta-row {
+  margin-top: 3.6rem;
+}
+
+/* the shared brand pill treatment picks this up via [class$="-cta"]; only the
+size and the trailing affordance are set here */
+.x-studio-cta {
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Where AI Pro already runs */
+.x-field {
+  margin: 5.6rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.x-field-row {
+  display: flex;
+  gap: 2rem;
+  padding: 2.8rem 0;
+  border-top: 1px solid var(--x-line);
+}
+
+.x-field-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+@media (max-width: 767px) {
+  .x-field {
+    margin-top: 4rem;
+  }
+
+}
+
+.x-field-mark {
+  flex: 0 0 auto;
+  width: 6.8rem;
+  height: 4.2rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.x-field-mark img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.x-field-mark-flag {
+  border-radius: .4rem;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .06);
+}
+
+.x-field-mark-flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.x-field-body {
+  min-width: 0;
+}
+
+.x-field-top {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .4rem 1rem;
+}
+
+.x-field-place {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.x-field-product {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgba(228, 226, 245, .78);
+}
+
+.x-field-state {
+  margin-left: auto;
+  flex: 0 0 auto;
+  padding: .3em .8em;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  font-size: 1.05rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(228, 226, 245, .6);
+}
+
+.x-field-state.is-live {
+  border-color: rgba(41, 204, 255, .55);
+  color: var(--brand-cyan, #29ccff);
+}
+
+.x-field-text {
+  margin: .8rem 0 0;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: var(--x-text);
+}
+
+/* The XClass loop sits inside its column, so it runs two across. */
+.x-map-class .x-eco-steps {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.x-map-class .x-eco-card:nth-child(3) {
+  border-top: 1px solid var(--x-line);
+}
+
+.x-map-class .x-eco-card:nth-child(4) {
+  border-top: 1px solid var(--x-line);
+}
+
+.x-map-class .x-eco-card:nth-child(odd) {
+  border-left: none;
+}
+
+.x-map-class .x-eco-caption {
+  margin-top: 2.8rem;
+}
+
+/* both columns close on a button, aligned to the bottom of the frame */
+.x-map-col .x-map-cta-row {
+  margin-top: auto;
+  padding-top: 3.6rem;
+}
+
+/* ------------------------------------------------------------------ *
+* Apps: three across, the third one opens on the web
+* ------------------------------------------------------------------ */
+.x-apps-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1023px) {
+  .x-apps-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* ------------------------------------------------------------------ *
+* Phones
+* ------------------------------------------------------------------ */
+/* 기존 우선순위를 유지하기 위한 명시적 덮어쓰기입니다. */
+@media (max-width: 1023px) {
+  .x-nav-list {
+    padding: 12rem var(--pwx, 3rem) 6rem !important;
+  }
+
+}
+
+@media (max-width: 767px) {
+  /* no drift-in on scroll: the page is simply there */
+  .x-reveal {
+    opacity: 1 !important;
+    translate: none !important;
+    transition: none !important;
+  }
+
+  .x-map {
+    padding: 3.2rem 2.2rem;
+    border-radius: 1.2rem;
+  }
+
+  .x-map-title {
+    margin-bottom: 3.6rem;
+  }
+
+  .x-map-cols {
+    grid-template-columns: 1fr;
+    gap: 5.6rem;
+  }
+
+  .x-map-class::before {
+    left: 0;
+    right: 0;
+    top: -2.8rem;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, .18) 12%, rgba(255, 255, 255, .18) 88%, transparent);
+  }
+
+  .x-map-sub {
+    margin-top: 5rem;
+  }
+
+  .x-studio-cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  .x-map-class .x-eco-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .x-map-class .x-eco-card {
+    border-left: none;
+    border-top: 1px solid var(--x-line);
+  }
+
+  .x-map-class .x-eco-card:first-child {
+    border-top: none;
+  }
+
+  .x-field-mark {
+    width: 5.6rem;
+    height: 3.6rem;
+  }
+
+  /* comfortable tap targets */
+  .page-home [class$="-cta"],
+  .section-hero-cta,
+  .x-store,
+  .x-community-link-text,
+  .x-service-link {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.4rem;
+  }
+
+  .x-store {
+    flex: 1 1 auto;
+  }
+
+  .x-nav-link {
+    padding: .8rem 0;
+  }
+
+  .x-nav-cta {
+    min-height: 4.4rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* widen the hamburger's hit area without moving its bars */
+  .x-nav-toggle::after {
+    content: "";
+    position: absolute;
+    inset: -.7rem;
+  }
+
+}
+
+/* unused CMS lead-in */
+/* The loop cards get a little more room inside, to match the section. */
+.x-map-class .x-eco-card {
+  padding: 3.2rem 2.8rem;
+  gap: 1.6rem;
+}
+
+@media (max-width: 767px) {
+  .x-map-class .x-eco-card {
+    padding: 2.6rem 2.2rem;
+  }
+
+}
+
+/* ------------------------------------------------------------------ *
+* Modals on phones
+* ------------------------------------------------------------------ */
+@media (max-width: 767px) {
+  /* The close button is floated, which shrinks the following block-formatting
+  context — that left the hero image narrower than the figures below it.
+  A stated width keeps every image in the sheet the same width; the head
+  content sits well clear of the button. */
+  .x-modal-top {
+    width: 100%;
+  }
+
+  /* exam and test tiles run two across instead of one */
+  .x-modal-exams,
+  .x-modal-tests {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .x-modal-exams .x-tile,
+  .x-modal-tests .x-tile {
+    padding: 1.6rem;
+  }
+
+  .x-tile-flag {
+    width: 4.8rem;
+  }
+
+  .x-tile-name {
+    font-size: 1.4rem;
+  }
+
+  .x-tile-test {
+    min-height: 7.2rem;
+    padding: 1.6rem;
+  }
+
+}
+
+/* On phones the status badge takes its own line, left aligned, instead of
+being pushed to the far right by itself. */
+@media (max-width: 767px) {
+  .x-field-top {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: .8rem 1rem;
+  }
+
+  .x-field-state {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-left: 0;
+  }
+
+}
+
+/* Unified content width and continuous section backdrop. */
+.header-main.x-header {
+  padding-inline: var(--pwx, 4rem);
+}
+
+.header-main.x-header .header-inner {
+  width: 100%;
+  max-width: 132rem;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.header-main.x-header .header-logo {
+  width: 17rem !important;
+  height: auto !important;
+  min-height: 4rem;
+  flex: 0 0 17rem;
+}
+
+/* The logo used to jump straight from the phone size to the full one at
+768px, which read as a sudden blow-up on tablets. This is the step in between. */
+@media (max-width: 1023px) {
+  .header-main.x-header .header-logo {
+    width: 13rem !important;
+    min-height: 3rem;
+    flex-basis: 13rem;
+  }
+
+}
+
+.footer-main.x-footer .footer-inner,
+.x-marquee-wrap {
+  width: 100%;
+  max-width: 132rem;
+  margin-inline: auto;
+}
+
+.x-sections {
+  isolation: isolate;
+}
+
+/* One veil over the whole section stack, and the only thing that blurs the
+3D mark behind the page.
+
+The mask — not the fill — drives the fade, so the blur and the tint come up
+together: it starts from nothing at the top of Ecosystem, is roughly two
+thirds in by Download Apps (the mark is still readable there) and is solid
+by Follow the work. Stops are percentages so the timing survives sections
+being added or removed.
+
+Scope note: this is a child of .x-sections, which ends before the footer, so
+the footer's video is never blurred by it. The footer runs its own tint — see
+the footer join block further down. */
+.x-sections::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient( to bottom, transparent 0%, rgba(0, 0, 0, .28) 14%, rgba(0, 0, 0, .48) 50%, rgba(0, 0, 0, .70) 83%, #000 95% );
+  mask-image: linear-gradient( to bottom, transparent 0%, rgba(0, 0, 0, .28) 14%, rgba(0, 0, 0, .48) 50%, rgba(0, 0, 0, .70) 83%, #000 95% );
+  background: linear-gradient(to bottom, rgba(6, 4, 15, .88), #04030c 70%);
+  backdrop-filter: blur(26px) saturate(115%);
+  -webkit-backdrop-filter: blur(26px) saturate(115%);
+}
+
+.x-sections .x-section {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  isolation: auto;
+}
+
+.x-section::after,
+.x-veil {
+  display: none;
+}
+
+/* per-section panels; the veil above replaces them */
+.footer-main.x-footer {
+  background: #04030c;
+}
+
+.footer-main.x-footer::before,
+.footer-main.x-footer::after {
+  display: none;
+}
+
+.x-service-link {
+  display: inline-flex;
+  min-height: 4.4rem;
+  align-items: center;
+  margin-top: 1.6rem;
+  padding: .8rem 1.6rem;
+  border: 1px solid #797092;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.x-service-link:hover {
+  border-color: #29ccff;
+  background: #ffffff0d;
+}
+
+/* Main text buttons use the Open XPredict control as the shared size/type
+reference. The header App pill is deliberately kept separate so it stays
+compact against the logo and navigation. Backgrounds are intentionally
+left to each component so the existing gradient and transparent treatments
+remain unchanged. */
+.page-home [class$="-cta"],
+.x-store,
+.x-community-link-text,
+.x-service-link {
+  box-sizing: border-box;
+  font-family: var(--font-primary) !important;
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  padding: .95em 2.1em !important;
+  min-height: 4.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header App pill: compact control, not a full-size content CTA. */
+.x-nav-cta {
+  box-sizing: border-box;
+  font-family: var(--font-primary) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  padding: .78em 1.6em !important;
+  min-height: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.x-blog-heading {
+  margin-bottom: 2.8rem;
+}
+
+.x-blog-list {
+  border-top: 1px solid #ffffff20;
+}
+
+.x-blog-row {
+  display: grid;
+  grid-template-columns: 11rem 1fr auto;
+  align-items: center;
+  gap: 2.4rem;
+  padding: 2.4rem .6rem;
+  border-bottom: 1px solid #ffffff14;
+  text-decoration: none;
+  color: #fff;
+  transition: background .2s ease, padding-inline .2s ease;
+}
+
+.x-blog-row:hover {
+  background: #ffffff08;
+  padding-inline: 1.6rem .6rem;
+}
+
+.x-blog-date {
+  margin: 0;
+  color: #aaa3bf;
+  font-size: 1.3rem;
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.x-blog-title {
+  margin: 0;
+  font-size: 1.7rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.x-blog-read {
+  color: #a99aee;
+  font-size: 1.3rem;
+  white-space: nowrap;
+  opacity: .75;
+  transition: opacity .2s ease;
+}
+
+.x-blog-row:hover .x-blog-read {
+  opacity: 1;
+}
+
+/* The bundle appends an arrow to its CTA links; buttons carry no arrow here. */
+.section-logoCards-card-cta::after {
+  content: none !important;
+}
+
+/* ------------------------------------------------------------------ *
+* Roadmap
+*
+* One lane of years on desktop, a single stacked column on phones. Each
+* year keeps its own rail so a long year does not drag the others down,
+* and shipped items are marked rather than hidden.
+* ------------------------------------------------------------------ */
+.x-road-lane {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.4rem;
+  align-items: start;
+}
+
+.x-road-year {
+  padding: 2.8rem 2.4rem 3rem;
+  border-radius: 1.4rem;
+}
+
+/* The current year keeps its violet wash, kept translucent so the blur
+underneath still shows through. */
+.x-road-year.is-now {
+  border-color: rgba(109, 79, 255, .55);
+  background: linear-gradient(180deg, rgba(109, 79, 255, .12), rgba(255, 255, 255, .03) 42%);
+}
+
+.x-road-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .8rem 1.2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2.4rem;
+  border-bottom: 1px solid var(--x-line);
+}
+
+.x-road-num {
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+
+.x-road-note {
+  margin: 0;
+  font-size: 1.3rem;
+  color: rgba(210, 208, 235, .6);
+}
+
+.x-road-badge {
+  margin-left: auto;
+  padding: .45em 1em;
+  border-radius: 999px;
+  background-image: linear-gradient(115deg, #d46fff, #29ccff);
+  color: #05030f;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.x-road-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.x-road-item {
+  position: relative;
+  display: flex;
+  gap: 1.4rem;
+  padding-bottom: 1.8rem;
+}
+
+.x-road-item:last-child {
+  padding-bottom: 0;
+}
+
+/* the rail runs between the dots, never past the last one */
+.x-road-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: .55rem;
+  top: 1.7rem;
+  bottom: .2rem;
+  width: 1px;
+  background: var(--x-line);
+}
+
+.x-road-dot {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: .55rem;
+  border-radius: 50%;
+  border: 1px solid rgba(210, 208, 235, .45);
+  background: #0a0818;
+}
+
+.x-road-item.is-done .x-road-dot {
+  border-color: transparent;
+  background-image: linear-gradient(115deg, #d46fff, #29ccff);
+}
+
+.x-road-body {
+  min-width: 0;
+}
+
+.x-road-text {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.55;
+  color: rgba(210, 208, 235, .72);
+}
+
+.x-road-item.is-done .x-road-text {
+  color: #fff;
+}
+
+.x-road-when {
+  margin: .4rem 0 0;
+  font-size: 1.2rem;
+  letter-spacing: .04em;
+  color: rgba(210, 208, 235, .48);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Team member link ------------------------------------------------- */
+.x-team-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 4rem;
+  margin-top: 1.8rem;
+  padding: .7rem 1.6rem;
+  border: 1px solid #797092;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.x-team-link:hover {
+  border-color: #29ccff;
+  background: rgba(255, 255, 255, .05);
+}
+
+/* The story panels stay full-bleed, but their inline padding now matches
+the centred 132rem column the other sections use, so the left edge of
+the page holds still as you scroll instead of stepping in and out. */
+/* The bundle caps these panels at 160rem and centres them, which threw the
+padding sum off against the header on wide screens. They run full-bleed
+now, so the calc below resolves against the viewport like the header does. */
+.story-section {
+  max-width: none !important;
+  margin-inline: 0 !important;
+  padding-inline: max(var(--pwx, 4rem), calc((100% - 132rem) / 2)) !important;
+}
+
+.section-text-card-inner,
+.section-text-card-side-inner,
+.section-logoCards-inner {
+  padding-inline: 0 !important;
+}
+
+/* The bundle caps the story card copy well short of the card edge,
+
+which left a dead column inside every card. */
+.section-logoCards-card-text {
+  max-width: none !important;
+}
+
+/* Below this width four columns stop fitting, and a 2-up grid leaves a
+ragged half-empty row, so the lane drops straight to a single column. */
+@media (max-width: 1179px) {
+  .x-road-lane {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .x-road-lane {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+  .x-road-year {
+    padding: 2.2rem 1.8rem 2.4rem;
+  }
+
+  .x-road-num {
+    font-size: 2.4rem;
+  }
+
+  .x-road-head {
+    padding-bottom: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .x-team-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #29ccff;
+  outline-offset: 5px;
+}
+
+@media(max-width:767px) {
+  /* The fixed bar overlaps the hero,
+  
+  so the headline needs room of its own
+  to clear it rather than starting right under the logo. */
+  .section-hero .section-hero-inner {
+    padding-top: 13rem;
+  }
+
+  /* One gutter for the whole page. The bundle's story blocks doubled it up —
+  a 6rem inset against our 3rem — so the top of the page stepped in and out
+  as you scrolled. Everything now sits on var(--pwx), and that gutter is
+  narrower on phones so the content is not squeezed into a thin column. */
+  :root {
+    --pwx: 1.6rem !important;
+  }
+
+  .section-text-card-side {
+    padding-inline: var(--pwx) !important;
+  }
+
+  .section-text-card-inner,
+  .section-logoCards-inner {
+    padding-inline: 0 !important;
+  }
+
+  .section-text-card,
+  .section-logoCards-header {
+    padding-inline: var(--pwx) !important;
+  }
+
+  /* Phone top bar: the logo was reading far too large next to the pill and
+  the hamburger, so all three come down together and keep their balance. */
+  .header-main.x-header .header-logo {
+    width: 9.8rem !important;
+    min-height: 2.3rem;
+    flex-basis: 9.8rem;
+  }
+
+  .x-nav {
+    gap: 1.1rem;
+  }
+
+  /* Keep the mobile header App pill visibly compact; content buttons keep
+  the Open XPredict reference height. */
+  .x-nav-cta {
+    font-size: 1.05rem !important;
+    padding: .65em 1.25em !important;
+    min-height: 2.9rem !important;
+  }
+
+  .x-nav-toggle {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  .x-nav-toggle span {
+    left: .2rem;
+    right: .2rem;
+  }
+
+  .x-nav-toggle span:first-child {
+    top: .85rem;
+  }
+
+  .x-nav-toggle span:last-child {
+    top: 1.5rem;
+  }
+
+  .x-nav-open .x-nav-toggle span:first-child {
+    transform: translateY(.32rem) rotate(45deg);
+  }
+
+  .x-nav-open .x-nav-toggle span:last-child {
+    transform: translateY(-.33rem) rotate(-45deg);
+  }
+
+  .x-blog-row {
+    grid-template-columns: 1fr;
+    gap: .8rem;
+    align-items: start;
+    padding: 2rem .2rem;
+  }
+
+  .x-blog-row:hover {
+    padding-inline: .2rem;
+  }
+
+}
+
+/* ------------------------------------------------------------------ *
+* Hero headline — line wrapping
+* ------------------------------------------------------------------ *
+* index.html writes the headline as two <span class="section-hero-line">
+* groups, one per authored line. The removed Nuxt bundle used to measure the
+* headline on every resize and re-group the words so no line ever ran past
+* the viewport. Letting each authored line wrap on its own does the same job
+* with no JavaScript: the line break the copy asks for is kept, and a line
+* that is too wide for the screen breaks between words instead of
+* overflowing. To change the headline, edit the words in index.html.
+*/
+.section-hero .section-hero-inner .section-hero-line {
+  flex-wrap: wrap;
+  /* 제목 줄 간격의 기존 우선순위를 유지합니다. */
+  row-gap: .35em !important;
+  max-width: 100%;
+}
+
+/* Words inside .section-hero-keep must not be split across two rows. Normally
+the wrapper is invisible to layout (display: contents), so each word is a
+flex item of the line exactly as if the wrapper were not there. Once the
+line has to wrap, the wrapper becomes a single flex item, so the words it
+holds move to the next row together. */
+.section-hero .section-hero-inner .section-hero-keep {
+  display: contents;
+}
+
+@media (max-width: 1023px) {
+  .section-hero .section-hero-inner .section-hero-keep {
+    display: inline-flex;
+    gap: .25em;
+  }
+
+}
+
+/* ==========================================================================
+* 4. 시세 티커와 활동 카운터 (기존 updates.css)
+* ========================================================================== */
+/* One height for the market bar: the bar uses it, and the header and the 3D
+mark are pushed down by the same amount. Change it here only. */
+:root {
+  --x-ticker-h: 3.8rem;
+}
+
+@media(max-width:767px) {
+  :root {
+    --x-ticker-h: 3.2rem;
+  }
+
+}
+
+/* ------------------------------------------------------------------ *
+* Market bar
+* ------------------------------------------------------------------ *
+* Its own strip above the header, on solid black so nothing shows
+* through it. .x-ticker-inner carries the same max width and gutters as
+* the rest of the page, so the quotes start and end on the layout edge.
+* The header sits below it and is pushed down by the same height.
+* ------------------------------------------------------------------ */
+.x-ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--x-ticker-h, 3.8rem);
+  display: flex;
+  align-items: center;
+  background: #000;
+  border: 0;
+  border-bottom: 1px solid #ffffff1a;
+  z-index: 120;
+}
+
+/* Same two-step as .header-inner in sections.css: the bar carries the page
+gutter, the inner box carries the 132rem cap. That makes the first quote
+start exactly under the logo and the last one end under the App button. */
+.x-ticker {
+  padding-inline: var(--pwx, 4rem);
+}
+
+.x-ticker-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 132rem;
+  margin-inline: auto;
+  padding-inline: 0;
+  min-width: 0;
+}
+
+/* the header and the 3D mark both start below the bar */
+.header-main.x-header {
+  top: var(--x-ticker-h, 3.8rem);
+}
+
+/* story.css gives the header a --pwy top padding, which was right when it sat
+against the top of the window. With the market bar above it that reads as a
+gap, so the logo row is pulled up closer to the bar. */
+.header-main.x-header .header-inner {
+  gap: 2.4rem;
+  align-items: center;
+  padding-top: 1.2rem;
+  !important;
+}
+
+.x-nav {
+  flex-shrink: 0;
+}
+
+.x-ticker-window {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+}
+
+.x-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: x-prices 26s linear infinite;
+}
+
+.x-ticker-run {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.x-quote {
+  display: inline-flex;
+  gap: .7rem;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  padding: 0 2rem;
+  border-right: 1px solid #ffffff30;
+}
+
+.x-ticker-run > .x-quote:first-child {
+  padding-left: 0;
+}
+
+.x-quote img {
+  width: 1.7rem;
+  height: 1.7rem;
+  object-fit: contain;
+}
+
+.x-quote-change {
+  color: #aaa5bd;
+  font-size: 1.05rem;
+}
+
+.x-quote-change.is-up {
+  color: #65e2b1;
+}
+
+.x-quote-change.is-down {
+  color: #ff8c9f;
+}
+
+.x-ticker:hover .x-ticker-track,
+.x-ticker:focus-within .x-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes x-prices {
+  to {
+    transform: translateX(-50%);
+  }
+
+}
+
+.section-hero .section-hero-inner {
+  min-height: 76rem;
+  filter: none;
+}
+
+.section-hero-title {
+  text-shadow: 0 0 4rem #0005;
+}
+
+.section-hero .section-hero-inner .section-hero-body {
+  margin-top: 1.3em;
+  gap: 1.7rem;
+}
+
+.x-activity {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 1.8rem;
+  width: min(100%,78rem);
+  margin-top: 5.6rem;
+}
+
+.x-activity-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: 2.5rem 2.4rem;
+  border: 1px solid #a58cff50;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg,#ffffff26,#ffffff14);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+.x-activity-card span {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: #eae6f7;
+}
+
+.x-activity-card strong {
+  font-size: clamp(2.6rem,2.9vw,4rem);
+  letter-spacing: -.035em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.section-hero .section-hero-inner .x-activity-note {
+  margin-top: -.7rem;
+  max-width: 60rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #cfc9e2;
+}
+
+.x-utility-intro {
+  margin-bottom: 4rem;
+}
+
+/* Sits between the section title and the four cards. Narrow on purpose so the
+line length stays readable next to the wide card row. */
+.x-utility-lead {
+  margin: 1.8rem 0 0;
+  max-width: 78rem;
+  font-size: 1.5rem;
+  line-height: 1.7;
+  color: var(--x-text);
+}
+
+.x-utility-intro .x-map-cta-row {
+  margin-top: 2.6rem;
+}
+
+.x-utility-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 1.6rem;
+}
+
+.x-utility-card {
+  padding: 2.8rem;
+  border: 1px solid #ffffff1c;
+  border-radius: 1.6rem;
+  background: linear-gradient(145deg,#171125d9,#08131de6);
+  backdrop-filter: blur(14px);
+}
+
+.x-utility-number {
+  display: block;
+  font-size: 1.3rem;
+  color: #8ccfff;
+  letter-spacing: .1em;
+  margin-bottom: 4rem;
+}
+
+.x-utility-card h3 {
+  margin: 0 0 1.6rem;
+  font-size: 2.2rem;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+
+.x-utility-card p {
+  color: var(--x-text);
+  font-size: 1.5rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.x-utility-actions {
+  margin-top: 3.2rem;
+}
+
+/* The "Infrastructure partner" / "Security partner" captions are gone, so the
+audit tile sits on the same gap as the rows above it and reads as one grid
+rather than a second section. */
+.x-partner-groups {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.x-partner-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 1.4rem;
+}
+
+.x-security-grid {
+  width: calc((100% - 2.8rem)/3);
+}
+
+.x-partner-tile {
+  height: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #ffffff1c;
+  border-radius: 1.2rem;
+  background: #ffffff0a;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  transition: transform .25s,border-color .25s,background .25s,box-shadow .25s;
+}
+
+.x-partner-tile img {
+  display: block;
+  width: 65%;
+  max-width: 22rem;
+  height: 4rem;
+  object-fit: contain;
+  transition: transform .25s;
+}
+
+.x-partner-tile img.x-partner-pumpswap {
+  height: auto;
+  max-height: none;
+  width: 24rem;
+  max-width: 88%;
+}
+
+.x-partner-tile img.x-partner-birdeye {
+  height: 7rem;
+}
+
+.x-partner-tile:hover,
+.x-partner-tile:focus-visible {
+  transform: translateY(-4px);
+  border-color: #a58cff99;
+  background: #6d4fff14;
+  box-shadow: 0 1rem 3rem #6d4fff12;
+}
+
+.x-partner-tile:hover img {
+  transform: scale(1.04);
+}
+
+/* Audit tile: the logo stays centred and the link label sits in the bottom
+right, styled like the "Read the story ↗" links elsewhere on the page. */
+.x-audit-grid .x-partner-tile {
+  position: relative;
+}
+
+.x-audit-more {
+  position: absolute;
+  right: 1.8rem;
+  bottom: 1.4rem;
+  font-size: 1.3rem;
+  color: var(--brand-cyan, #29ccff);
+  white-space: nowrap;
+}
+
+@media(max-width:1179px) {
+  .x-utility-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:767px) {
+  .header-main.x-header .header-inner {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: .9rem;
+  }
+
+  .header-main.x-header .header-logo {
+    width: 7.8rem !important;
+    flex-basis: 7.8rem;
+    min-height: 2rem;
+  }
+
+  .x-nav {
+    gap: .7rem;
+    margin-left: 0;
+  }
+
+  .x-nav-cta {
+    padding-inline: 1em !important;
+  }
+
+  .header-main.x-header .header-inner {
+    padding-top: 1.2rem;
+  }
+
+  .x-ticker {
+    height: var(--x-ticker-h, 3.2rem);
+  }
+
+  .x-quote {
+    padding-inline: 1.2rem;
+    gap: .5rem;
+    font-size: 1.05rem;
+  }
+
+  .x-quote-change {
+    font-size: 1rem;
+  }
+
+  .x-quote img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .section-hero .section-hero-inner {
+    min-height: 88rem;
+    padding-top: 12rem;
+  }
+
+  .x-activity {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin-top: 4.8rem;
+  }
+
+  .x-activity-card {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.6rem;
+    padding: 1.8rem 2rem;
+  }
+
+  .x-activity-card strong {
+    font-size: 2.8rem;
+  }
+
+  .x-audit-more {
+    right: 1.2rem;
+    bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .x-activity-card span {
+    font-size: 1.2rem;
+  }
+
+  .x-utility-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .x-utility-card {
+    padding: 2.5rem;
+  }
+
+  .x-utility-number {
+    margin-bottom: 2rem;
+  }
+
+  .x-partner-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 1rem;
+  }
+
+  .x-security-grid {
+    width: calc((100% - 1rem)/2);
+  }
+
+  .x-partner-tile {
+    height: 10rem;
+  }
+
+  .x-partner-tile img {
+    width: 80%;
+  }
+
+  .x-partner-tile img.x-partner-birdeye {
+    height: 6rem;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .x-ticker-track {
+    animation: none;
+  }
+
+  .x-ticker-window {
+    overflow-x: auto;
+    mask-image: none;
+  }
+
+  .x-ticker-run[aria-hidden] {
+    display: none;
+  }
+
+  .x-partner-tile,
+  .x-partner-tile img {
+    transition: none;
+  }
+
+}
+
+.section-hero .section-hero-body > .cta-group {
+  margin-top: 3.8rem;
+}
+
+/* ==========================================================================
+* 5. Token 전용 스타일 (기존 token.css)
+* ========================================================================== */
+.x-token-page {
+  padding-top: calc(var(--x-ticker-h, 3.8rem) + 11rem);
+}
+
+.x-token-page .container {
+  width: calc(100% - 8rem);
+  max-width: 132rem;
+  margin: auto;
+}
+
+/* Scoped to main and to the footer's own text, never to the whole page: the
+market bar, the header and the footer email are styled by sections.css and
+have to keep the behaviour they have on index.html. A blanket
+`.x-token-page a` here outranks those rules and silently changes the App
+pill and the menu hover. */
+.x-token-page main a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.x-token-page main a:hover {
+  color: #bba8ff;
+}
+
+.x-token-page .back {
+  display: inline-block;
+  margin-top: 5rem;
+  color: #b3abc7;
+  font-size: 1.4rem;
+}
+
+.x-token-page .hero {
+  padding: 2rem 0 7rem;
+}
+
+.x-token-page h1 {
+  font-size: clamp(5rem, 6.4vw, 9rem);
+  line-height: 1.05;
+  letter-spacing: -.045em;
+  font-weight: 500;
+  margin: 0 0 2.5rem;
+}
+
+.x-token-page .lead {
+  font-size: 2rem;
+  color: #bbb4cd;
+  max-width: 50rem;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------ *
+* Token Overview — spec table on the left, allocation donut on the right
+* ------------------------------------------------------------------ */
+.x-token-page .spec {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4rem;
+  align-items: start;
+  padding-bottom: 8rem;
+}
+
+.x-spec-table {
+  min-width: 0;
+}
+
+.x-token-page dl {
+  margin: 0;
+  border-top: 1px solid #ffffff30;
+}
+
+.x-token-page dl div {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 2rem;
+  border-bottom: 1px solid #ffffff1a;
+  padding: 2rem 0;
+}
+
+.x-token-page dt {
+  color: #aaa3ba;
+}
+
+.x-token-page dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------------ *
+* Allocation donut
+* ------------------------------------------------------------------ *
+* Static SVG: six arcs of one circle, drawn with stroke-dasharray. Each arc
+* is 2.4 units short of its true share, which is what leaves the hairline gap
+* between segments. To change a share, edit the pair of numbers in this file's
+* @keyframes AND the matching .x-donut-still rule — both carry the same
+* "<arc length> <circumference>" value, and the labels live in token.html.
+* Segment colours were checked for colour-blind separation; every segment is
+* also labelled by name, so colour is never the only cue.
+* ------------------------------------------------------------------ */
+.x-donut {
+  margin: 0;
+  min-width: 0;
+}
+
+.x-donut-title {
+  margin: 0 0 1.2rem;
+  font-size: 1.4rem;
+  letter-spacing: .04em;
+  color: #aaa3ba;
+}
+
+/* Capped so the ring plus its title come out about as tall as the spec table
+beside it — left unbounded the SVG scales to the full column and hangs well
+below the table. Centred in whatever width is left over. */
+.x-donut-svg {
+  display: block;
+  width: 100%;
+  max-width: 52rem;
+  height: auto;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.x-donut-seg {
+  animation-duration: .9s;
+  animation-timing-function: cubic-bezier(.32, .7, .3, 1);
+  animation-fill-mode: forwards;
+}
+
+/* font-size in SVG user units, so the labels scale with the ring */
+.x-donut-label {
+  font-size: 13px;
+  fill: #fff;
+  font-weight: 600;
+}
+
+.x-donut-name {
+  fill: #e7e3f4;
+}
+
+.x-donut-pct {
+  fill: #a6a0bd;
+  font-weight: 500;
+}
+
+.x-donut-key {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin-right: .6rem;
+}
+
+@keyframes x-donut-1 {
+  to {
+    stroke-dasharray: 311.76 628.32;
+  }
+
+}
+
+.x-donut-seg-1 {
+  animation-name: x-donut-1;
+  animation-delay: 0.15s;
+}
+
+.x-donut-still .x-donut-seg-1 {
+  stroke-dasharray: 311.76 628.32;
+}
+
+@keyframes x-donut-2 {
+  to {
+    stroke-dasharray: 60.43 628.32;
+  }
+
+}
+
+.x-donut-seg-2 {
+  animation-name: x-donut-2;
+  animation-delay: 0.28s;
+}
+
+.x-donut-still .x-donut-seg-2 {
+  stroke-dasharray: 60.43 628.32;
+}
+
+@keyframes x-donut-3 {
+  to {
+    stroke-dasharray: 91.85 628.32;
+  }
+
+}
+
+.x-donut-seg-3 {
+  animation-name: x-donut-3;
+  animation-delay: 0.41s;
+}
+
+.x-donut-still .x-donut-seg-3 {
+  stroke-dasharray: 91.85 628.32;
+}
+
+@keyframes x-donut-4 {
+  to {
+    stroke-dasharray: 60.43 628.32;
+  }
+
+}
+
+.x-donut-seg-4 {
+  animation-name: x-donut-4;
+  animation-delay: 0.54s;
+}
+
+.x-donut-still .x-donut-seg-4 {
+  stroke-dasharray: 60.43 628.32;
+}
+
+@keyframes x-donut-5 {
+  to {
+    stroke-dasharray: 60.43 628.32;
+  }
+
+}
+
+.x-donut-seg-5 {
+  animation-name: x-donut-5;
+  animation-delay: 0.67s;
+}
+
+.x-donut-still .x-donut-seg-5 {
+  stroke-dasharray: 60.43 628.32;
+}
+
+@keyframes x-donut-6 {
+  to {
+    stroke-dasharray: 29.02 628.32;
+  }
+
+}
+
+.x-donut-seg-6 {
+  animation-name: x-donut-6;
+  animation-delay: 0.80s;
+}
+
+.x-donut-still .x-donut-seg-6 {
+  stroke-dasharray: 29.02 628.32;
+}
+
+/* No entrance animation for anyone who asked for less motion: the ring is
+simply already drawn. */
+@media (prefers-reduced-motion: reduce) {
+  .x-donut-seg {
+    animation: none;
+  }
+
+  .x-donut-seg-1 {
+    stroke-dasharray: 311.76 628.32;
+  }
+
+  .x-donut-seg-2 {
+    stroke-dasharray: 60.43 628.32;
+  }
+
+  .x-donut-seg-3 {
+    stroke-dasharray: 91.85 628.32;
+  }
+
+  .x-donut-seg-4 {
+    stroke-dasharray: 60.43 628.32;
+  }
+
+  .x-donut-seg-5 {
+    stroke-dasharray: 60.43 628.32;
+  }
+
+  .x-donut-seg-6 {
+    stroke-dasharray: 29.02 628.32;
+  }
+
+}
+
+/* ------------------------------------------------------------------ *
+* Official resources + footer
+* ------------------------------------------------------------------ */
+.x-token-page .resources {
+  padding: 0 0 10rem;
+}
+
+/* story.css resets every heading margin to 0, so the space under this one has
+to be asked for. */
+.x-token-page .resources h2 {
+  margin: 0 0 2.6rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.x-token-page .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.x-token-page .links a {
+  padding: 1.4rem 2.5rem;
+  border: 1px solid #ffffff30;
+  border-radius: 99px;
+}
+
+.x-token-page .links a:hover {
+  border-color: var(--brand-cyan, #29ccff);
+  background: #ffffff0d;
+  color: #fff;
+}
+
+.x-token-page > footer {
+  padding: 6rem 0;
+  background: #04030c;
+}
+
+.x-token-page > footer a:has(.logo) {
+  display: inline-block;
+}
+
+.x-token-page > footer .logo {
+  width: 17rem;
+  display: block;
+}
+
+.x-token-page > footer p {
+  margin-top: 1.8rem;
+  color: #aaa3ba;
+}
+
+/* Only the spacing is set here. The colour, size and hover of .x-footer-email
+come from sections.css, so this line behaves exactly like the one in the
+index.html footer. */
+.x-token-page .x-footer-email {
+  margin-top: 5rem;
+}
+
+.x-token-page > footer small {
+  display: block;
+  margin-top: 1.4rem;
+  color: #8f879f;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1023px) {
+  .x-donut-label {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .x-token-page {
+    padding-top: calc(var(--x-ticker-h, 3.2rem) + 9rem);
+  }
+
+  .x-token-page .container {
+    width: calc(100% - 4rem);
+  }
+
+  .x-token-page .spec {
+    grid-template-columns: 1fr;
+    gap: 5rem;
+  }
+
+  .x-token-page dl div {
+    grid-template-columns: 1fr;
+    gap: .5rem;
+  }
+
+  .x-token-page .back {
+    margin-top: 4rem;
+  }
+
+  .x-token-page .links a {
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .x-donut-label {
+    font-size: 15px;
+  }
+
+}
