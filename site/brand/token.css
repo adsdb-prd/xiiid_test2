@@ -41,7 +41,10 @@
  * ------------------------------------------------------------------ */
 .x-donut { margin: 0; min-width: 0; }
 .x-donut-title { margin: 0 0 1.2rem; font-size: 1.4rem; letter-spacing: .04em; color: #aaa3ba; }
-.x-donut-svg { display: block; width: 100%; height: auto; overflow: visible; }
+/* Capped so the ring plus its title come out about as tall as the spec table
+   beside it — left unbounded the SVG scales to the full column and hangs well
+   below the table. Centred in whatever width is left over. */
+.x-donut-svg { display: block; width: 100%; max-width: 52rem; height: auto; margin-inline: auto; overflow: visible; }
 .x-donut-seg {
   animation-duration: .9s;
   animation-timing-function: cubic-bezier(.32, .7, .3, 1);
@@ -88,14 +91,20 @@
  * Official resources + footer
  * ------------------------------------------------------------------ */
 .x-token-page .resources { padding: 0 0 10rem; }
-.x-token-page .resources h2 { font-size: 2.5rem; font-weight: 500; }
+/* story.css resets every heading margin to 0, so the space under this one has
+   to be asked for. */
+.x-token-page .resources h2 { margin: 0 0 2.6rem; font-size: 2.5rem; font-weight: 500; }
 .x-token-page .links { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .x-token-page .links a { padding: 1.4rem 2.5rem; border: 1px solid #ffffff30; border-radius: 99px; }
 .x-token-page .links a:hover { border-color: var(--brand-cyan, #29ccff); background: #ffffff0d; color: #fff; }
 .x-token-page > footer { padding: 6rem 0; background: #04030c; }
+.x-token-page > footer a:has(.logo) { display: inline-block; }
 .x-token-page > footer .logo { width: 17rem; display: block; }
-.x-token-page > footer p { color: #aaa3ba; }
-.x-token-page > footer small { display: block; margin-top: 5rem; color: #8f879f; font-size: 1.1rem; }
+.x-token-page > footer p { margin-top: 1.8rem; color: #aaa3ba; }
+/* Contact line above the copyright, same treatment as the one on index.html. */
+.x-token-page .x-footer-email { display: inline-block; margin-top: 5rem; color: #cfc9e2; font-size: 1.35rem; }
+.x-token-page .x-footer-email:hover { color: var(--brand-cyan, #29ccff); }
+.x-token-page > footer small { display: block; margin-top: 1.4rem; color: #8f879f; font-size: 1.1rem; }
 
 @media (max-width: 1023px) {
   .x-donut-label { font-size: 14px; }

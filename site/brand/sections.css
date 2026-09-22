@@ -1093,6 +1093,7 @@
 
   /* comfortable tap targets */
   .page-home [class$="-cta"],
+  .x-token-page [class$="-cta"],
 
   .section-hero-cta,
 
@@ -1213,6 +1214,7 @@
    left to each component so the existing gradient and transparent treatments
    remain unchanged. */
 .page-home [class$="-cta"],
+.x-token-page [class$="-cta"],
 .x-store,
 .x-community-link-text,
 .x-service-link {
