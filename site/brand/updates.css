@@ -1,11 +1,51 @@
 /* September 2026: activity, token utility, partners and live market ribbon. */
+/* One height for the market bar: the bar uses it, and the header and the 3D
+   mark are pushed down by the same amount. Change it here only. */
+:root { --x-ticker-h: 3.8rem; }
+@media(max-width:767px) { :root { --x-ticker-h: 3.2rem; } }
+/* ------------------------------------------------------------------ *
+ * Market bar
+ * ------------------------------------------------------------------ *
+ * Its own strip above the header, on solid black so nothing shows
+ * through it. .x-ticker-inner carries the same max width and gutters as
+ * the rest of the page, so the quotes start and end on the layout edge.
+ * The header sits below it and is pushed down by the same height.
+ * ------------------------------------------------------------------ */
+.x-ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--x-ticker-h, 3.8rem);
+  display: flex;
+  align-items: center;
+  background: #000;
+  border: 0;
+  border-bottom: 1px solid #ffffff1a;
+  z-index: 120;
+}
+/* Same two-step as .header-inner in sections.css: the bar carries the page
+   gutter, the inner box carries the 132rem cap. That makes the first quote
+   start exactly under the logo and the last one end under the App button. */
+.x-ticker { padding-inline: var(--pwx, 4rem); }
+.x-ticker-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 132rem;
+  margin-inline: auto;
+  padding-inline: 0;
+  min-width: 0;
+}
+/* the header and the 3D mark both start below the bar */
+.header-main.x-header { top: var(--x-ticker-h, 3.8rem); }
 .header-main.x-header .header-inner { gap: 2.4rem; align-items: center; }
 .x-nav { flex-shrink: 0; }
-.x-ticker { display: flex; align-items: center; min-width: 0; flex: 1 1 24rem; margin-top: 0; height: 3.8rem; border: 0; background: transparent; }
-.x-ticker-window { min-width: 0; flex: 1; overflow: hidden; mask-image: linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+.x-ticker-window { min-width: 0; flex: 1; overflow: hidden; mask-image: linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
 .x-ticker-track { display: flex; width: max-content; animation: x-prices 26s linear infinite; }
 .x-ticker-run { display: flex; align-items: center; flex-shrink: 0; }
-.x-quote { display: inline-flex; gap: .7rem; align-items: center; white-space: nowrap; font-size: 1.15rem; font-variant-numeric: tabular-nums; padding: 0 1.6rem; border-right: 1px solid #ffffff30; }
+.x-quote { display: inline-flex; gap: .7rem; align-items: center; white-space: nowrap; font-size: 1.15rem; font-variant-numeric: tabular-nums; padding: 0 2rem; border-right: 1px solid #ffffff30; }
+.x-ticker-run > .x-quote:first-child { padding-left: 0; }
 .x-quote img { width: 1.7rem; height: 1.7rem; object-fit: contain; }
 .x-quote-change { color: #aaa5bd; font-size: 1.05rem; }
 .x-quote-change.is-up { color: #65e2b1; }
@@ -15,12 +55,16 @@
 .section-hero .section-hero-inner { min-height: 76rem; filter: none; }
 .section-hero-title { text-shadow: 0 0 4rem #0005; }
 .section-hero .section-hero-inner .section-hero-body { margin-top: 1.3em; gap: 1.7rem; }
-.x-activity { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2.4rem; width: min(100%,54rem); margin-top: 5.6rem; }
-.x-activity-card { display: flex; flex-direction: column; gap: 1.4rem; padding: 2.5rem 3rem; border: 1px solid #a58cff50; border-radius: 1.5rem; background: linear-gradient(135deg,#ffffff26,#ffffff14); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
-.x-activity-card span { font-size: 1.3rem; letter-spacing: .04em; color: #d7d1e9; }
-.x-activity-card strong { font-size: clamp(3rem,3.4vw,4.4rem); letter-spacing: -.035em; line-height: 1; font-variant-numeric: tabular-nums; color: #fff; }
-.section-hero .section-hero-inner .x-activity-note { margin-top: -.7rem; max-width: 46rem; font-size: 1.2rem; line-height: 1.5; color: #b9b3ce; }
+.x-activity { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.8rem; width: min(100%,78rem); margin-top: 5.6rem; }
+.x-activity-card { display: flex; flex-direction: column; gap: 1.4rem; padding: 2.5rem 2.4rem; border: 1px solid #a58cff50; border-radius: 1.5rem; background: linear-gradient(135deg,#ffffff26,#ffffff14); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+.x-activity-card span { font-size: 1.3rem; font-weight: 700; letter-spacing: .04em; color: #eae6f7; }
+.x-activity-card strong { font-size: clamp(2.6rem,2.9vw,4rem); letter-spacing: -.035em; line-height: 1; font-variant-numeric: tabular-nums; color: #fff; }
+.section-hero .section-hero-inner .x-activity-note { margin-top: -.7rem; max-width: 60rem; font-size: 1.2rem; font-weight: 700; line-height: 1.5; color: #cfc9e2; }
 .x-utility-intro { margin-bottom: 4rem; }
+/* Sits between the section title and the four cards. Narrow on purpose so the
+   line length stays readable next to the wide card row. */
+.x-utility-lead { margin: 1.8rem 0 0; max-width: 78rem; font-size: 1.5rem; line-height: 1.7; color: var(--x-text); }
+.x-utility-intro .x-map-cta-row { margin-top: 2.6rem; }
 .x-utility-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1.6rem; }
 .x-utility-card { padding: 2.8rem; border: 1px solid #ffffff1c; border-radius: 1.6rem; background: linear-gradient(145deg,#171125d9,#08131de6); backdrop-filter: blur(14px); }
 .x-utility-number { display: block; font-size: 1.3rem; color: #8ccfff; letter-spacing: .1em; margin-bottom: 4rem; }
@@ -28,8 +72,10 @@
 .x-utility-card p { color: var(--x-text); font-size: 1.5rem; line-height: 1.7; margin: 0; }
 .x-utility-actions { margin-top: 3.2rem; }
 .x-utility-cta { font-size: 1.35rem; }
-.x-partner-groups { display: grid; gap: 3.8rem; }
-.x-partner-groups .x-partner-role-label { margin: 0 0 1.8rem; }
+/* The "Infrastructure partner" / "Security partner" captions are gone, so the
+   audit tile sits on the same gap as the rows above it and reads as one grid
+   rather than a second section. */
+.x-partner-groups { display: grid; gap: 1.4rem; }
 .x-partner-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.4rem; }
 .x-security-grid { width: calc((100% - 2.8rem)/3); }
 .x-partner-tile { height: 12rem; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #ffffff1c; border-radius: 1.2rem; background: #ffffff0a; -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); transition: transform .25s,border-color .25s,background .25s,box-shadow .25s; }
@@ -38,19 +84,33 @@
 .x-partner-tile img.x-partner-birdeye { height: 7rem; }
 .x-partner-tile:hover,.x-partner-tile:focus-visible { transform: translateY(-4px); border-color: #a58cff99; background: #6d4fff14; box-shadow: 0 1rem 3rem #6d4fff12; }
 .x-partner-tile:hover img { transform: scale(1.04); }
+
+/* Audit tile: the logo stays centred and the link label sits in the bottom
+   right, styled like the "Read the story ↗" links elsewhere on the page. */
+.x-audit-grid .x-partner-tile { position: relative; }
+.x-audit-more {
+  position: absolute;
+  right: 1.8rem;
+  bottom: 1.4rem;
+  font-size: 1.3rem;
+  color: var(--brand-cyan, #29ccff);
+  white-space: nowrap;
+}
 @media(max-width:1179px) { .x-utility-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media(max-width:767px) {
   .header-main.x-header .header-inner { flex-wrap: nowrap; align-items: center; gap: .9rem; }
   .header-main.x-header .header-logo { width: 7.8rem !important; flex-basis: 7.8rem; min-height: 2rem; }
   .x-nav { gap: .7rem; margin-left: 0; }
   .x-nav-cta { padding-inline: 1em !important; }
-  .x-ticker { order: 0; flex: 1 1 0; margin: 0; height: 3rem; }
-  .x-quote { padding-inline: 1rem; gap: .5rem; font-size: 1.05rem; }
+  .x-ticker { height: var(--x-ticker-h, 3.2rem); }
+  .x-quote { padding-inline: 1.2rem; gap: .5rem; font-size: 1.05rem; }
   .x-quote-change { font-size: 1rem; }
   .x-quote img { width: 1.5rem; height: 1.5rem; }
     .section-hero .section-hero-inner { min-height: 88rem; padding-top: 12rem; }
-  .x-activity { gap: 1.8rem; margin-top: 4.8rem; }
-  .x-activity-card { padding: 2.4rem 1.6rem; }
+  .x-activity { grid-template-columns: 1fr; gap: 1.2rem; margin-top: 4.8rem; }
+  .x-activity-card { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 1.6rem; padding: 1.8rem 2rem; }
+  .x-activity-card strong { font-size: 2.8rem; }
+  .x-audit-more { right: 1.2rem; bottom: 1rem; font-size: 1.2rem; }
   .x-activity-card span { font-size: 1.2rem; }
   .x-utility-grid { grid-template-columns: 1fr; }
   .x-utility-card { padding: 2.5rem; }

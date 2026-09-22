@@ -1,8 +1,10 @@
 /* Static-host compatible; public endpoints, no API key embedded in the client.
- * BTC/SOL: Coinbase Exchange USD markets, rolling 24h change from open/last.
+ * BTC/ETH/SOL/TRX: Coinbase Exchange USD markets, rolling 24h change from
+ *   open/last. CoinGecko is the stand-in if a Coinbase market is missing.
  * XIIID: DEX Screener, exact Solana base-token address, highest USD liquidity.
  * Docs: https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-stats
  *       https://docs.dexscreener.com/api/reference
+ *       https://docs.coingecko.com/reference/simple-price
  */
 (() => {
   'use strict';
@@ -42,6 +44,22 @@
     if (!valid(data.last) || Number(data.last) <= 0 || !valid(data.open) || Number(data.open) <= 0) throw new Error('Invalid quote');
     return { price: Number(data.last), change: (Number(data.last) / Number(data.open) - 1) * 100, source: 'Coinbase' };
   }
+  /* Stand-in for a symbol Coinbase does not list a USD market for. Only runs
+     after Coinbase has already failed, so it stays well inside the free rate
+     limit. Add a symbol here and to COINS below to put it on the ribbon. */
+  const GECKO = { BTC: 'bitcoin', ETH: 'ethereum', SOL: 'solana', TRX: 'tron' };
+  async function coingecko(symbol) {
+    const id = GECKO[symbol];
+    if (!id) throw new Error('No fallback id');
+    const data = await json(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_24hr_change=true`);
+    const row = data?.[id];
+    if (!row || !valid(row.usd) || Number(row.usd) <= 0) throw new Error('Invalid quote');
+    return { price: Number(row.usd), change: valid(row.usd_24h_change) ? Number(row.usd_24h_change) : null, source: 'CoinGecko' };
+  }
+  async function listed(symbol) {
+    try { return await coinbase(symbol); }
+    catch { return await coingecko(symbol); }
+  }
   async function xiiid() {
     const data = await json(`https://api.dexscreener.com/tokens/v1/solana/${TOKEN}`);
     if (!Array.isArray(data)) throw new Error('Invalid pairs');
@@ -68,14 +86,17 @@
     });
     ribbon.querySelector('.x-ticker-summary').textContent = [...run.querySelectorAll('.x-quote')].map(n => n.textContent).join('; ');
   }
+  /* Ribbon order lives in index.html; this only has to cover the same set. */
+  const COINS = ['BTC', 'ETH', 'SOL', 'TRX', 'XIIID'];
+
   let busy = false;
   async function refresh() {
     if (busy || document.hidden) return;
     busy = true;
     try {
-      await Promise.allSettled(['BTC', 'SOL', 'XIIID'].map(async symbol => {
+      await Promise.allSettled(COINS.map(async symbol => {
         try {
-          const quote = await (symbol === 'XIIID' ? xiiid() : coinbase(symbol));
+          const quote = await (symbol === 'XIIID' ? xiiid() : listed(symbol));
           quotes.set(symbol, { ...quote, time: Date.now(), failed: false });
         } catch {
           if (quotes.has(symbol)) quotes.get(symbol).failed = true;
@@ -87,7 +108,7 @@
   refresh();
   setInterval(refresh, 60000);
   document.addEventListener('visibilitychange', () => {
-    ['BTC', 'SOL', 'XIIID'].forEach(render);
+    COINS.forEach(render);
     if (!document.hidden) refresh();
   });
 })();
