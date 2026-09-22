@@ -41,9 +41,8 @@
 .header-main.x-header { top: var(--x-ticker-h, 3.8rem); }
 /* story.css gives the header a --pwy top padding, which was right when it sat
    against the top of the window. With the market bar above it that reads as a
-   gap, so the logo row is pulled right up under the bar and the two read as
-   one unit. !important because story.css sets the padding shorthand. */
-.header-main.x-header .header-inner { gap: 2.4rem; align-items: center; padding-top: .8rem !important; }
+   gap, so the logo row is pulled up closer to the bar. */
+.header-main.x-header .header-inner { gap: 2.4rem; align-items: center; padding-top: 1.8rem; }
 .x-nav { flex-shrink: 0; }
 .x-ticker-window { min-width: 0; flex: 1; overflow: hidden; mask-image: linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
 .x-ticker-track { display: flex; width: max-content; animation: x-prices 26s linear infinite; }
@@ -106,7 +105,7 @@
   .header-main.x-header .header-logo { width: 7.8rem !important; flex-basis: 7.8rem; min-height: 2rem; }
   .x-nav { gap: .7rem; margin-left: 0; }
   .x-nav-cta { padding-inline: 1em !important; }
-  .header-main.x-header .header-inner { padding-top: .6rem !important; }
+  .header-main.x-header .header-inner { padding-top: 1.2rem; }
   .x-ticker { height: var(--x-ticker-h, 3.2rem); }
   .x-quote { padding-inline: 1.2rem; gap: .5rem; font-size: 1.05rem; }
   .x-quote-change { font-size: 1rem; }
