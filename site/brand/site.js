@@ -1708,15 +1708,15 @@
 })();
 
 /* ==========================================================================
- * 3. 활동 카운터와 시세 티커 — API 조회, 실패 시 대체 조회, 주기적 갱신
+ * 3. 활동 카운터와 시세 티커 — DEX Screener 단일 출처, 주기적 갱신
  * ========================================================================== */
-/* Static-host compatible; public endpoints, no API key embedded in the client.
- * BTC/ETH/SOL/TRX: Coinbase Exchange USD markets, rolling 24h change from
- *   open/last. CoinGecko is the stand-in if a Coinbase market is missing.
- * XIIID: DEX Screener, exact Solana base-token address, highest USD liquidity.
- * Docs: https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-stats
- *       https://docs.dexscreener.com/api/reference
- *       https://docs.coingecko.com/reference/simple-price
+/* 모든 시세는 DEX Screener 공개 API에서 가져옵니다. API 키는 필요 없습니다.
+ * BTC는 WBTC의 DEX 참고 가격이며 Bitcoin 현물 통합 시세와 다를 수 있습니다.
+ * ETH/SOL/TRX는 각 원래 체인의 WETH/WSOL/WTRX 풀을 사용합니다.
+ * 정확한 체인·baseToken 주소가 일치하는 응답 중 USD 유동성이 가장 큰 풀을
+ * 선택합니다. 심볼 검색이나 quoteToken의 가격·등락률 전용은 하지 않습니다.
+ * priceUsd와 priceChange.h24는 모두 선택한 baseToken 풀의 값입니다.
+ * API 문서: https://docs.dexscreener.com/api/reference
  */
 (() => {
   'use strict';
@@ -1739,7 +1739,36 @@
   const copy = run.cloneNode(true);
   copy.setAttribute('aria-hidden', 'true');
   run.parentNode.append(copy);
-  const TOKEN = 'AtNfXEt9vSZtHovxVYKXrfFwATfddmeMvApugZzcdWiQ';
+  // 표시 심볼과 실제 조회 토큰을 한곳에서 관리합니다.
+  // EVM 주소만 대소문자를 무시하며 Solana/TRON 주소는 원문 그대로 비교합니다.
+  // 토큰 확인 자료는 함께 전달하는 DEXSCREENER-NOTES.md를 참고하세요.
+  const MARKETS = {
+    BTC: {
+      chain: 'ethereum',
+      address: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
+      label: 'WBTC on Ethereum (BTC reference)'
+    },
+    ETH: {
+      chain: 'ethereum',
+      address: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+      label: 'WETH on Ethereum (ETH reference)'
+    },
+    SOL: {
+      chain: 'solana',
+      address: 'So11111111111111111111111111111111111111112',
+      label: 'Wrapped SOL on Solana'
+    },
+    TRX: {
+      chain: 'tron',
+      address: 'TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR',
+      label: 'Wrapped TRX on TRON'
+    },
+    XIIID: {
+      chain: 'solana',
+      address: 'AtNfXEt9vSZtHovxVYKXrfFwATfddmeMvApugZzcdWiQ',
+      label: 'XIIID on Solana'
+    }
+  };
   const quotes = new Map();
   const valid = value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value));
   async function json(url) {
@@ -1756,54 +1785,42 @@
       clearTimeout(timeout);
     }
   }
-  async function coinbase(symbol) {
-    const data = await json(`https://api.exchange.coinbase.com/products/${symbol}-USD/stats`);
-    if (!valid(data.last) || Number(data.last) <= 0 || !valid(data.open) || Number(data.open) <= 0) throw new Error('Invalid quote');
-    return {
-      price: Number(data.last),
-      change: (Number(data.last) / Number(data.open) - 1) * 100,
-      source: 'Coinbase'
-    };
+  function matchesAddress(chain, actual, expected) {
+    if (typeof actual !== 'string') return false;
+    return chain === 'ethereum'
+      ? actual.toLowerCase() === expected.toLowerCase()
+      : actual === expected;
   }
-  /* Stand-in for a symbol Coinbase does not list a USD market for. Only runs
-     after Coinbase has already failed, so it stays well inside the free rate
-     limit. Add a symbol here and to COINS below to put it on the ribbon. */
-  const GECKO = {
-    BTC: 'bitcoin',
-    ETH: 'ethereum',
-    SOL: 'solana',
-    TRX: 'tron'
-  };
-  async function coingecko(symbol) {
-    const id = GECKO[symbol];
-    if (!id) throw new Error('No fallback id');
-    const data = await json(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_24hr_change=true`);
-    const row = data?.[id];
-    if (!row || !valid(row.usd) || Number(row.usd) <= 0) throw new Error('Invalid quote');
-    return {
-      price: Number(row.usd),
-      change: valid(row.usd_24h_change) ? Number(row.usd_24h_change) : null,
-      source: 'CoinGecko'
-    };
-  }
-  async function listed(symbol) {
-    try {
-      return await coinbase(symbol);
-    } catch {
-      return await coingecko(symbol);
-    }
-  }
-  async function xiiid() {
-    const data = await json(`https://api.dexscreener.com/tokens/v1/solana/${TOKEN}`);
-    if (!Array.isArray(data)) throw new Error('Invalid pairs');
-    const pair = data.filter(p => p.chainId === 'solana' && p.baseToken?.address === TOKEN && valid(p.priceUsd) && Number(p.priceUsd) > 0).sort((a, b) => (Number(b.liquidity?.usd) || 0) - (Number(a.liquidity?.usd) || 0))[0];
-    if (!pair) throw new Error('No XIIID market');
+
+  async function dexQuote(symbol) {
+    const market = MARKETS[symbol];
+    if (!market) throw new Error('Unknown market');
+
+    // 개별 조회로 각 토큰의 응답을 분리합니다. 한 토큰 실패가 다른 시세를 막지 않습니다.
+    const url = `https://api.dexscreener.com/tokens/v1/${market.chain}/${market.address}`;
+    const data = await json(url);
+    if (!Array.isArray(data)) throw new Error('Invalid DEX Screener response');
+
+    // priceUsd/h24는 baseToken 기준입니다. 대상이 quoteToken인 풀은 제외해야
+    // 다른 코인의 가격 또는 등락률을 BTC/ETH/SOL/TRX로 잘못 표시하지 않습니다.
+    const pair = data
+      .filter(p =>
+        p?.chainId === market.chain &&
+        matchesAddress(market.chain, p.baseToken?.address, market.address) &&
+        valid(p.priceUsd) && Number(p.priceUsd) > 0 &&
+        valid(p.liquidity?.usd) && Number(p.liquidity.usd) > 0
+      )
+      .sort((a, b) => Number(b.liquidity.usd) - Number(a.liquidity.usd))[0];
+
+    if (!pair) throw new Error(`No valid DEX market for ${symbol}`);
     return {
       price: Number(pair.priceUsd),
       change: valid(pair.priceChange?.h24) ? Number(pair.priceChange.h24) : null,
-      source: 'DEX Screener'
+      source: `DEX Screener · ${market.label} · ${pair.dexId || 'DEX'}`,
+      pairAddress: pair.pairAddress || ''
     };
   }
+
   function render(symbol) {
     const quote = quotes.get(symbol);
     const stale = quote && (quote.failed || Date.now() - quote.time > 120000);
@@ -1820,12 +1837,12 @@
         change.textContent = `${quote.change > 0 ? '▲' : quote.change < 0 ? '▼' : '—'}${Math.abs(quote.change).toFixed(1)}%`;
         if (quote.change !== 0) change.classList.add(quote.change > 0 ? 'is-up' : 'is-down');
       }
-      node.title = quote ? `${quote.source} · USD · 24h change · Updated ${new Date(quote.time).toLocaleTimeString()}${stale ? ' · Refresh unavailable' : ''}` : 'Price temporarily unavailable. Retrying automatically.';
+      node.title = quote ? `${quote.source} · USD · 24h change · Pool ${quote.pairAddress} · Fetched ${new Date(quote.time).toLocaleTimeString()}${stale ? ' · Refresh unavailable' : ''}` : `DEX Screener · ${MARKETS[symbol].label} · Price temporarily unavailable. Retrying automatically.`;
     });
     ribbon.querySelector('.x-ticker-summary').textContent = [...run.querySelectorAll('.x-quote')].map(n => n.textContent).join('; ');
   }
   /* Ribbon order lives in index.html; this only has to cover the same set. */
-  const COINS = ['BTC', 'ETH', 'SOL', 'TRX', 'XIIID'];
+  const COINS = Object.keys(MARKETS);
   let busy = false;
   async function refresh() {
     if (busy || document.hidden) return;
@@ -1833,7 +1850,7 @@
     try {
       await Promise.allSettled(COINS.map(async symbol => {
         try {
-          const quote = await (symbol === 'XIIID' ? xiiid() : listed(symbol));
+          const quote = await dexQuote(symbol);
           quotes.set(symbol, {
             ...quote,
             time: Date.now(),
