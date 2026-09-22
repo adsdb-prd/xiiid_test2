@@ -42,7 +42,7 @@
 /* story.css gives the header a --pwy top padding, which was right when it sat
    against the top of the window. With the market bar above it that reads as a
    gap, so the logo row is pulled up closer to the bar. */
-.header-main.x-header .header-inner { gap: 2.4rem; align-items: center; padding-top: 1.8rem; }
+.header-main.x-header .header-inner { gap: 2.4rem; align-items: center; padding-top: 1.2rem; !important }
 .x-nav { flex-shrink: 0; }
 .x-ticker-window { min-width: 0; flex: 1; overflow: hidden; mask-image: linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
 .x-ticker-track { display: flex; width: max-content; animation: x-prices 26s linear infinite; }
