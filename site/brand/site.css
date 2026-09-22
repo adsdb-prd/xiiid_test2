@@ -583,7 +583,8 @@ ul {
   margin-right: auto;
   margin-top: 6rem;
   max-width: var(--container-max-width,160rem);
-  padding: 0 var(--pwx,4rem);
+  /* 바깥 story-section이 공통 여백을 담당하므로 중복 여백을 제거합니다. */
+  padding: 0;
   width: 100%;
 }
 
@@ -608,7 +609,7 @@ ul {
 
 @media (max-width: 767px) {
   .section-logoCards .section-logoCards-cards {
-    padding: 0 var(--pwx,4rem);
+    padding: 0;
   }
 
 }
@@ -2160,7 +2161,8 @@ panel plus a backdrop blur keeps the mark and its motion legible behind. */
 
   .section-logoCards .section-logoCards-cards .section-logoCards-card {
     width: 34% !important;
-    max-width: 42rem !important;
+    /* 넓은 화면에서도 세 카드가 Download Apps와 같은 양끝에 맞춰집니다. */
+    max-width: none !important;
     min-width: 0 !important;
     /* the original four-up layout locked the cards to a 0.8 ratio; with three
     longer cards they need to grow to fit their copy instead */
@@ -3824,7 +3826,8 @@ rather than a second section. */
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 1px solid #ffffff1c;
+  /* Hero의 Total Activity 카드와 동일한 얇은 연보라색 테두리입니다. */
+  border: 1px solid #a58cff50;
   border-radius: 1.2rem;
   background: #ffffff0a;
   -webkit-backdrop-filter: blur(18px);
@@ -4147,6 +4150,14 @@ below the table. Centred in whatever width is left over. */
   height: auto;
   margin-inline: auto;
   overflow: visible;
+}
+
+/* 원호 시작점을 3시에서 12시로 옮겨 고정된 비율 레이블과 맞춥니다.
+   SVG viewBox 좌표의 중심(205, 176)으로 원호만 회전합니다. */
+.x-donut-ring {
+  transform-box: view-box;
+  transform-origin: 205px 176px;
+  transform: rotate(-90deg);
 }
 
 .x-donut-seg {
