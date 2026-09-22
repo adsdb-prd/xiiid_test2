@@ -10,8 +10,14 @@
 
 .x-token-page { padding-top: calc(var(--x-ticker-h, 3.8rem) + 11rem); }
 .x-token-page .container { width: calc(100% - 8rem); max-width: 132rem; margin: auto; }
-.x-token-page a { color: inherit; text-decoration: none; }
-.x-token-page a:hover { color: #bba8ff; }
+
+/* Scoped to main and to the footer's own text, never to the whole page: the
+   market bar, the header and the footer email are styled by sections.css and
+   have to keep the behaviour they have on index.html. A blanket
+   `.x-token-page a` here outranks those rules and silently changes the App
+   pill and the menu hover. */
+.x-token-page main a { color: inherit; text-decoration: none; }
+.x-token-page main a:hover { color: #bba8ff; }
 
 .x-token-page .back { display: inline-block; margin-top: 5rem; color: #b3abc7; font-size: 1.4rem; }
 .x-token-page .hero { padding: 2rem 0 7rem; }
@@ -101,9 +107,10 @@
 .x-token-page > footer a:has(.logo) { display: inline-block; }
 .x-token-page > footer .logo { width: 17rem; display: block; }
 .x-token-page > footer p { margin-top: 1.8rem; color: #aaa3ba; }
-/* Contact line above the copyright, same treatment as the one on index.html. */
-.x-token-page .x-footer-email { display: inline-block; margin-top: 5rem; color: #cfc9e2; font-size: 1.35rem; }
-.x-token-page .x-footer-email:hover { color: var(--brand-cyan, #29ccff); }
+/* Only the spacing is set here. The colour, size and hover of .x-footer-email
+   come from sections.css, so this line behaves exactly like the one in the
+   index.html footer. */
+.x-token-page .x-footer-email { margin-top: 5rem; }
 .x-token-page > footer small { display: block; margin-top: 1.4rem; color: #8f879f; font-size: 1.1rem; }
 
 @media (max-width: 1023px) {

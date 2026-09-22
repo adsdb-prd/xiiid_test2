@@ -102,7 +102,6 @@ button:focus-visible,
    Several of these are plain text links in the source, so the padding,
    radius and inline-block are set here rather than only the colours. */
 .page-home [class$="-cta"],
-.x-token-page [class$="-cta"],
 .section-hero-cta {
   display: inline-block;
   background-image: var(--brand-gradient) !important;
@@ -120,12 +119,10 @@ button:focus-visible,
   transition: filter .25s ease, transform .25s ease, box-shadow .25s ease;
 }
 /* The ↗ affordance the bundled styles append to some links stays inside. */
-.page-home [class$="-cta"]::after,
-.x-token-page [class$="-cta"]::after { margin-left: .15em; }
+.page-home [class$="-cta"]::after { margin-left: .15em; }
 
 @media (hover: hover) {
   .page-home [class$="-cta"]:hover,
-  .x-token-page [class$="-cta"]:hover,
   .section-hero-cta:hover {
     filter: brightness(1.1);
     transform: translateY(-2px);
@@ -134,21 +131,17 @@ button:focus-visible,
 }
 
 /* Groups of CTAs need breathing room between the pills. */
-.page-home .cta-group,
-.x-token-page .cta-group { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
+.page-home .cta-group { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
 
 @media (max-width: 767px) {
   .page-home [class$="-cta"],
-  .x-token-page [class$="-cta"],
   .section-hero-cta { padding: 0.9em 1.7em !important; white-space: normal; }
 }
 
 /* The bundled styles draw a currentColor rule under card CTAs; with the pill
    treatment that reads as a stray black underline, so it goes. */
-.page-home [class$="-cta"]::before,
-.x-token-page [class$="-cta"]::before { display: none !important; }
-.page-home [class$="-cta"],
-.x-token-page [class$="-cta"] { overflow: visible; }
+.page-home [class$="-cta"]::before { display: none !important; }
+.page-home [class$="-cta"] { overflow: visible; }
 
 /* Card CTAs sit at the bottom of their card, so keep them inline-sized.
    The 4rem gap below the button is the bundle's value: it loaded a second
