@@ -1303,8 +1303,12 @@ panel plus a backdrop blur keeps the mark and its motion legible behind. */
   animation: x-marquee-right 66s linear infinite;
 }
 
-.x-marquee:hover .x-marquee-track {
-  animation-play-state: paused;
+/* iPhone의 터치는 :hover 상태를 남길 수 있으므로 마우스에서만 정지합니다.
+   터치·스크롤 후에도 로고 이동은 계속됩니다. 동작 줄이기 설정은 아래에서 존중합니다. */
+@media (hover: hover) and (pointer: fine) {
+  .x-marquee:hover .x-marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 .x-marquee-run {
@@ -3674,7 +3678,14 @@ gap, so the logo row is pulled up closer to the bar. */
   color: #ff8c9f;
 }
 
-.x-ticker:hover .x-ticker-track,
+/* 터치 기기의 sticky hover로 시세 바가 계속 정지하는 것을 방지합니다. */
+@media (hover: hover) and (pointer: fine) {
+  .x-ticker:hover .x-ticker-track {
+    animation-play-state: paused;
+  }
+}
+
+/* 키보드로 내부 요소에 초점을 둔 경우의 읽기 편의는 유지합니다. */
 .x-ticker:focus-within .x-ticker-track {
   animation-play-state: paused;
 }
